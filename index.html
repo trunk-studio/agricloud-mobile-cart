@@ -1,0 +1,234 @@
+<!doctype html>
+<html class="no-js" lang="en-US">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>雲端農場：快易購</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
+<link rel="apple-touch-startup-image" href="img/splash.png" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<style type="text/css">#splash{background-image: url(splash.png)}</style>
+</head>
+<body>
+<div data-role="page" data-theme="b" id="splash"> 
+	<div class="splash">
+	<!--
+		<div class="logoframe">
+			<h1>AgriCloud</h1>
+			<p>新鮮水果快易購</p>
+		</div>
+		-->
+	</div>
+</div>
+<div data-role="page" data-theme="b" id="home">
+	<div data-role="header" data-position="fixed" data-theme="b">
+		<a id="btnGoToDashboard" href="#home" data-icon="home" data-iconpos="notext">回到首頁</a>
+		<h1>商品</h1>
+	</div> 
+	<div data-role="main" class="ui-content">
+		<img src="product1.jpg" alt="product" />
+		<h3>斗六文旦柚禮盒</h3>
+		<p>3斤裝</p>
+		<fieldset data-role="controlgroup" data-type="horizontal">
+	        <label for="select-more-1a" class="ui-hidden-accessible">More</label>
+	        <select name="select-more-1a" id="select-more-1a">
+	            <option value="">數量</option>
+	            <option value="#">1 箱</option>
+	            <option value="#">2 箱</option>
+	            <option value="#">3 箱</option>
+	            <option value="#">4 箱</option>
+		        <option value="#">5 箱</option>
+	        </select>
+	        <a href="#order" class="ui-btn ui-corner-all">加入購物車</a>
+
+	    </fieldset>
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#home" data-action="announce" data-icon="home">商品</a></li>
+				<li><a href="#order" data-action="contact" data-icon="star">訂單</a></li>
+				<li><a href="#home" data-action="information" data-icon="info">履歷</a>
+				</li><li><a href="#contact" data-action="about" data-icon="grid">聯絡</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div>
+</div>
+<div data-role="page" data-theme="b" id="order">
+	<div data-role="header" data-position="fixed" data-theme="b">
+		<a href="#home" data-icon="back" data-iconpos="notext">返回</a>
+		<h1>訂單</h1>
+	</div> 
+	<div data-role="content">
+		<p></p>
+	</div>
+</div>
+<script type="text/javascript">
+// HTML5 Web SQL
+/*
+var db = openDatabase('mydb', '1.0', 'Test DB', 1 * 1024 * 1024);
+
+db.transaction(function (tx) {
+   tx.executeSql('CREATE TABLE IF NOT EXISTS LOGS (id unique, log)');
+   tx.executeSql('INSERT INTO LOGS (id, log) VALUES (1, "foobar")');
+   tx.executeSql('INSERT INTO LOGS (id, log) VALUES (2, "logmsg")');
+});
+
+db.transaction(function(tx) {
+	tx.executeSql('CREATE TABLE IF NOT EXISTS PAGES (id unique, slug, title, excerpt, content, date, cover, thumbnail)');
+	tx.executeSql('INSERT INTO PAGES (1, "aaa", "bbb", "ccc", "ddd", "eee", "fff", "ggg")');
+});
+*/
+/*
+window.onload = function() {
+    setTimeout(function(){
+        window.scrollTo(0, 1);
+    }, 100);
+};
+$(window).resize(function() {
+	window.scrollTo(0, 1);
+});
+*/
+//document.addEventListener("touchmove", function(event){
+//    event.preventDefault();
+//}, false);
+
+$(function() {
+
+	// Cache all pages
+	//cacheAllPages();
+
+	if (true /* window.navigator.standalone == true */) {
+		$('#splash').on('swipe', hideSplash);
+		setTimeout(hideSplash, 3000);
+	}
+
+	//retrieveData();
+
+	$( "a" ).loader({ defaults: true });
+
+	$( document ).ajaxStart(function() {
+		$.mobile.loading( "show", {
+			text: "Loading...",
+			textVisible: true,
+			theme: "b",
+			html: ""
+		});
+	});
+	$( document ).ajaxComplete(function() {
+		$.mobile.loading( "hide" );
+	});
+	$( document ).ajaxStop(function() {
+		$.mobile.loading( "hide" );
+	});
+	
+
+	/*
+	loadPage('dashboard');
+
+	$('a#btnGoToDashboard').click(function() {
+		loadPage('dashboard');
+	});
+
+	$('a[data-action=announce]').click(function() {
+		retrieveData();
+	});
+	$('a[data-action=contact]').click(function() {
+		loadPage('contact');
+	});
+	$('a[data-action=about]').click(function() {
+		loadPage('about');
+	});
+    */
+});
+/*
+function cacheAllPages() {
+	$.get('wp-json/pages', function(data) {
+		db.transaction(function (tx) { console.log('run in');
+
+			for (var i = 0; i < data.length; i++) {
+				var d = data[i];console.log(d);
+				var id = d.ID, slug = d.slug, title = d.title, excerpt = d.excerpt, content = d.content, modified = d.modified;
+				var cover = '', thumbnail = '';
+				if (d.featured_image) {
+					if (d.featured_image.source) {
+						cover = d.featured_image.source;
+					}
+					if (d.featured_image.attachment_meta) {
+						thumbnail = d.featured_image.attachment_meta.sizes.thumbnail.url;
+					}
+				}
+					tx.executeSql('INSERT INTO PAGES (id, slug, title, excerpt, content, modified, cover, thumbnail) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [id, slug, title, excerpt, content, modified, cover, thumbnail], function(tx, results) {console.log(results); } );
+	console.log(id + ', ' + slug);
+					tx.executeSql('INSERT INTO PAGES (id, slug) VALUES (?, ?)', [id, slug] );
+			}
+		});
+	});
+}
+*/
+function loadPage(pagename) {
+	$.get('wp-json/posts?type[]=page&filter[pagename]='+pagename, function(data) {
+		$('#home h1').text(data[0].title);
+		var container = $('#home div[data-role=main]');
+		container.html(data[0].content);
+		container.find('a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"]').has('img').each(function() {
+			var popupId = 'popup' + new Date().getTime();
+			var imgSrc = $(this).attr('href');
+			$(this).find('img')./*removeAttr('width').removeAttr('height').removeClass().*/addClass('popphoto');
+			$(this).attr('data-rel', 'popup').attr('data-position-to', 'window').attr('data-transition', 'fade');
+			$(this).attr('href', '#'+popupId);
+			var popup = $('<div data-role="popup" id="'+popupId+'" data-overlay-theme="b" data-theme="b" data-corners="false"><a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="'+imgSrc+'" style="max-height:512px;" /></div>');
+			popup.insertAfter($(this));
+		});
+
+		//console.log($('a[href$=jpg]'));
+		container.trigger('create');
+	});
+}
+function retrieveData() {
+	$.get('wp-json/posts?filter[cat]=announce', function(data) {
+		var ul = $('<ul/>').data('role', 'listview');
+		for (var i = 0; i < data.length; i++) {
+			var postDate = new Date(data[i].date);
+			var dateStr = postDate.getMonth()+'/'+postDate.getDate();
+			var li = $('<li/>');
+			var a = $('<a/>');
+			a.click(function() {
+				$('#viewer h1').text($(this).children('h2').text());
+				$('#viewer div[data-role=content]').html($(this).children('.content').html());
+			});
+			a.attr('href', '#viewer');
+			if (data[i].featured_image && data[i].featured_image.source) {
+				a.append('<img src="'+data[i].featured_image.source+'" />');
+			}
+			a.append($('<h2/>').text(data[i].title));
+			a.append($('<div/>').html(data[i].excerpt));
+			a.append($('<div/>').html(data[i].content).addClass('content').hide());
+			//a.append($('<p/>').append(data[i].author.name));
+			a.append($('<p class="ui-li-aside">').text(dateStr));
+			li.append(a);
+			ul.append(li);
+		}
+		$('#home div[data-role=main]').empty().append(ul);
+		ul.listview();
+	});
+}
+function retrievePage() {
+	$.get('wp-json/posts?type[]=page&filter[pagename]=about', function(data) {
+		$('#viewer h1').text(data[0].title);
+		$('#viewer div[data-role=content]').html(data[0].content);
+		$.mobile.changePage("#viewer", "slide");
+	});
+}
+function hideSplash() {
+	$('#splash').hide();
+	$.mobile.changePage("#home", "fade");
+}
+</script>
+</body>
+</html>
