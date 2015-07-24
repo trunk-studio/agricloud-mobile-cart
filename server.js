@@ -11,12 +11,20 @@ var app = module.exports = koa();
 
 app.use(koaBodyParser());
 
+
+var addr = process.env.WEB_PORT_1337_TCP_ADDR || 'localhost';
+var port = process.env.WEB_PORT_1337_TCP_PORT || '1337';
+
+var restServerUrl = 'http://' + addr + ':' + port;
+
+console.log('restServerUrl', restServerUrl);
+
 router.get('/product/:id', function *(next) {
   var id = this.params.id;
-  var result = yield request('http://localhost:1337/product/' + id);
-  var product = JSON.parse(result.body);
+  var result = yield request(restServerUrl+'/product/' + id);
+  var result = JSON.parse(result.body);
 
-  this.body = product
+  this.body = result
 });
 
 app
