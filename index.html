@@ -15,7 +15,7 @@
 <style type="text/css">#splash{background-image: url(splash.png)}</style>
 </head>
 <body>
-<div data-role="page" data-theme="b" id="splash"> 
+<div data-role="page" data-theme="b" id="splash">
 	<div class="splash">
 	<!--
 		<div class="logoframe">
@@ -29,20 +29,17 @@
 	<div data-role="header" data-position="fixed" data-theme="b">
 		<a id="btnGoToDashboard" href="#home" data-icon="home" data-iconpos="notext">回到首頁</a>
 		<h1>商品</h1>
-	</div> 
+	</div>
 	<div data-role="main" class="ui-content">
-		<img src="product1.jpg" alt="product" />
-		<h3>斗六文旦柚禮盒</h3>
-		<p>3斤裝</p>
+		<img id='product_image' src="about:blank" alt="product" />
+		<h3 id='product_name'></h3>
+		<p id='product_descript'></p>
+		<p>庫存箱數: <span id='product_stockQuantity'>0</span></p>
+		<p>單價: <span id='product_price'>0</span></p>
 		<fieldset data-role="controlgroup" data-type="horizontal">
 	        <label for="select-more-1a" class="ui-hidden-accessible">More</label>
-	        <select name="select-more-1a" id="select-more-1a">
+	        <select name="order_quantity" id="order_quantity">
 	            <option value="">數量</option>
-	            <option value="#">1 箱</option>
-	            <option value="#">2 箱</option>
-	            <option value="#">3 箱</option>
-	            <option value="#">4 箱</option>
-		        <option value="#">5 箱</option>
 	        </select>
 	        <a href="#order" class="ui-btn ui-corner-all">加入購物車</a>
 
@@ -63,7 +60,7 @@
 	<div data-role="header" data-position="fixed" data-theme="b">
 		<a href="#home" data-icon="back" data-iconpos="notext">返回</a>
 		<h1>訂單</h1>
-	</div> 
+	</div>
 	<div data-role="content">
 		<p></p>
 	</div>
@@ -109,6 +106,23 @@ $(function() {
 
 	// Cache all pages
 	//cacheAllPages();
+	$.get("http://localhost:1337/product/1", function(data, status){
+
+		var product = data.product;
+
+		$('#product_stockQuantity').text(product.stockQuantity);
+		$('#product_name').text(product.name);
+		$('#product_descript').text(product.descript);
+		$('#product_price').text(product.price);
+		$('#product_image').attr("src", product.image);
+
+		for (var i = 1; i < product.stockQuantity+1; i++) {
+			$('#order_quantity')
+          .append($("<option></option>")
+          .attr("value",i)
+          .text(i + ' 箱'));
+		}
+	});
 
 	if (true /* window.navigator.standalone == true */) {
 		$('#splash').on('swipe', hideSplash);
@@ -133,7 +147,7 @@ $(function() {
 	$( document ).ajaxStop(function() {
 		$.mobile.loading( "hide" );
 	});
-	
+
 
 	/*
 	loadPage('dashboard');
@@ -188,7 +202,7 @@ function loadPage(pagename) {
 			var imgSrc = $(this).attr('href');
 			$(this).find('img')./*removeAttr('width').removeAttr('height').removeClass().*/addClass('popphoto');
 			$(this).attr('data-rel', 'popup').attr('data-position-to', 'window').attr('data-transition', 'fade');
-			$(this).attr('href', '#'+popupId);
+			$(this).attr('href', '#'+po.upId);
 			var popup = $('<div data-role="popup" id="'+popupId+'" data-overlay-theme="b" data-theme="b" data-corners="false"><a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="'+imgSrc+'" style="max-height:512px;" /></div>');
 			popup.insertAfter($(this));
 		});
