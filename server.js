@@ -32,13 +32,16 @@ router.get('/', function *(next) {
 
 router.post('/order/status', function *(next) {
   var orderQuery = this.request.body;
-  console.log('orderQuery', orderQuery);
-  console.log('api rest url', restServerUrl+'/order/status');
   var result = yield request.post(restServerUrl+'/order/status', {form: orderQuery});
   var orderStatus = result.body;
-  console.log('orderStatus', orderStatus);
   this.body = orderStatus;
+});
 
+router.post('/order', function *(next) {
+  var purchaseForm = this.request.body;
+  var result = yield request.post(restServerUrl+'/order', {form: purchaseForm});
+  var purchaseResult = result.body;
+  this.body = purchaseResult;
 });
 
 
