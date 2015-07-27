@@ -17,15 +17,30 @@ var port = process.env.WEB_PORT_1337_TCP_PORT || '1337';
 
 var restServerUrl = 'http://' + addr + ':' + port;
 
-console.log('restServerUrl', restServerUrl);
 
 router.get('/product/:id', function *(next) {
   var id = this.params.id;
   var result = yield request(restServerUrl+'/product/' + id);
-  var result = JSON.parse(result.body);
+  var product = JSON.parse(result.body);
 
-  this.body = result
+  this.body = product
 });
+
+router.get('/', function *(next) {
+  this.redirect('/index.html');
+});
+
+router.post('/order/status', function *(next) {
+  var orderQuery = this.request.body;
+  console.log('orderQuery', orderQuery);
+  console.log('api rest url', restServerUrl+'/order/status');
+  var result = yield request.post(restServerUrl+'/order/status', {form: orderQuery});
+  var orderStatus = result.body;
+  console.log('orderStatus', orderStatus);
+  this.body = orderStatus;
+
+});
+
 
 app
   .use(router.routes())
@@ -33,4 +48,9 @@ app
 
 app.use(mount('/', staticCache(path.join(__dirname, './asserts'))));
 
-if (!module.parent) app.listen(3000);
+var port = 3000;
+
+console.log('ec-platform Server Url', restServerUrl);
+console.log('mobile site Url', 'http://localhost:' + port);
+
+if (!module.parent) app.listen(port);

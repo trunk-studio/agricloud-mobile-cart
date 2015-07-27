@@ -48,10 +48,10 @@
 	<div data-role="footer" data-position="fixed">
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#home" data-action="announce" data-icon="home">商品</a></li>
-				<li><a href="#order" data-action="contact" data-icon="star">訂單</a></li>
-				<li><a href="#home" data-action="information" data-icon="info">履歷</a>
-				</li><li><a href="#contact" data-action="about" data-icon="grid">聯絡</a></li>
+				<li><a href="#home" data-action="announce" data-icon="home">商品訂購</a></li>
+				<li><a href="#order" data-action="contact" data-icon="star">訂單查詢</a></li>
+				<li><a href="#home" data-action="information" data-icon="info">履歷</a></li>
+				<li><a href="#contact" data-action="about" data-icon="grid">聯絡</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div>
@@ -62,7 +62,20 @@
 		<h1>訂單</h1>
 	</div>
 	<div data-role="content">
-		<p></p>
+		<form id='orderStatusQueryForm' method="post" action="/order/status">
+			<div data-role="fieldcontain">
+	         <label for="email">Email:</label>
+	         <input type="email" name="email" id="email" value="buyer@gmail.com" />
+			</div>
+			<div data-role="fieldcontain">
+	         <label for="orderId">Number:</label>
+	         <input type="number" name="orderId" id="orderId" value="1111" />
+			</div>
+			<fieldset class="ui-grid-a">
+				<div class="ui-block-a"><button type="submit" data-theme="d">Cancel</button></div>
+				<div class="ui-block-b"><button type="submit" data-theme="a">Submit</button></div>
+	    </fieldset>
+		</form>
 	</div>
 	<div data-role="footer" data-position="fixed">
 		<div data-role="navbar">
@@ -72,6 +85,47 @@
 		</div><!-- /navbar -->
 	</div>
 </div>
+
+<div data-role="page" data-theme="b" id="orderStatus">
+	<div data-role="header" data-position="fixed" data-theme="b">
+		<a href="#order" data-icon="back" data-iconpos="notext">返回</a>
+		<h1>訂單狀態</h1>
+	</div>
+	<div data-role="orderStatus">
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_quantity">訂單數量:</label>
+			<span id="orderStatus_quantity"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_id">訂單編號:</label>
+			<span id="orderStatus_id"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_user_username">訂購者姓名:</label>
+			<span id="orderStatus_user_username"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_user_email">email:</label>
+			<span id="orderStatus_user_email"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_user_mobile">電話:</label>
+			<span id="orderStatus_user_mobile"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_user_address">地址:</label>
+			<span id="orderStatus_user_address"/>
+		</div>
+	</div>
+</div>
+
+
 <script type="text/javascript">
 // HTML5 Web SQL
 /*
@@ -122,6 +176,37 @@ $(function() {
           .attr("value",i)
           .text(i + ' 箱'));
 		}
+	});
+
+	//callback handler for form submit
+	$("#orderStatusQueryForm").submit(function(e)
+	{
+    var postData = $(this).serializeArray();
+    var formURL = $(this).attr("action");
+    $.ajax(
+    {
+      url : formURL,
+      type: "POST",
+      data : postData,
+      success:function(data, textStatus, jqXHR)
+      {
+        var orderStatus = JSON.parse(data);
+				$('#orderStatus_quantity').text(orderStatus.order.quantity);
+				$('#orderStatus_id').text(orderStatus.order.id);
+				$('#orderStatus_user_username').text(orderStatus.order.user.username);
+				$('#orderStatus_user_email').text(orderStatus.order.user.email);
+				$('#orderStatus_user_mobile').text(orderStatus.order.user.mobile);
+				$('#orderStatus_user_address').text(orderStatus.order.user.address);
+				window.location.assign("/index.html#orderStatus")
+
+
+      },
+      error: function(jqXHR, textStatus, errorThrown)
+      {
+        //if fails
+      }
+    });
+    e.preventDefault(); //STOP default action
 	});
 
 	if (true /* window.navigator.standalone == true */) {
