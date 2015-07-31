@@ -93,6 +93,8 @@
 	</div>
 	<div data-role="orderStatus">
 
+		<h1>訂單資訊</h1>
+
 		<div data-role="fieldcontain">
 			<label for="orderStatus_quantity">訂單數量:</label>
 			<span id="orderStatus_quantity"/>
@@ -102,6 +104,8 @@
 			<label for="orderStatus_id">訂單編號:</label>
 			<span id="orderStatus_id"/>
 		</div>
+
+		<h2>訂購者資訊</h2>
 
 		<div data-role="fieldcontain">
 			<label for="orderStatus_user_username">訂購者姓名:</label>
@@ -122,6 +126,31 @@
 			<label for="orderStatus_user_address">地址:</label>
 			<span id="orderStatus_user_address"/>
 		</div>
+
+		<h2>收件者資訊</h2>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_shipment_username">收件者姓名:</label>
+			<span id="orderStatus_shipment_username"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_shipment_email">email:</label>
+			<span id="orderStatus_shipment_email"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_shipment_mobile">電話:</label>
+			<span id="orderStatus_shipment_mobile"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_shipment_address">地址:</label>
+			<span id="orderStatus_shipment_address"/>
+		</div>
+
+
+
 	</div>
 </div>
 
@@ -138,6 +167,7 @@
 				<input type="hidden" name="order[product][id]" id='order[product][id]' value="1" />
 			</div>
 
+			<h2>訂購者資訊</h2>
 			<div data-role="fieldcontain">
 				<label for="order[user][username]">訂購者姓名:</label>
 				<input type="text" name="order[user][username]" id='order[user][username]' value="王大明" />
@@ -156,6 +186,27 @@
 			<div data-role="fieldcontain">
 				<label for="order[user][address]">地址:</label>
 				<input type="text" name="order[user][address]" id='order[user][address]' value="台北市" />
+			</div>
+
+			<h2>收件者資訊</h2>
+			<div data-role="fieldcontain">
+				<label for="order[shipment][username]">收件者姓名:</label>
+				<input type="text" name="order[shipment][username]" id='order[shipment][username]' value="王大明" />
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="order[shipment][email]">email:</label>
+				<input type="email" name="order[shipment][email]" id='order[shipment][email]' value="new@gmail.com" />
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="order[shipment][mobile]">電話:</label>
+				<input type="number" name="order[shipment][mobile]" id='order[shipment][mobile]' value="0911111111" />
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="order[shipment][address]">地址:</label>
+				<input type="text" name="order[shipment][address]" id='order[shipment][address]' value="台北市" />
 			</div>
 			<fieldset class="ui-grid-a">
 				<div class="ui-block-a"><button type="submit" data-theme="d">Cancel</button></div>
@@ -241,10 +292,17 @@ $(function() {
         var orderStatus = JSON.parse(data);
 				$('#orderStatus_quantity').text(orderStatus.order.quantity);
 				$('#orderStatus_id').text(orderStatus.order.id);
-				$('#orderStatus_user_username').text(orderStatus.order.user.username);
-				$('#orderStatus_user_email').text(orderStatus.order.user.email);
-				$('#orderStatus_user_mobile').text(orderStatus.order.user.mobile);
-				$('#orderStatus_user_address').text(orderStatus.order.user.address);
+				$('#orderStatus_user_username').text(orderStatus.order.User.username);
+				$('#orderStatus_user_email').text(orderStatus.order.User.email);
+				$('#orderStatus_user_mobile').text(orderStatus.order.User.mobile);
+				$('#orderStatus_user_address').text(orderStatus.order.User.address);
+
+				$('#orderStatus_shipment_username').text(orderStatus.order.Shipment.username);
+				$('#orderStatus_shipment_email').text(orderStatus.order.Shipment.email);
+				$('#orderStatus_shipment_mobile').text(orderStatus.order.Shipment.mobile);
+				$('#orderStatus_shipment_address').text(orderStatus.order.Shipment.address);
+
+
 				window.location.assign("/index.html#orderStatus");
 
 
