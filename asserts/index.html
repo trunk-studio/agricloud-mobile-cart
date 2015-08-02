@@ -127,12 +127,20 @@
 			<span id="orderStatus_user_address"/>
 		</div>
 
-		<h2>收件者資訊</h2>
+		<h2>匯款資訊</h2>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_bank_id">銀行代號:</label>
+			<span id="orderStatus_bank_id"/>
+		</div>
 
 		<div data-role="fieldcontain">
 			<label for="orderStatus_bank_accountId">匯款帳戶:</label>
 			<span id="orderStatus_bank_accountId"/>
 		</div>
+
+		<h2>收件者資訊</h2>
+
 
 		<div data-role="fieldcontain">
 			<label for="orderStatus_shipment_username">收件者姓名:</label>
@@ -247,9 +255,16 @@
 			<span id="purchaseResult_orderPrice"/>
 		</div>
 
+		<h2>匯款資訊</h2>
+
 		<div data-role="fieldcontain">
-			<label for="purchaseResult_purchaseDetail">匯款資訊</label>
-			<span id="purchaseResult_purchaseDetail"/>
+			<label for="purchaseResult_bank_id">銀行代號</label>
+			<span id="purchaseResult_bank_id"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="purchaseResult_bank_accountId">匯款帳戶</label>
+			<span id="purchaseResult_bank_accountId"/>
 		</div>
 
 
@@ -306,8 +321,9 @@ $(function() {
 				$('#orderStatus_shipment_email').text(orderStatus.order.Shipment.email);
 				$('#orderStatus_shipment_mobile').text(orderStatus.order.Shipment.mobile);
 				$('#orderStatus_shipment_address').text(orderStatus.order.Shipment.address);
-				
+
 				$('#orderStatus_bank_accountId').text(orderStatus.bank.bank.accountId);
+				$('#orderStatus_bank_id').text(orderStatus.bank.bank.id);
 
 				window.location.assign("/index.html#orderStatus");
 
@@ -343,14 +359,13 @@ $(function() {
 				$('#purchaseResult_orderId').text(purchaseResult.order.id);
 				$('#purchaseResult_orderQuantity').text(purchaseResult.order.quantity);
 				$('#purchaseResult_productPrice').text(product.price);
-				console.log('product.price', product.price);
-				console.log('purchaseResult.order.quantity', purchaseResult.order.quantity);
+
 				var orderPrice =
 					parseInt(purchaseResult.order.quantity, 10) * parseInt(product.price, 10);
 
-				console.log('orderPrice', orderPrice);
 				$('#purchaseResult_orderPrice').text(orderPrice);
-				$('#purchaseResult_purchaseDetail').text('某某銀行');
+				$('#purchaseResult_bank_id').text(purchaseResult.bank.id);
+				$('#purchaseResult_bank_accountId').text(purchaseResult.bank.accountId);
 
 				window.location.assign("/index.html#purchaseResult");
 
