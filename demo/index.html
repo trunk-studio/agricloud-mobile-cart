@@ -162,10 +162,29 @@
 				<input type="number" name="order[user][mobile]" id='order[user][mobile]' value="0911111111" />
 			</div>
 
-			<div data-role="fieldcontain">
-				<label for="order[user][address]">地址:</label>
-				<input type="text" name="order[user][address]" id='order[user][address]' value="台北市" />
-			</div>
+      <div data-role="fieldcontain">
+		  	<label for="order[user][address]">地址:</label>
+        <div id="twzipcode">
+          <div data-role="county"
+               data-name="order[user][county]"
+               data-value=""
+               data-style="order-user-county">
+          </div>
+          <div data-role="district"
+               data-name="order[user][district]"
+               data-value=""
+               data-style="order-user-district">
+          </div>
+          <div data-role="zipcode"
+               data-name="order[user][zipcode]"
+               data-value=""
+               data-style="order-user-zipcode">
+          </div>
+        </div>
+        <input type="text" name="order[user][address]" id='order[user][address]' value="中正路" />
+      </div>
+
+		</div>
 
 			<h3>收件者資訊</h3>
 
@@ -186,7 +205,24 @@
 
 			<div data-role="fieldcontain">
 				<label for="order[shipment][address]">地址:</label>
-				<input type="text" name="order[shipment][address]" id='order[shipment][address]' value="台北市" />
+        <div id="twzipcode_shipment">
+          <div data-role="county"
+               data-name="order[shipment][county]"
+               data-value=""
+               data-style="order-shipment-county">
+          </div>
+          <div data-role="district"
+               data-name="order[shipment][district]"
+               data-value=""
+               data-style="order-shipment-district">
+          </div>
+          <div data-role="zipcode"
+               data-name="order[shipment][zipcode]"
+               data-value=""
+               data-style="order-shipment-zipcode">
+          </div>
+        </div>
+				<input type="text" name="order[shipment][address]" id='order[shipment][address]' value="中正路" />
 			</div>
       <hr/>
 			<fieldset class="ui-grid-a">
@@ -238,6 +274,7 @@
 <script src="/vendor/waves/waves.min.js"></script>
 <script src="/vendor/wow/wow.min.js"></script>
 <script src="/js/nativedroid2.js"></script>
+<script src="/js/jquery.twzipcode.js"></script>
 <script src="/nd2settings.js"></script>
 
 <script src="http://owlcarousel.owlgraphic.com/assets/owlcarousel/owl.carousel.js"></script>
@@ -248,6 +285,14 @@ $( document ).delegate("#splash", "pageshow", function() {
   setTimeout(function(){
           $.mobile.changePage("#home", "fade");
   }, 1000);
+  $('#twzipcode').twzipcode({
+    'detect': true, // auto dectect user's geo location.
+    'zipcodeIntoDistrict': true
+  });
+  $('#twzipcode_shipment').twzipcode({
+    'zipcodeIntoDistrict': true
+  });
+
 });
 
 $( document ).delegate("#home", "pageshow", function() {
@@ -263,6 +308,12 @@ $( document ).delegate("#home", "pageshow", function() {
 	        }
 	    }
 	});
+
+});
+
+$( document ).delegate("#order", "pageshow", function() {
+
+
 
 });
 
