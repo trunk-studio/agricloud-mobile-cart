@@ -335,6 +335,18 @@ $(function() {
 	  var orderQuantity = $("#order_quantity").val();
 		console.log('orderQuantity', orderQuantity);
 		$("input[name='order[quantity]']").val(orderQuantity);
+
+		if (localStorage.purchaseResult) {
+   			purchaseResult = JSON.parse(localStorage["purchaseResult"]);
+   			$("input[name='order[user][username]']").val(purchaseResult.order.user.username);
+   			$("input[name='order[user][email]']").val(purchaseResult.order.user.email);
+   			$("input[name='order[user][mobile]']").val(purchaseResult.order.user.mobile);
+   			$("input[name='order[user][address]']").val(purchaseResult.order.user.address);
+   			$("input[name='order[shipment][username]']").val(purchaseResult.order.shipment.username);
+   			$("input[name='order[shipment][email]']").val(purchaseResult.order.shipment.email);
+   			$("input[name='order[shipment][mobile]']").val(purchaseResult.order.shipment.mobile);
+   			$("input[name='order[shipment][address]']").val(purchaseResult.order.shipment.address);
+		}
 	});
 
 	$("#purchaseForm").submit(function(e)
@@ -363,7 +375,7 @@ $(function() {
 
 				window.location.assign("/index.html#purchaseResult");
 
-
+		localStorage["purchaseResult"] = JSON.stringify(purchaseResult);
       },
       error: function(jqXHR, textStatus, errorThrown)
       {
