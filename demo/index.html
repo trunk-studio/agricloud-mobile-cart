@@ -243,6 +243,13 @@
 <script src="http://owlcarousel.owlgraphic.com/assets/owlcarousel/owl.carousel.js"></script>
 <script>
 
+$( document ).delegate("#splash", "pageshow", function() {
+
+  setTimeout(function(){
+          $.mobile.changePage("#home", "fade");
+  }, 1000);
+});
+
 $( document ).delegate("#home", "pageshow", function() {
 
   $('.owl-carousel.header-slides').owlCarousel({
