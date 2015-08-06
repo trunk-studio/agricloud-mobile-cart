@@ -285,13 +285,6 @@ $( document ).delegate("#splash", "pageshow", function() {
   setTimeout(function(){
           $.mobile.changePage("#home", "fade");
   }, 1000);
-  $('#twzipcode').twzipcode({
-    'detect': true, // auto dectect user's geo location.
-    'zipcodeIntoDistrict': true
-  });
-  $('#twzipcode_shipment').twzipcode({
-    'zipcodeIntoDistrict': true
-  });
 
 });
 
@@ -313,7 +306,14 @@ $( document ).delegate("#home", "pageshow", function() {
 
 $( document ).delegate("#order", "pageshow", function() {
 
-
+  $('#twzipcode').twzipcode({
+    'detect': true, // auto dectect user's geo location.
+    'zipcodeIntoDistrict': true
+  });
+  
+  $('#twzipcode_shipment').twzipcode({
+    'zipcodeIntoDistrict': true
+  });
 
 });
 
