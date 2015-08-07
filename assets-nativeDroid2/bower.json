@@ -1,0 +1,11 @@
+{
+  "name": "agricloud-mobile-cart",
+  "version": "1.0.0",
+  "dependencies": {
+    "chartist": null,
+    "jquery": null,
+    "jquery-twzipcode": null,
+    "waves": null,
+    "wow": null
+  }
+}
