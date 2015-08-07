@@ -196,6 +196,13 @@
 			</div>
 
 			<h2>收件者資訊</h2>
+
+			<div data-role="fieldcontain">
+				<label>	
+					<input type="checkbox" id="order_infoto_shipment"> 同訂購者資訊
+				</label>
+			</div>
+
 			<div data-role="fieldcontain">
 				<label for="order[shipment][username]">收件者姓名:</label>
 				<input type="text" name="order[shipment][username]" id='order[shipment][username]' value="王大明" />
@@ -384,6 +391,37 @@ $(function() {
     });
     e.preventDefault(); //STOP default action
 	});
+
+	$('#order_infoto_shipment').change(function() {
+        if($(this).is(":checked")) {
+        	$("input[name='order[shipment][username]']").val($("input[name='order[user][username]']").val());
+   			$("input[name='order[shipment][email]']").val($("input[name='order[user][email]']").val());
+   			$("input[name='order[shipment][mobile]']").val($("input[name='order[user][mobile]']").val());
+   			$("input[name='order[shipment][address]']").val($("input[name='order[user][address]']").val());
+
+			$("input[name='order[user][username]']").change(function(){
+				$("input[name='order[shipment][username]']").val($(this).val());
+			});
+
+			$("input[name='order[user][email]']").change(function(){
+				$("input[name='order[shipment][email]']").val($(this).val());
+			});
+
+			$("input[name='order[user][mobile]']").change(function(){
+				$("input[name='order[shipment][mobile]']").val($(this).val());
+			});
+
+			$("input[name='order[user][address]']").change(function(){
+				$("input[name='order[shipment][address]']").val($(this).val());
+			});
+
+        }else{
+            $("input[name='order[shipment][username]']").val("");
+   			$("input[name='order[shipment][email]']").val("");
+   			$("input[name='order[shipment][mobile]']").val("");
+   			$("input[name='order[shipment][address]']").val("");
+        }
+    });
 
 
 
