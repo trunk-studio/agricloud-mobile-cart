@@ -49,7 +49,11 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-app.use(mount('/', staticCache(path.join(__dirname, './asserts'))));
+/*
+app.use(mount('/', staticCache(path.join(__dirname, 'assets'))));
+*/
+
+app.use(mount('/', staticCache(path.join(__dirname, 'assets-nativeDroid2'))));
 
 var port = 3000;
 
