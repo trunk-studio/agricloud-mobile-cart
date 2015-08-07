@@ -8,15 +8,14 @@ var staticCache = require('koa-static-cache');
 
 var app = module.exports = koa();
 
-
 app.use(koaBodyParser());
-
 
 var addr = process.env.WEB_PORT_1337_TCP_ADDR || 'localhost';
 var port = process.env.WEB_PORT_1337_TCP_PORT || '1337';
 
-var restServerUrl = 'http://' + addr + ':' + port;
+//todo: use PICKLETE_ENDPOINT_URL=http://localhost:1337/
 
+var restServerUrl = 'http://' + addr + ':' + port;
 
 router.get('/product/:id', function *(next) {
   var id = this.params.id;
@@ -44,12 +43,15 @@ router.post('/order', function *(next) {
   this.body = purchaseResult;
 });
 
-
 app
   .use(router.routes())
   .use(router.allowedMethods());
 
-app.use(mount('/', staticCache(path.join(__dirname, './asserts'))));
+/*
+app.use(mount('/', staticCache(path.join(__dirname, 'assets'))));
+*/
+
+app.use(mount('/', staticCache(path.join(__dirname, 'assets-nativeDroid2'))));
 
 var port = 3000;
 
