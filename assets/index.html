@@ -114,6 +114,116 @@
   </div>
 </div>
 
+<div data-role="page" id="orderQuery">
+	<div data-role="header" data-position="fixed">
+		<a href="#home" data-icon="back" data-iconpos="notext">返回</a>
+		<h1>訂單查詢</h1>
+	</div>
+	<div data-role="content">
+		<form id='orderStatusQueryForm' method="post" action="/order/status">
+			<div data-role="fieldcontain">
+	         <label for="email">Email:</label>
+	         <input type="email" name="email" id="email" value="buyer@gmail.com" />
+			</div>
+			<div data-role="fieldcontain">
+	         <label for="SerialNumber">Number:</label>
+	         <input type="number" name="SerialNumber" id="SerialNumber" value="1111" />
+			</div>
+			<fieldset class="ui-grid-a">
+				<div class="ui-block-a"><button type="submit" data-theme="d">Cancel</button></div>
+				<div class="ui-block-b"><button type="submit" data-theme="a">Submit</button></div>
+	    </fieldset>
+		</form>
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#home" data-action="announce" data-icon="home">商品</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div>
+</div>
+
+<div data-role="page" id="orderStatus">
+	<div data-role="header" data-position="fixed">
+		<a href="#order" data-icon="back" data-iconpos="notext">返回</a>
+		<h1>訂單狀態</h1>
+	</div>
+	<div data-role="orderStatus">
+
+		<h1>訂單資訊</h1>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_quantity">訂單數量:</label>
+			<span id="orderStatus_quantity"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_id">訂單編號:</label>
+			<span id="orderStatus_id"/>
+		</div>
+
+		<h2>訂購者資訊</h2>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_user_username">訂購者姓名:</label>
+			<span id="orderStatus_user_username"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_user_email">email:</label>
+			<span id="orderStatus_user_email"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_user_mobile">電話:</label>
+			<span id="orderStatus_user_mobile"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_user_address">地址:</label>
+			<span id="orderStatus_user_address"/>
+		</div>
+
+		<h2>匯款資訊</h2>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_bank_id">銀行代號:</label>
+			<span id="orderStatus_bank_id"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_bank_accountId">匯款帳戶:</label>
+			<span id="orderStatus_bank_accountId"/>
+		</div>
+
+		<h2>收件者資訊</h2>
+
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_shipment_username">收件者姓名:</label>
+			<span id="orderStatus_shipment_username"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_shipment_email">email:</label>
+			<span id="orderStatus_shipment_email"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_shipment_mobile">電話:</label>
+			<span id="orderStatus_shipment_mobile"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="orderStatus_shipment_address">地址:</label>
+			<span id="orderStatus_shipment_address"/>
+		</div>
+
+	</div>
+</div>
+
+
 <div data-role="page" id="purchase">
 	<div data-role="header" data-position="fixed">
 		<h1>訂單建立</h1>
@@ -258,8 +368,8 @@
 
 </div>
 
-<div data-role="page" data-theme="b" id="purchaseResult">
-	<div data-role="header" data-position="fixed" data-theme="b">
+<div data-role="page" id="purchaseResult">
+	<div data-role="header" data-position="fixed">
 		<a href="#home" data-icon="back" data-iconpos="notext">返回</a>
 		<h1>訂單建立完成</h1>
 	</div>
