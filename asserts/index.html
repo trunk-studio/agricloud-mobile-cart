@@ -62,8 +62,8 @@
 	         <input type="email" name="email" id="email" value="buyer@gmail.com" />
 			</div>
 			<div data-role="fieldcontain">
-	         <label for="orderId">Number:</label>
-	         <input type="number" name="orderId" id="orderId" value="1111" />
+	         <label for="SerialNumber">Number:</label>
+	         <input type="number" name="SerialNumber" id="SerialNumber" value="1111" />
 			</div>
 			<fieldset class="ui-grid-a">
 				<div class="ui-block-a"><button type="submit" data-theme="d">Cancel</button></div>
@@ -230,8 +230,8 @@
 	</div>
 	<div data-role="purchaseResult">
 		<div data-role="fieldcontain">
-			<label for="purchaseResult_orderId">訂單編號</label>
-			<span id="purchaseResult_orderId"/>
+			<label for="purchaseResult_SerialNumber">訂單編號</label>
+			<span id="purchaseResult_SerialNumber"/>
 		</div>
 
 		<div data-role="fieldcontain">
@@ -362,7 +362,7 @@ $(function() {
       {
         var purchaseResult = JSON.parse(data);
 				var product = purchaseResult.order.product;
-				$('#purchaseResult_orderId').text(purchaseResult.order.id);
+				$('#purchaseResult_SerialNumber').text(purchaseResult.order.id);
 				$('#purchaseResult_orderQuantity').text(purchaseResult.order.quantity);
 				$('#purchaseResult_productPrice').text(product.price);
 
