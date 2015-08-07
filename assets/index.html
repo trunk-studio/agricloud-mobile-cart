@@ -67,7 +67,7 @@
 
 			</div>
 
-			<div class="card-supporting-text">
+			<div class="card-supporting-text readable">
 				<strong>“斗六文旦”</strong>聞名全台，由於具有日照時間充足、濁水溪灌溉土壤豐沃、排水良好等得天獨厚的土壤豐沃天然條件，因此讓斗六地區所產之文旦擁有皮薄、果肉細軟、香甜多汁、甜度高、品質優、味美及口感佳的特色，特別是由農民細心栽培、農場管理團隊用心管理的雲端文旦，每顆甜度都有10度以上，更有甜度12度以上的限量特精品，有品質保證的優質文旦歡迎訂購！<br/><br/>
 			</div>
 
@@ -153,19 +153,41 @@
   			</div>
 
   			<div data-role="fieldcontain">
-  				<label for="order[user][email]">email:</label>
+  				<label for="order[user][email]">E-Mail:</label>
   				<input type="email" name="order[user][email]" id='order[user][email]' value="new@gmail.com" />
   			</div>
 
   			<div data-role="fieldcontain">
   				<label for="order[user][mobile]">電話:</label>
-  				<input type="number" name="order[user][mobile]" id='order[user][mobile]' value="0911111111" />
+  				<input type="text" name="order[user][mobile]" id='order[user][mobile]' value="0911111111" />
   			</div>
 
-  			<div data-role="fieldcontain">
-  				<label for="order[user][address]">地址:</label>
-  				<input type="text" name="order[user][address]" id='order[user][address]' value="台北市" />
-  			</div>
+        <div data-role="fieldcontain">
+  		  	<label for="order[user][address]">縣市:</label>
+          <div id="twzipcode">
+            <div data-role="county"
+                 data-name="order[user][county]"
+                 data-value=""
+                 data-style="order-user-county">
+            </div>
+            <div data-role="district"
+                 data-name="order[user][district]"
+                 data-value=""
+                 data-style="order-user-district">
+            </div>
+            <div data-role="zipcode"
+                 data-name="order[user][zipcode]"
+                 data-value=""
+                 data-style="order-user-zipcode">
+            </div>
+          </div>
+        </div>
+
+        <div data-role="fieldcontain">
+  		  	<label for="order[user][address]">地址:</label>
+          <input type="text" name="order[user][address]" id='order[user][address]' value="中正路" />
+        </div>
+
 
   			<h3>步驟三、請填寫收件人</h3>
 
@@ -181,18 +203,40 @@
   			</div>
 
   			<div data-role="fieldcontain">
-  				<label for="order[shipment][email]">email:</label>
+  				<label for="order[shipment][email]">E-Mail:</label>
   				<input type="email" name="order[shipment][email]" id='order[shipment][email]' value="new@gmail.com" />
   			</div>
 
   			<div data-role="fieldcontain">
   				<label for="order[shipment][mobile]">電話:</label>
-  				<input type="number" name="order[shipment][mobile]" id='order[shipment][mobile]' value="0911111111" />
+  				<input type="text" name="order[shipment][mobile]" id='order[shipment][mobile]' value="0911111111" />
   			</div>
 
-  			<div data-role="fieldcontain">
-  				<label for="order[shipment][address]">地址:</label>
-  				<input type="text" name="order[shipment][address]" id='order[shipment][address]' value="台北市" />
+        <div data-role="fieldcontain">
+  				<label for="order[shipment][address]">縣市:</label>
+          <div id="twzipcode_shipment">
+            <div data-role="county"
+                 data-name="order[shipment][county]"
+                 data-value=""
+                 data-style="order-shipment-county">
+            </div>
+            <div data-role="district"
+                 data-name="order[shipment][district]"
+                 data-value=""
+                 data-style="order-shipment-district">
+            </div>
+            <div data-role="zipcode"
+                 data-name="order[shipment][zipcode]"
+                 data-value=""
+                 data-style="order-shipment-zipcode">
+            </div>
+          </div>
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="order[shipment][address]">地址:</label>
+
+  				<input type="text" name="order[shipment][address]" id='order[shipment][address]' value="中正路" />
   			</div>
 
         <fieldset class="ui-grid-a">
@@ -295,6 +339,7 @@
 <script src="/js/index.splash.js"></script>
 <script src="/js/index.home.js"></script>
 <script src="/js/index.product.js"></script>
+<script src="/js/index.purchase.js"></script>
 <script src="/js/index.order.js"></script>
 <script src="/js/index.contact.js"></script>
 </body>
