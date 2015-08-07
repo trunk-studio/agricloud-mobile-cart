@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="en-US">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>AgriCloud Mobile Cart</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.3.1/animate.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="//owlcarousel.owlgraphic.com/assets/owlcarousel/assets/owl.carousel.min.css" />
+<link rel="stylesheet" href="//owlcarousel.owlgraphic.com/assets/owlcarousel/assets/owl.theme.default.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.1.2/css/material-design-iconic-font.min.css">
+<!--<link rel="stylesheet" href="/vendor/waves/dist/waves.min.css" />-->
+<!--<link rel="stylesheet" href="/css/nativedroid2.css" />-->
+<link rel="stylesheet" href="/css/index.css" />
+</head>
+<body>
+<div data-role="page" id="splash">
+</div>
+
+<!-- [page: home] -->
+<div data-role="page" id="home">
+  <div data-role="header" data-position="fixed">
+		<h1>雲端農場</h1>
+	</div>
+
+  <div class="owl-carousel header-slides">
+    <div class="item"><img src="img/slide1.jpg" alt="slides"></div>
+    <div class="item"><img src="img/slide2.jpg" alt="slides"></div>
+    <div class="item"><img src="img/slide3.jpg" alt="slides"></div>
+  </div>
+
+  <div role="main" class="ui-content">
+    <div class="readable">
+      <p>自從2008年時台灣引爆了毒奶粉事件後，更多的食安事件接連發生，食物，不再像以前那單純自然。因此，我們想解決食安問題，並從農產品開始著手。雲端農業服務中心是雲林科技大學工業工程與管理系參考製造業發展的經驗，為農業e化管理研發與服務而設立。我們嘗試將工管系的專業，製造業管理品質的方式，運用在農場上，管理農產品的品質、安全以及行銷...</p>
+    </div>
+  </div>
+
+  <div data-role="footer" data-position="fixed">
+    <nd2-include data-src="footer-navbar.html"></nd2-include>
+	</div>
+</div>
+
+<!-- [page: product] -->
+<div data-role="page" id="product">
+
+	<div data-role="header" data-position="fixed">
+		<h1>雲端農場</h1>
+	</div>
+
+	<div role="main" class="ui-content wow fadeIn" data-inset="false" data-wow-delay="0.2s">
+
+		<!-- Simple Card with Title !-->
+
+		<div class="nd2-card">
+
+			<div class="card-media">
+				<div class="owl-carousel product-slides">
+					<div class="item"><img src="img/product1.jpg" alt="slides"></div>
+					<div class="item"><img src="img/slide1.jpg" alt="slides"></div>
+					<div class="item"><img src="img/slide2.jpg" alt="slides"></div>
+					<div class="item"><img src="img/slide3.jpg" alt="slides"></div>
+				</div>
+
+			</div>
+
+			<div class="card-supporting-text">
+				<strong>“斗六文旦”</strong>聞名全台，由於具有日照時間充足、濁水溪灌溉土壤豐沃、排水良好等得天獨厚的土壤豐沃天然條件，因此讓斗六地區所產之文旦擁有皮薄、果肉細軟、香甜多汁、甜度高、品質優、味美及口感佳的特色，特別是由農民細心栽培、農場管理團隊用心管理的雲端文旦，每顆甜度都有10度以上，更有甜度12度以上的限量特精品，有品質保證的優質文旦歡迎訂購！<br/><br/>
+			</div>
+
+		</div>
+
+		<div class="nd2-card">
+      <div class="card-media">
+        <img id='product_image' src="about:blank" alt="product" />
+      </div>
+      <div class="card-supporting-text has-action">
+        <h3 id='product_name'></h3>
+        <p id='product_descript'></p>
+        <p>庫存箱數: <span id='product_stockQuantity'>0</span></p>
+        <p>單價: <span id='product_price'>0</span></p>
+      </div>
+      <div class="card-action">
+        <fieldset data-role="controlgroup" data-type="horizontal">
+          <select name="order_quantity" id="order_quantity">
+            <option value="0">數量</option>
+          </select>
+          <a href="#purchase" id="purchaseButton" class="ui-btn ui-corner-all">進行購買</a>
+        </fieldset>
+      </div>
+    </div>
+	</div>
+
+	<div data-role="footer" data-position="fixed">
+    <nd2-include data-src="footer-navbar.html"></nd2-include>
+	</div>
+
+</div>
+
+<!-- [page: order] -->
+<div data-role="page" id="order">
+  <div data-role="header" data-position="fixed">
+    <h1>雲端農場</h1>
+  </div>
+
+  <div role="main" class="ui-content">
+  </div>
+
+  <div data-role="footer" data-position="fixed">
+    <nd2-include data-src="footer-navbar.html"></nd2-include>
+  </div>
+</div>
+
+<div data-role="page" id="purchase">
+	<div data-role="header" data-position="fixed">
+		<h1>訂單建立</h1>
+	</div>
+  <div role="main" class="ui-content">
+  	<div data-role="purchase">
+  		<form id='purchaseForm' method="post" action="/order">
+
+  			<input type="hidden" name="order[product][id]" id='order[product][id]' value="1" />
+
+        <h3>步驟一、請確認數量</h3>
+
+        <table data-role="table" class="ui-responsive">
+          <thead>
+            <tr>
+              <th>品名</th>
+              <th>數量</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                斗六文旦柚禮盒
+              </td>
+              <td>
+                <input type="text" name="order[quantity]" value="" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+  			<h3>步驟二、請填寫付款人</h3>
+
+  			<div data-role="fieldcontain">
+  				<label for="order[user][username]">訂購者姓名:</label>
+  				<input type="text" name="order[user][username]" id='order[user][username]' value="王大明" />
+  			</div>
+
+  			<div data-role="fieldcontain">
+  				<label for="order[user][email]">email:</label>
+  				<input type="email" name="order[user][email]" id='order[user][email]' value="new@gmail.com" />
+  			</div>
+
+  			<div data-role="fieldcontain">
+  				<label for="order[user][mobile]">電話:</label>
+  				<input type="number" name="order[user][mobile]" id='order[user][mobile]' value="0911111111" />
+  			</div>
+
+  			<div data-role="fieldcontain">
+  				<label for="order[user][address]">地址:</label>
+  				<input type="text" name="order[user][address]" id='order[user][address]' value="台北市" />
+  			</div>
+
+  			<h3>步驟三、請填寫收件人</h3>
+
+  			<div data-role="fieldcontain">
+  				<label>
+  					<input type="checkbox" id="order_infoto_shipment"> 同訂購者資訊
+  				</label>
+  			</div>
+
+  			<div data-role="fieldcontain">
+  				<label for="order[shipment][username]">收件者姓名:</label>
+  				<input type="text" name="order[shipment][username]" id='order[shipment][username]' value="王大明" />
+  			</div>
+
+  			<div data-role="fieldcontain">
+  				<label for="order[shipment][email]">email:</label>
+  				<input type="email" name="order[shipment][email]" id='order[shipment][email]' value="new@gmail.com" />
+  			</div>
+
+  			<div data-role="fieldcontain">
+  				<label for="order[shipment][mobile]">電話:</label>
+  				<input type="number" name="order[shipment][mobile]" id='order[shipment][mobile]' value="0911111111" />
+  			</div>
+
+  			<div data-role="fieldcontain">
+  				<label for="order[shipment][address]">地址:</label>
+  				<input type="text" name="order[shipment][address]" id='order[shipment][address]' value="台北市" />
+  			</div>
+
+        <fieldset class="ui-grid-a">
+          <div class="ui-block-a">
+            <button>取消</button>
+          </div>
+          <div class="ui-block-b">
+            <button>確認訂購</button>
+          </div>
+        </fieldset>
+
+  		</form>
+  	</div>
+  </div>
+
+  <div data-role="footer" data-position="fixed">
+
+  </div>
+
+</div>
+
+<div data-role="page" data-theme="b" id="purchaseResult">
+	<div data-role="header" data-position="fixed" data-theme="b">
+		<a href="#home" data-icon="back" data-iconpos="notext">返回</a>
+		<h1>訂單建立完成</h1>
+	</div>
+	<div data-role="purchaseResult">
+		<div data-role="fieldcontain">
+			<label for="purchaseResult_SerialNumber">訂單編號</label>
+			<span id="purchaseResult_SerialNumber"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="purchaseResult_orderQuantity">購買數量</label>
+			<span id="purchaseResult_orderQuantity"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="purchaseResult_productPrice">單價</label>
+			<span id="purchaseResult_productPrice"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="purchaseResult_orderPrice">總金額</label>
+			<span id="purchaseResult_orderPrice"/>
+		</div>
+
+		<h2>匯款資訊</h2>
+
+		<div data-role="fieldcontain">
+			<label for="purchaseResult_bank_id">銀行代號</label>
+			<span id="purchaseResult_bank_id"/>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="purchaseResult_bank_accountId">匯款帳戶</label>
+			<span id="purchaseResult_bank_accountId"/>
+		</div>
+
+	</div>
+</div>
+
+<!-- [page: contact] -->
+<div data-role="page" id="contact">
+  <div data-role="header" data-position="fixed">
+    <a href="#" class="ui-btn ui-btn-left"><i class="zmdi zmdi-cloud-done"></i></a>
+    <h1>雲端農場</h1>
+  </div>
+
+  <div role="main" class="ui-content">
+    <div class="readable">
+      <h3>雲端農業服務中心</h3>
+      <p>藉 e 化與企業化促成農業轉型，達到農民、消費者雙贏！</p>
+      <ul>
+        <li>聯絡電話 : 0963-829160</li>
+        <li>傳真 : 05-5337049</li>
+        <li>信箱 : acloud@yuntech.edu.tw</li>
+        <li>FB粉絲專頁 : https://www.facebook.com/AgriCloud</li>
+        <li>兆豐商業銀行017(斗六分行)帳號 : 063-09-116270</li>
+        <li>戶名: 創毅資訊股份有限公司</li>
+      </ul>
+    </div>
+    <img src="http://maps.googleapis.com/maps/api/staticmap?center=雲林科技大學&zoom=15&scale=2&size=640x300&maptype=roadmap&format=png&visual_refresh=true" alt="Google Map of 雲林科技大學" style="max-width:100%" />
+  </div>
+
+  <div data-role="footer" data-position="fixed">
+    <nd2-include data-src="footer-navbar.html"></nd2-include>
+  </div>
+</div>
+
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script src="//owlcarousel.owlgraphic.com/assets/owlcarousel/owl.carousel.js"></script>
+<!--<script src="/vendor/waves/dist/waves.min.js"></script>-->
+<script src="/js/jquery.twzipcode.min.js"></script>
+<script src="/js/nativedroid2.js"></script>
+<script src="/js/nd2settings.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/index.splash.js"></script>
+<script src="/js/index.home.js"></script>
+<script src="/js/index.product.js"></script>
+<script src="/js/index.order.js"></script>
+<script src="/js/index.contact.js"></script>
+</body>
+</html>

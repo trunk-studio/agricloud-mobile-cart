@@ -3,14 +3,21 @@
   width: 100%;
   height: auto;
 }
+
 #splash {
   background: url(../img/splash.png) center no-repeat;
   background-size: cover;
 }
+
 .readable p {
   line-height: 150%;
   letter-spacing: 0.5px;
 }
+
 .readable ul {
   line-height: 150%;
+}
+
+.owl-carousel img {
+  max-width: 100%;
 }
