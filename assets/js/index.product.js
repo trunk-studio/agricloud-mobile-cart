@@ -16,9 +16,9 @@ $( document ).delegate("#product", "pageshow", function() {
 
 $( document ).delegate("#product", "pagebeforecreate", function() {
 
-  $.get("/product/1", function(data, status){
+  $.get("/products", function(data, status){
 
-    var product = data.product;
+    var product = data.products[0];
 
     $('#product_stockQuantity').text(product.stockQuantity);
     $('#product_name').text(product.name);

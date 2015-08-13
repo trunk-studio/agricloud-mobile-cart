@@ -17,6 +17,11 @@ var port = process.env.WEB_PORT_1337_TCP_PORT || '1337';
 
 var restServerUrl = 'http://' + addr + ':' + port;
 
+router.get('/products', function *(next) {
+  var result = yield request(restServerUrl + '/product/find');
+  this.body = JSON.parse(result.body);
+});
+
 router.get('/product/:id', function *(next) {
   var id = this.params.id;
   var result = yield request(restServerUrl+'/product/' + id);
