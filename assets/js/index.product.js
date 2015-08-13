@@ -22,7 +22,7 @@ $( document ).delegate("#product", "pagebeforecreate", function() {
 
     $('#product_stockQuantity').text(product.stockQuantity);
     $('#product_name').text(product.name);
-    $('#product_descript').text(product.descript);
+    $('#product_description').text(product.description);
     $('#product_price').text(product.price);
     $('#product_image').attr("src", product.image);
 

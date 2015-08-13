@@ -28,7 +28,7 @@
 	<div data-role="main" class="ui-content">
 		<img id='product_image' src="about:blank" alt="product" />
 		<h3 id='product_name'></h3>
-		<p id='product_descript'></p>
+		<p id='product_description'></p>
 		<p>庫存箱數: <span id='product_stockQuantity'>0</span></p>
 		<p>單價: <span id='product_price'>0</span></p>
 		<fieldset data-role="controlgroup" data-type="horizontal">
@@ -198,7 +198,7 @@
 			<h2>收件者資訊</h2>
 
 			<div data-role="fieldcontain">
-				<label>	
+				<label>
 					<input type="checkbox" id="order_infoto_shipment"> 同訂購者資訊
 				</label>
 			</div>
@@ -286,7 +286,7 @@ $(function() {
 
 		$('#product_stockQuantity').text(product.stockQuantity);
 		$('#product_name').text(product.name);
-		$('#product_descript').text(product.descript);
+		$('#product_description').text(product.description);
 		$('#product_price').text(product.price);
 		$('#product_image').attr("src", product.image);
 
