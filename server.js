@@ -18,13 +18,13 @@ var port = process.env.WEB_PORT_1337_TCP_PORT || '1337';
 var restServerUrl = 'http://' + addr + ':' + port;
 
 router.get('/products', function *(next) {
-  var result = yield request(restServerUrl + '/product/find');
+  var result = yield request(restServerUrl + '/api/product');
   this.body = JSON.parse(result.body);
 });
 
 router.get('/product/:id', function *(next) {
   var id = this.params.id;
-  var result = yield request(restServerUrl+'/product/' + id);
+  var result = yield request(restServerUrl+'/api/product/' + id);
   var product = JSON.parse(result.body);
 
   this.body = product
@@ -36,14 +36,14 @@ router.get('/', function *(next) {
 
 router.post('/order/status', function *(next) {
   var orderQuery = this.request.body;
-  var result = yield request.post(restServerUrl+'/order/status', {form: orderQuery});
+  var result = yield request.post(restServerUrl+'/api/order/status', {form: orderQuery});
   var orderStatus = result.body;
   this.body = orderStatus;
 });
 
 router.post('/order', function *(next) {
   var purchaseForm = this.request.body;
-  var result = yield request.post(restServerUrl+'/order', {form: purchaseForm});
+  var result = yield request.post(restServerUrl+'/api/order', {form: purchaseForm});
   var purchaseResult = result.body;
   this.body = purchaseResult;
 });
