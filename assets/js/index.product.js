@@ -1,5 +1,6 @@
 
-$( document ).delegate('#product', 'pagecreate', function() {
+$( document ).delegate('#product', 'pagebeforecreate', function() {
+  $('div.ui-content', '#product').installContent();
   $('div[data-role=footer]', '#product').installGlobalFooter();
 });
 

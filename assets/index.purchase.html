@@ -1,0 +1,208 @@
+<div data-role="purchase">
+  <form id='purchaseForm' method="post" action="/order">
+
+    <input type="hidden" name="order[product][id]" id='order[product][id]' value="1" />
+
+    <h3>一、請確認訂購數量</h3>
+
+    <div class="readable ui-body ui-body-a ui-corner-all">
+      <table width="100%" class="table-stroke table-stripe ui-responsive" style="font-size: 15px">
+        <thead>
+          <tr>
+            <th>品名</th>
+            <th>單價</th>
+            <th>數量</th>
+            <th>小記</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <small>圓滿柚</small>
+            </td>
+            <td align="right">
+              $500
+            </td>
+            <td align="right">
+              0
+              <input type="hidden" name="order[quantity]" value="" />
+            </td>
+            <td align="right">
+              $0
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <small>團圓柚</small>
+            </td>
+            <td align="right">
+              $625
+            </td>
+            <td align="right">
+              1
+              <input type="hidden" name="order[quantity]" value="" />
+            </td>
+            <td align="right">
+              $625
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <small>平安柚</small>
+            </td>
+            <td align="right">
+              $750
+            </td>
+            <td align="right">
+              2
+              <input type="hidden" name="order[quantity]" value="" />
+            </td>
+            <td align="right">
+              $1500
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <small>【特級】團圓柚</small>
+            </td>
+            <td align="right">
+              $950
+            </td>
+            <td align="right">
+              0
+              <input type="hidden" name="order[quantity]" value="" />
+            </td>
+            <td align="right">
+              $0
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <small>【特級】平安柚</small>
+            </td>
+            <td align="right">
+              $1200
+            </td>
+            <td align="right">
+              0
+              <input type="hidden" name="order[quantity]" value="" />
+            </td>
+            <td align="right">
+              $0
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" align="right"><font color="red">預購優惠 - <b>$213</b> 元</font></td>
+          </tr>
+          <tr>
+            <td colspan="4" align="right"><font color="green">運費 <b>$180</b> 元</font></td>
+          </tr>
+          <tr>
+            <td colspan="4" align="right"><font color="blue">訂單金額總計（含運費）  <b>$2092</b> 元</font></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>二、請填寫付款人</h3>
+
+    <div data-role="fieldcontain">
+      <label for="order[user][username]">訂購者姓名:</label>
+      <input type="text" name="order[user][username]" id='order[user][username]' value="王大明" />
+    </div>
+
+    <div data-role="fieldcontain">
+      <label for="order[user][email]">E-Mail:</label>
+      <input type="email" name="order[user][email]" id='order[user][email]' value="new@gmail.com" />
+    </div>
+
+    <div data-role="fieldcontain">
+      <label for="order[user][mobile]">電話:</label>
+      <input type="text" name="order[user][mobile]" id='order[user][mobile]' value="0911111111" />
+    </div>
+
+    <div data-role="fieldcontain">
+      <label for="order[user][address]">縣市:</label>
+      <div id="twzipcode">
+        <div data-role="county"
+             data-name="order[user][county]"
+             data-value=""
+             data-style="order-user-county">
+        </div>
+        <div data-role="district"
+             data-name="order[user][district]"
+             data-value=""
+             data-style="order-user-district">
+        </div>
+        <div data-role="zipcode"
+             data-name="order[user][zipcode]"
+             data-value=""
+             data-style="order-user-zipcode">
+        </div>
+      </div>
+    </div>
+
+    <div data-role="fieldcontain">
+      <label for="order[user][address]">地址:</label>
+      <input type="text" name="order[user][address]" id='order[user][address]' value="中正路" />
+    </div>
+
+
+    <h3>步驟三、請填寫收件人</h3>
+
+    <div data-role="fieldcontain">
+      <label>
+        <input type="checkbox" id="order_infoto_shipment"> 同訂購者資訊
+      </label>
+    </div>
+
+    <div data-role="fieldcontain">
+      <label for="order[shipment][username]">收件者姓名:</label>
+      <input type="text" name="order[shipment][username]" id='order[shipment][username]' value="王大明" />
+    </div>
+
+    <div data-role="fieldcontain">
+      <label for="order[shipment][email]">E-Mail:</label>
+      <input type="email" name="order[shipment][email]" id='order[shipment][email]' value="new@gmail.com" />
+    </div>
+
+    <div data-role="fieldcontain">
+      <label for="order[shipment][mobile]">電話:</label>
+      <input type="text" name="order[shipment][mobile]" id='order[shipment][mobile]' value="0911111111" />
+    </div>
+
+    <div data-role="fieldcontain">
+      <label for="order[shipment][address]">縣市:</label>
+      <div id="twzipcode_shipment">
+        <div data-role="county"
+             data-name="order[shipment][county]"
+             data-value=""
+             data-style="order-shipment-county">
+        </div>
+        <div data-role="district"
+             data-name="order[shipment][district]"
+             data-value=""
+             data-style="order-shipment-district">
+        </div>
+        <div data-role="zipcode"
+             data-name="order[shipment][zipcode]"
+             data-value=""
+             data-style="order-shipment-zipcode">
+        </div>
+      </div>
+    </div>
+
+    <div data-role="fieldcontain">
+      <label for="order[shipment][address]">地址:</label>
+
+      <input type="text" name="order[shipment][address]" id='order[shipment][address]' value="中正路" />
+    </div>
+
+    <button class="ui-btn ui-btn-active">確認訂購</button>
+
+    <div style="text-align:right">
+      <a href="#product">取消訂購</a>
+    </div>
+
+  </form>
+</div>

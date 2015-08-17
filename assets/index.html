@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <title>AgriCloud Mobile Cart</title>
 <link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.3.1/animate.min.css" />
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
-<link rel="stylesheet" href="//owlcarousel.owlgraphic.com/assets/owlcarousel/assets/owl.carousel.min.css" />
-<link rel="stylesheet" href="//owlcarousel.owlgraphic.com/assets/owlcarousel/assets/owl.theme.default.min.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.1.2/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/vendor/owlcarousel/assets/owl.carousel.min.css" />
+<link rel="stylesheet" href="/vendor/owlcarousel/assets/owl.theme.default.min.css" />
 <!--<link rel="stylesheet" href="/vendor/waves/dist/waves.min.css" />-->
 <!--<link rel="stylesheet" href="/css/nativedroid2.css" />-->
 <link rel="stylesheet" href="/css/index.css" />
@@ -45,52 +45,13 @@
 <!-- [page: product] -->
 <div data-role="page" id="product">
 
-	<div data-role="header" data-position="fixed">
-		<h1>雲端農場</h1>
+  <div data-role="header" data-position="fixed">
+		<h1>中秋文旦預購</h1>
 	</div>
 
-	<div role="main" class="ui-content">
+  <!--<img src="img/banner.jpg" alt="" />-->
 
-		<!-- Simple Card with Title !-->
-
-		<div class="nd2-card">
-
-			<div class="card-media">
-				<div class="owl-carousel product-slides">
-          <img class="owl-lazy" data-src="/img/product1.jpg" alt="" />
-					<img class="owl-lazy" data-src="/img/slide1.jpg" alt="" />
-					<img class="owl-lazy" data-src="/img/slide2.jpg" alt="" />
-					<img class="owl-lazy" data-src="/img/slide3.jpg" alt="" />
-				</div>
-
-			</div>
-
-			<div class="card-supporting-text readable">
-				<strong>“斗六文旦”</strong>聞名全台，由於具有日照時間充足、濁水溪灌溉土壤豐沃、排水良好等得天獨厚的土壤豐沃天然條件，因此讓斗六地區所產之文旦擁有皮薄、果肉細軟、香甜多汁、甜度高、品質優、味美及口感佳的特色，特別是由農民細心栽培、農場管理團隊用心管理的雲端文旦，每顆甜度都有10度以上，更有甜度12度以上的限量特精品，有品質保證的優質文旦歡迎訂購！<br/><br/>
-			</div>
-
-		</div>
-
-		<div class="nd2-card">
-      <div class="card-media">
-        <img id='product_image' src="about:blank" alt="product" />
-      </div>
-      <div class="card-supporting-text has-action">
-        <h3 id='product_name'></h3>
-        <p id='product_description'></p>
-        <p>庫存箱數: <span id='product_stockQuantity'>0</span></p>
-        <p>單價: <span id='product_price'>0</span></p>
-      </div>
-      <div class="card-action">
-        <fieldset data-role="controlgroup" data-type="horizontal">
-          <select name="order_quantity" id="order_quantity">
-            <option value="0">數量</option>
-          </select>
-          <a href="#purchase" id="purchaseButton" class="ui-btn ui-corner-all">進行購買</a>
-        </fieldset>
-      </div>
-    </div>
-	</div>
+	<div role="main" class="ui-content" data-src="index.product.html"></div>
 
   <div data-role="footer" data-position="fixed" data-src="index.footer.html"></div>
 </div>
@@ -218,147 +179,7 @@
 
 
 <div data-role="page" id="purchase">
-	<div data-role="header" data-position="fixed">
-		<h1>訂單建立</h1>
-	</div>
-  <div role="main" class="ui-content">
-  	<div data-role="purchase">
-  		<form id='purchaseForm' method="post" action="/order">
-
-  			<input type="hidden" name="order[product][id]" id='order[product][id]' value="1" />
-
-        <h3>步驟一、請確認數量</h3>
-
-        <table data-role="table" class="ui-responsive">
-          <thead>
-            <tr>
-              <th>品名</th>
-              <th>數量</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                斗六文旦柚禮盒
-              </td>
-              <td>
-                <input type="text" name="order[quantity]" value="" />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-  			<h3>步驟二、請填寫付款人</h3>
-
-  			<div data-role="fieldcontain">
-  				<label for="order[user][username]">訂購者姓名:</label>
-  				<input type="text" name="order[user][username]" id='order[user][username]' value="王大明" />
-  			</div>
-
-  			<div data-role="fieldcontain">
-  				<label for="order[user][email]">E-Mail:</label>
-  				<input type="email" name="order[user][email]" id='order[user][email]' value="new@gmail.com" />
-  			</div>
-
-  			<div data-role="fieldcontain">
-  				<label for="order[user][mobile]">電話:</label>
-  				<input type="text" name="order[user][mobile]" id='order[user][mobile]' value="0911111111" />
-  			</div>
-
-        <div data-role="fieldcontain">
-  		  	<label for="order[user][address]">縣市:</label>
-          <div id="twzipcode">
-            <div data-role="county"
-                 data-name="order[user][county]"
-                 data-value=""
-                 data-style="order-user-county">
-            </div>
-            <div data-role="district"
-                 data-name="order[user][district]"
-                 data-value=""
-                 data-style="order-user-district">
-            </div>
-            <div data-role="zipcode"
-                 data-name="order[user][zipcode]"
-                 data-value=""
-                 data-style="order-user-zipcode">
-            </div>
-          </div>
-        </div>
-
-        <div data-role="fieldcontain">
-  		  	<label for="order[user][address]">地址:</label>
-          <input type="text" name="order[user][address]" id='order[user][address]' value="中正路" />
-        </div>
-
-
-  			<h3>步驟三、請填寫收件人</h3>
-
-  			<div data-role="fieldcontain">
-  				<label>
-  					<input type="checkbox" id="order_infoto_shipment"> 同訂購者資訊
-  				</label>
-  			</div>
-
-  			<div data-role="fieldcontain">
-  				<label for="order[shipment][username]">收件者姓名:</label>
-  				<input type="text" name="order[shipment][username]" id='order[shipment][username]' value="王大明" />
-  			</div>
-
-  			<div data-role="fieldcontain">
-  				<label for="order[shipment][email]">E-Mail:</label>
-  				<input type="email" name="order[shipment][email]" id='order[shipment][email]' value="new@gmail.com" />
-  			</div>
-
-  			<div data-role="fieldcontain">
-  				<label for="order[shipment][mobile]">電話:</label>
-  				<input type="text" name="order[shipment][mobile]" id='order[shipment][mobile]' value="0911111111" />
-  			</div>
-
-        <div data-role="fieldcontain">
-  				<label for="order[shipment][address]">縣市:</label>
-          <div id="twzipcode_shipment">
-            <div data-role="county"
-                 data-name="order[shipment][county]"
-                 data-value=""
-                 data-style="order-shipment-county">
-            </div>
-            <div data-role="district"
-                 data-name="order[shipment][district]"
-                 data-value=""
-                 data-style="order-shipment-district">
-            </div>
-            <div data-role="zipcode"
-                 data-name="order[shipment][zipcode]"
-                 data-value=""
-                 data-style="order-shipment-zipcode">
-            </div>
-          </div>
-        </div>
-
-        <div data-role="fieldcontain">
-          <label for="order[shipment][address]">地址:</label>
-
-  				<input type="text" name="order[shipment][address]" id='order[shipment][address]' value="中正路" />
-  			</div>
-
-        <fieldset class="ui-grid-a">
-          <div class="ui-block-a">
-            <button>取消</button>
-          </div>
-          <div class="ui-block-b">
-            <button>確認訂購</button>
-          </div>
-        </fieldset>
-
-  		</form>
-  	</div>
-  </div>
-
-  <div data-role="footer" data-position="fixed">
-
-  </div>
-
+  <div role="main" class="ui-content" data-src="index.purchase.html"></div>
 </div>
 
 <div data-role="page" id="purchaseResult">
@@ -411,10 +232,11 @@
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <!--<script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>-->
-<script src="//owlcarousel.owlgraphic.com/assets/owlcarousel/owl.carousel.js"></script>
+<script src="/vendor/owlcarousel/owl.carousel.js"></script>
 <!--<script src="/vendor/waves/dist/waves.min.js"></script>-->
 <script src="//www.parsecdn.com/js/parse-1.5.0.min.js"></script>
 <script src="/js/jquery.twzipcode.min.js"></script>
+<script src="/js/jquery.spinbox.js"></script>
 <script src="/js/nativedroid2.js"></script>
 <script src="/js/nd2settings.js"></script>
 <script src="/js/index.js"></script>
