@@ -22,11 +22,31 @@ $( document ).ajaxStop(function() { $.mobile.loading( "hide" ); });
 
       var __target = this;
 
+      if (!path) {
+        path = $(this).data('src');
+      }
+
       $(this).load(path, function() {
         $(this).enhanceWithin();
 
         $('a[href="'+window.location.hash+'"]', this).addClass("ui-btn-active ui-state-persist");
 
+      });
+
+      return this;
+
+    };
+
+    $.fn.installContent = function(path) {
+
+      var __target = this;
+
+      if (!path) {
+        path = $(this).data('src');
+      }
+
+      $(this).load(path, function() {
+        $(this).enhanceWithin();
       });
 
       return this;

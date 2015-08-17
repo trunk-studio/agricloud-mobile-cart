@@ -1,6 +1,6 @@
 
 $( document ).delegate('#product', 'pagecreate', function() {
-  $('div[data-role=footer]', '#product').installGlobalFooter('footer-navbar.html');
+  $('div[data-role=footer]', '#product').installGlobalFooter();
 });
 
 $( document ).delegate("#product", "pageshow", function() {
