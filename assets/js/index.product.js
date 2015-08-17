@@ -1,3 +1,8 @@
+
+$( document ).delegate('#product', 'pagecreate', function() {
+  $('div[data-role=footer]', '#product').installGlobalFooter('footer-navbar.html');
+});
+
 $( document ).delegate("#product", "pageshow", function() {
 
 	$('.owl-carousel.product-slides').owlCarousel({

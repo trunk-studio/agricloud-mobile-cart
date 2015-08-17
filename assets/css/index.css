@@ -21,3 +21,12 @@
 .owl-carousel img {
   max-width: 100%;
 }
+
+.ui-page-theme-a .ui-header {
+	background-color: #72B844;
+	color: #ffffff;
+}
+
+.ui-title {
+  text-shadow: none;
+}

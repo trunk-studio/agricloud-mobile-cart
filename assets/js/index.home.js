@@ -1,15 +1,18 @@
-$( document ).delegate("#home", "pageshow", function() {
 
-  $('.owl-carousel.header-slides')
-  .owlCarousel({
-	    loop:true,
-	    margin:0,
-	    nav:false,
-			autoHeight:true,
-	    responsive:{
-	        0:{
-	            items:1
-	        }
-	    }
+$( document ).delegate('#home', 'pagecreate', function() {
+  $('div[data-role=footer]', '#home').installGlobalFooter('footer-navbar.html');
+});
+
+$( document ).delegate('#home', 'pageshow', function() {
+
+  $('.owl-carousel', '#home').owlCarousel({
+      responsiveClass: false,
+      lazyLoad : true,
+	    loop: true,
+	    margin: 0,
+	    nav: false,
+      dots: true,
+			autoHeight: false,
+      items: 1
 	});
 });

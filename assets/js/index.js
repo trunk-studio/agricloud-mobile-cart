@@ -1,3 +1,7 @@
+// Disable fixed toolbar auto hidden
+//$('[data-position=fixed]').fixedtoolbar({ tapToggleBlacklist: "a, img, input, select, textarea, .ui-header-fixed, .ui-footer-fixed, .owl-carousel" })
+
+
 $( "a" ).loader({ defaults: true });
 
 $( document ).ajaxStart(function() {
@@ -11,6 +15,26 @@ $( document ).ajaxStart(function() {
 
 $( document ).ajaxComplete(function() { $.mobile.loading( "hide" ); });
 $( document ).ajaxStop(function() { $.mobile.loading( "hide" ); });
+
+(function( $ ) {
+
+    $.fn.installGlobalFooter = function(path) {
+
+      var __target = this;
+
+      $(this).load(path, function() {
+        $(this).enhanceWithin();
+
+        $('a[href="'+window.location.hash+'"]', this).addClass("ui-btn-active ui-state-persist");
+
+      });
+
+      return this;
+
+    };
+
+}( jQuery ));
+
 
 $(function() {
 
