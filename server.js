@@ -43,6 +43,7 @@ router.post('/order/status', function *(next) {
 
 router.post('/order', function *(next) {
   var purchaseForm = this.request.body;
+  console.log('=== purchaseForm ===', purchaseForm);
   var result = yield request.post(restServerUrl+'/api/order', {form: purchaseForm});
   var purchaseResult = result.body;
   this.body = purchaseResult;
@@ -52,7 +53,7 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-app.use(mount('/', staticCache(path.join(__dirname, 'assets'))));
+app.use(mount('/', staticCache(path.join(__dirname, 'app'))));
 
 var port = 3000;
 

@@ -7,7 +7,7 @@ $( document ).delegate("#purchase", "pagebeforecreate", function() {
 
 $( document ).delegate("#purchase", "pagecreate", function() {
 
-
+  console.log('=== load zipcode ===');
   $('#twzipcode').twzipcode({
     'detect': false,
     'zipcodeIntoDistrict': true
