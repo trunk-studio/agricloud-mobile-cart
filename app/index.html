@@ -10,11 +10,16 @@
 <!--<link rel="stylesheet" href="/vendor/waves/dist/waves.min.css" />-->
 <!--<link rel="stylesheet" href="/css/nativedroid2.css" />-->
 
-<link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.3.1/animate.min.css" />
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.1.2/css/material-design-iconic-font.min.css">
 
+<!-- build:css styles/vendor.css -->
+<!-- bower:css -->
+<link rel="stylesheet" href="/bower_components/jquery-mobile-bower/css/jquery.mobile-1.4.5.min.css" />
+<!-- endbower -->
+<!-- endbuild -->
 
 <!-- build:css styles/main.css -->
 <link rel="stylesheet" href="/vendor/owlcarousel/assets/owl.carousel.min.css" />
@@ -242,13 +247,20 @@
   <div role="main" class="ui-content" data-src="index.contact.html"></div>
   <div data-role="footer" data-position="fixed" data-src="index.footer.html"></div>
 </div>
-  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-  <script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-  <script src="//www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+
+
+  <!-- build:js scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="/bower_components/jquery-legacy/dist/jquery.min.js"></script>
+  <script src="/bower_components/jquery-mobile-bower/js/jquery.mobile-1.4.5.min.js"></script>
+  <script src="/bower_components/parse/parse.min.js"></script>
+  <script src="/vendor/owlcarousel/owl.carousel.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
 
 
   <!-- build:js scripts/main.js -->
-  <script src="/vendor/owlcarousel/owl.carousel.js"></script>
+
   <script src="/js/jquery.twzipcode.min.js"></script>
   <script src="/js/jquery.spinbox.js"></script>
   <script src="/js/nativedroid2.js"></script>

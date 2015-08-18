@@ -62,6 +62,8 @@ if(env === 'development')
 else if(env === 'production')
   app.use(mount('/', staticCache(path.join(__dirname, 'dist'))));
 
+app.use(mount('/bower_components', staticCache(path.join(__dirname, 'bower_components'))));
+
 var port = 3000;
 
 console.log('ec-platform Server Url', restServerUrl);
