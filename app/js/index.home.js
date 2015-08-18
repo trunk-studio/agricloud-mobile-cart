@@ -1,5 +1,6 @@
 
 $( document ).delegate('#home', 'pagecreate', function() {
+  $('div.ui-content', '#home').installContent();
   $('div[data-role=footer]', '#home').installGlobalFooter();
 });
 
