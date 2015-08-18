@@ -7,15 +7,22 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <title>AgriCloud Mobile Cart</title>
+<!--<link rel="stylesheet" href="/vendor/waves/dist/waves.min.css" />-->
+<!--<link rel="stylesheet" href="/css/nativedroid2.css" />-->
+
 <link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.3.1/animate.min.css" />
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.1.2/css/material-design-iconic-font.min.css">
+
+
+<!-- build:css styles/main.css -->
 <link rel="stylesheet" href="/vendor/owlcarousel/assets/owl.carousel.min.css" />
 <link rel="stylesheet" href="/vendor/owlcarousel/assets/owl.theme.default.min.css" />
-<!--<link rel="stylesheet" href="/vendor/waves/dist/waves.min.css" />-->
-<!--<link rel="stylesheet" href="/css/nativedroid2.css" />-->
 <link rel="stylesheet" href="/css/index.css" />
+<!-- endbuild -->
+
+
 </head>
 <body>
 <div data-role="page" id="splash">
@@ -235,32 +242,38 @@
   <div role="main" class="ui-content" data-src="index.contact.html"></div>
   <div data-role="footer" data-position="fixed" data-src="index.footer.html"></div>
 </div>
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <script src="//www.parsecdn.com/js/parse-1.5.0.min.js"></script>
 
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<!--<script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>-->
-<script src="/vendor/owlcarousel/owl.carousel.js"></script>
-<!--<script src="/vendor/waves/dist/waves.min.js"></script>-->
-<script src="//www.parsecdn.com/js/parse-1.5.0.min.js"></script>
-<script src="/js/jquery.twzipcode.min.js"></script>
-<script src="/js/jquery.spinbox.js"></script>
-<script src="/js/nativedroid2.js"></script>
-<script src="/js/nd2settings.js"></script>
-<script src="/js/index.js"></script>
-<script src="/js/index.splash.js"></script>
-<script src="/js/index.home.js"></script>
-<script src="/js/index.product.js"></script>
-<script src="/js/index.purchase.js"></script>
-<script src="/js/index.order.js"></script>
-<script src="/js/index.contact.js"></script>
-<script src="/js/index.youtube.js"></script>
-<script>
-Parse.initialize("rjgRbUbKc33NLmj9nI0DGOd0lBtkx1KKDRq76zCQ", "KqSuLPJnXVz69ZI68qLtiAfRzPBbTErlDSoLiGkB");
-var TestObject = Parse.Object.extend("TestObject");
-var testObject = new TestObject();
-testObject.save({foo: "bar"}).then(function(object) {
-  //alert("yay! it worked");
-});
-</script>
+
+  <!-- build:js scripts/main.js -->
+  <script src="/vendor/owlcarousel/owl.carousel.js"></script>
+  <script src="/js/jquery.twzipcode.min.js"></script>
+  <script src="/js/jquery.spinbox.js"></script>
+  <script src="/js/nativedroid2.js"></script>
+  <script src="/js/nd2settings.js"></script>
+  <script src="/js/index.js"></script>
+  <script src="/js/index.splash.js"></script>
+  <script src="/js/index.home.js"></script>
+  <script src="/js/index.product.js"></script>
+  <script src="/js/index.purchase.js"></script>
+  <script src="/js/index.order.js"></script>
+  <script src="/js/index.contact.js"></script>
+  <script src="/js/index.youtube.js"></script>
+  <!-- endbuild -->
+
+
+  <!--<script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>-->
+  <!--<script src="/vendor/waves/dist/waves.min.js"></script>-->
+
+  <script>
+  Parse.initialize("rjgRbUbKc33NLmj9nI0DGOd0lBtkx1KKDRq76zCQ", "KqSuLPJnXVz69ZI68qLtiAfRzPBbTErlDSoLiGkB");
+  var TestObject = Parse.Object.extend("TestObject");
+  var testObject = new TestObject();
+  testObject.save({foo: "bar"}).then(function(object) {
+    //alert("yay! it worked");
+  });
+  </script>
 </body>
 </html>

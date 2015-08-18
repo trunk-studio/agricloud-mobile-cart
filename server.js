@@ -11,6 +11,8 @@ var app = module.exports = koa();
 
 app.use(koaBodyParser());
 
+var env = process.env.NODE_ENV || 'development';
+
 var addr = process.env.WEB_PORT_1337_TCP_ADDR || 'localhost';
 var port = process.env.WEB_PORT_1337_TCP_PORT || '1337';
 
@@ -54,8 +56,11 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-// app.use(mount('/', staticCache(path.join(__dirname, 'app'))));
-app.use(mount('/', serve(path.join(__dirname, 'app'))));
+console.log('=== env ===', env);
+if(env === 'development')
+  app.use(mount('/', serve(path.join(__dirname, 'app'))));
+else if(env === 'production')
+  app.use(mount('/', staticCache(path.join(__dirname, 'dist'))));
 
 var port = 3000;
 
