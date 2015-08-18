@@ -38,6 +38,19 @@
   <div data-role="footer" data-position="fixed" data-src="index.footer.html"></div>
 </div>
 
+<!-- [page: home] -->
+<div data-role="page" id="youtube">
+  <div role="main" class="ui-content">
+    <div class="myWrapper">
+      <iframe src="jwplayer.html" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div data-role="footer" data-position="fixed">
+    <a href="#home" class="pull-right" style="margin-right:20px">返回首頁</a>
+  </div>
+</div>
+
 <!-- [page: product] -->
 <div data-role="page" id="product">
 
@@ -242,7 +255,6 @@
 <script src="/js/index.purchase.js"></script>
 <script src="/js/index.order.js"></script>
 <script src="/js/index.contact.js"></script>
-
 <script>
 Parse.initialize("rjgRbUbKc33NLmj9nI0DGOd0lBtkx1KKDRq76zCQ", "KqSuLPJnXVz69ZI68qLtiAfRzPBbTErlDSoLiGkB");
 var TestObject = Parse.Object.extend("TestObject");
