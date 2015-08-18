@@ -5,6 +5,7 @@ var koaBodyParser = require('koa-bodyparser');
 var mount = require('koa-mount');
 var path = require('path');
 var staticCache = require('koa-static-cache');
+var serve = require('koa-static');
 
 var app = module.exports = koa();
 
@@ -53,7 +54,8 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-app.use(mount('/', staticCache(path.join(__dirname, 'app'))));
+// app.use(mount('/', staticCache(path.join(__dirname, 'app'))));
+app.use(mount('/', serve(path.join(__dirname, 'app'))));
 
 var port = 3000;
 
