@@ -1,54 +1,27 @@
 # AgriCloud Mobile Shopping Cart
 
-## 需求
+## 使用說明
 
-* iojs-v2.5.0
+需要 iojs
 
-## 資料夾說明
+    nvm install iojs-v1.8.4
 
-* assets-nativeDroid2 新佈景的程式碼
-* assets-legacy 保留舊的程式碼
+安裝 node modules
 
-## 開始之前
+    npm i
 
-```
-npm install
-```
+安裝 bower components
 
-## 如何執行
+    bower i
 
-```
-node server.js
-```
+安裝 sass (需要 Ruby)
 
-## 如何使用 bower 安裝前端套件
+    gem install sass
 
-先切換到 `assets-nativeDroid2` 資料夾
+或 (with root permission)
 
-預設安裝路徑定義在 `.bowerrc`
+    sudo gem install sass
 
-Search:
+安裝 Gulp
 
-```
-bower search jquery
-```
-
-Install:
-
-```
-bower install jquery-twzipcode
-```
-
-## 以下暫時無用
-
-``demo`` 資料夾是展示用的靜態網站。
-
-使用方式：
-
-```
-npm install -g http-server
-```
-
-```
-http-server demo -p 3001 --cors
-```
+    npm install -g gulp
