@@ -11,12 +11,12 @@ img { max-width: 100%; }
   background-size: cover;
 }
 
-.readable p {
+.readable p, p.readable {
   line-height: 150%;
   letter-spacing: 0.5px;
 }
 
-.readable ul {
+.readable ul, ul.readable {
   line-height: 150%;
 }
 
