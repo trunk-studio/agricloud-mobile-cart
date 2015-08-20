@@ -6,6 +6,7 @@ $( document ).delegate('#home', 'pagecreate', function() {
 
 $( document ).delegate('#home', 'pageshow', function() {
 
+/*
   $('.owl-carousel', '#home').owlCarousel({
       responsiveClass: false,
       lazyLoad : true,
@@ -16,4 +17,5 @@ $( document ).delegate('#home', 'pageshow', function() {
 			autoHeight: false,
       items: 1
 	});
+  */
 });

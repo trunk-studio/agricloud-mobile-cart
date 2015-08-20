@@ -5,7 +5,7 @@ $( document ).delegate('#product', 'pagebeforecreate', function() {
 });
 
 $( document ).delegate("#product", "pageshow", function() {
-
+/*
 	$('.owl-carousel.product-slides').owlCarousel({
 	    loop:true,
 	    margin:0,
@@ -17,7 +17,7 @@ $( document ).delegate("#product", "pageshow", function() {
 	        }
 	    }
 	});
-
+*/
 });
 
 $( document ).delegate("#product", "pagebeforecreate", function() {
