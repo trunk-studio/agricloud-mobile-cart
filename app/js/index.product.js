@@ -42,7 +42,7 @@ $( document ).delegate("#product", "pagebeforecreate", function() {
   });
 
 
-  $("#purchaseButton").bind("click", function() {
+  $("#purchaseButton").delegate("click", function() {
 	  var orderQuantity = $("#order_quantity").val();
 		console.log('orderQuantity', orderQuantity);
 		$("input[name='order[quantity]']").val(orderQuantity);

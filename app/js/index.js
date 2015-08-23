@@ -37,7 +37,7 @@ $( document ).ajaxStop(function() { $.mobile.loading( "hide" ); });
 
     };
 
-    $.fn.installContent = function(path) {
+    $.fn.installContent = function(path, cb) {
 
       var __target = this;
 
@@ -45,9 +45,16 @@ $( document ).ajaxStop(function() { $.mobile.loading( "hide" ); });
         path = $(this).data('src');
       }
 
+      
+
       $(this).load(path, function() {
         $(this).enhanceWithin();
+        if (cb !== null && cb !== undefined){
+          cb();
+        }
       });
+
+
 
       return this;
 
