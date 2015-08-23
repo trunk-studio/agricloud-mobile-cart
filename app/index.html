@@ -23,7 +23,7 @@
 
 <!-- build:css styles/main.css -->
 <link rel="stylesheet" href="/vendor/owlcarousel/assets/owl.carousel.min.css" />
-<link rel="stylesheet" href="/vendor/owlcarousel/assets/owl.theme.default.min.css" />
+<!-- <link rel="stylesheet" href="/vendor/owlcarousel/assets/owl.theme.default.min.css" /> -->
 <link rel="stylesheet" href="/css/index.css" />
 <!-- endbuild -->
 
@@ -39,11 +39,15 @@
 		<h1>我的雲端農場</h1>
 	</div>
 
+  <a href="#product"><img src="img/cover1.jpg" alt="" /></a>
+
+<!--
   <div class="owl-carousel">
     <img class="owl-lazy" data-src="img/slide1.jpg" alt="" />
     <img class="owl-lazy" data-src="img/slide2.jpg" alt="" />
     <img class="owl-lazy" data-src="img/slide3.jpg" alt="" />
   </div>
+-->
 
   <div role="main" class="ui-content" data-src="index.home.html"></div>
 
@@ -69,6 +73,7 @@
 	</div>
 
   <!--<img src="img/banner.jpg" alt="" />-->
+  <a href="#product"><img src="img/cover2.jpg" alt="" /></a>
 
 	<div role="main" class="ui-content" data-src="index.product.html"></div>
 
@@ -78,11 +83,10 @@
 <!-- [page: order] -->
 <div data-role="page" id="order">
   <div data-role="header" data-position="fixed">
-    <h1>雲端農場</h1>
+    <h1>訂單查詢</h1>
   </div>
 
-  <div role="main" class="ui-content">
-  </div>
+  <div role="main" class="ui-content" data-src="index.order.html"></div>
 
   <div data-role="footer" data-position="fixed" data-src="index.footer.html"></div>
 </div>
@@ -244,6 +248,10 @@
 
 <!-- [page: contact] -->
 <div data-role="page" id="contact">
+  <div data-role="header" data-position="fixed">
+    <h1>聯絡雲端農場</h1>
+  </div>
+
   <div role="main" class="ui-content" data-src="index.contact.html"></div>
   <div data-role="footer" data-position="fixed" data-src="index.footer.html"></div>
 </div>
@@ -254,7 +262,7 @@
   <script src="/bower_components/jquery/jquery.min.js"></script>
   <script src="/bower_components/jquery-mobile-bower/js/jquery.mobile-1.4.5.min.js"></script>
   <script src="/bower_components/parse/parse.min.js"></script>
-  <script src="/vendor/owlcarousel/owl.carousel.js"></script>
+  <!--<script src="/vendor/owlcarousel/owl.carousel.js"></script>-->
   <!-- endbower -->
   <!-- endbuild -->
 
