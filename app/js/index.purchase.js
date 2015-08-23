@@ -5,19 +5,6 @@ $( document ).delegate("#purchase", "pagebeforecreate", function() {
 
 });
 
-
-// $( document ).delegate("#purchase", "pageshow", function() {
-//   $('#twzipcode').twzipcode({
-//     'detect': false,
-//     'zipcodeIntoDistrict': true
-//   });
-//
-//   $('#twzipcode_shipment').twzipcode({
-//     'zipcodeIntoDistrict': true
-//   });
-//
-// });
-
 $( document ).delegate("#purchase", "pageshow", function() {
 
   console.log('=== load zipcode ===');
