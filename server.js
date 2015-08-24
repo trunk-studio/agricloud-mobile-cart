@@ -16,6 +16,7 @@ var env = process.env.NODE_ENV || 'development';
 var addr = process.env.WEB_PORT_1337_TCP_ADDR || 'localhost';
 var port = process.env.WEB_PORT_1337_TCP_PORT || '1337';
 
+
 //todo: use PICKLETE_ENDPOINT_URL=http://localhost:1337/
 
 var restServerUrl = 'http://' + addr + ':' + port;
@@ -51,6 +52,21 @@ router.post('/order', function *(next) {
   var purchaseResult = result.body;
   this.body = purchaseResult;
 });
+
+router.post('/order/sync', function *(next) {
+  var email = this.request.body.email;
+  var traget = process.env.DOMAIN_HOST || 'localhost:1337';
+  var tragetHost = 'http://'+traget+'/index.html#order';
+  var result = yield request.get(restServerUrl+'/api/sync?eamil='+email+'&host'+tragetHost);
+  this.body = result.body;
+});
+
+router.post('/order/status', function *(next) {
+  var token = this.request.body.token;
+  var result = yield request.get(restServerUrl+'/api/order/status?token='+token);
+  this.body = result.body;
+});
+
 
 app
   .use(router.routes())
