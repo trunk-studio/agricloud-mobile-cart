@@ -30,7 +30,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
 
 $( document ).delegate("#purchase", "pageshow", function() {
 
-  var productName = $("div[name=productPrice] h2").map(function(){
+  var productName = $("div[name=productInfo] h2").map(function(){
     return $(this).text();
   }).get();
 
@@ -38,29 +38,31 @@ $( document ).delegate("#purchase", "pageshow", function() {
     return $(this).val();
   }).get();
 
-  var priceArray = $("div[name=productPrice]").map(function(){
-    return $(this).data("price");
+  var productInfoArray = $("div[name=productInfo]").map(function(){
+    return $(this).data();
   }).get();
 
   var priceSum = 0;
-  $.each(priceArray,function (i) {
-    // console.log(productName[i]+','+quantity[i]+','+priceArray[i]);
+  $('#purchaseTable tbody').empty();
+  $.each(productInfoArray,function (i) {
+    console.log(productName[i]+','+quantity[i]+','+productInfoArray[i].price+','+productInfoArray[i].orderproductid);
     // console.log($('#showOrder'));
-    priceSum += (priceArray[i]*quantity[i]);
+    priceSum += (productInfoArray[i].price*quantity[i]);
     $('#purchaseTable').find('tbody:last').append(
       '<tr>'+
         '<td>'+
           '<small>'+productName[i]+'</small>'+
+          '<input type=\"hidden\" name=\"orderItems['+ i +'][ProductId]\" value='+productInfoArray[i].orderproductid+'>'+
         '</td>'+
         '<td align="right">'+
-          '$'+priceArray[i]+
+          '$'+productInfoArray[i].price+
         '</td>'+
         '<td align="right">'+
           quantity[i]+
-          '<input type=\"hidden\" name=\"order[quantity]\" value=\"\">'+
+          '<input type=\"hidden\" name=\"orderItems['+ i +'][quantity]\" value='+quantity[i]+'>'+
         '</td>'+
         '<td align="right">'+
-          '$'+priceArray[i]*quantity[i]+
+          '$'+productInfoArray[i].price*quantity[i]+
         '</td>'+
       '</tr>');
   });
