@@ -45,8 +45,6 @@ $( document ).delegate("#purchase", "pageshow", function() {
   var priceSum = 0;
   $('#purchaseTable tbody').empty();
   $.each(productInfoArray,function (i) {
-    console.log(productName[i]+','+quantity[i]+','+productInfoArray[i].price+','+productInfoArray[i].orderproductid);
-    // console.log($('#showOrder'));
     priceSum += (productInfoArray[i].price*quantity[i]);
     $('#purchaseTable').find('tbody:last').append(
       '<tr>'+
