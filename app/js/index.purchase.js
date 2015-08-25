@@ -50,14 +50,14 @@ $( document ).delegate("#purchase", "pageshow", function() {
       '<tr>'+
         '<td>'+
           '<small>'+productName[i]+'</small>'+
-          '<input type=\"hidden\" name=\"orderItems['+ i +'][ProductId]\" value='+productInfoArray[i].orderproductid+'>'+
+          '<input type=\"hidden\" name=\"order[orderItems]['+i+'][ProductId]\" value='+productInfoArray[i].orderproductid+'>'+
         '</td>'+
         '<td align="right">'+
           '$'+productInfoArray[i].price+
         '</td>'+
         '<td align="right">'+
           quantity[i]+
-          '<input type=\"hidden\" name=\"orderItems['+ i +'][quantity]\" value='+quantity[i]+'>'+
+          '<input type=\"hidden\" name=\"order[orderItems]['+i+'][quantity]\" value='+quantity[i]+'>'+
         '</td>'+
         '<td align="right">'+
           '$'+productInfoArray[i].price*quantity[i]+
@@ -74,7 +74,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
     '</tr>'+
     '<tr>'+
       '<td colspan=\"4\" align=\"right\"><font color=\"blue\">訂單金額總計（含運費）  <b>$'+ Math.round(priceSum*0.9+180) +'</b> 元</font></td>'+
-      '<input type=\"hidden\" name=\"orderItems[priceSum]\" value='+Math.round(priceSum*0.9+180)+'>'+
+      '<input type=\"hidden\" name=\"order[priceSum]\" value='+Math.round(priceSum*0.9+180)+'>'+
     '</tr>'
   );
 
