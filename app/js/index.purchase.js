@@ -74,6 +74,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
     '</tr>'+
     '<tr>'+
       '<td colspan=\"4\" align=\"right\"><font color=\"blue\">訂單金額總計（含運費）  <b>$'+ Math.round(priceSum*0.9+180) +'</b> 元</font></td>'+
+      '<input type=\"hidden\" name=\"orderItems[priceSum]\" value='+Math.round(priceSum*0.9+180)+'>'+
     '</tr>'
   );
 
