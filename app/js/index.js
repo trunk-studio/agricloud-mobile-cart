@@ -45,7 +45,7 @@ $( document ).ajaxStop(function() { $.mobile.loading( "hide" ); });
         path = $(this).data('src');
       }
 
-      
+
 
       $(this).load(path, function() {
         $(this).enhanceWithin();
@@ -119,7 +119,7 @@ $(function() {
       {
         var purchaseResult = JSON.parse(data);
 				var product = purchaseResult.order.product;
-				$('#purchaseResult_SerialNumber').text(purchaseResult.order.id);
+				$('#purchaseResult_serialNumber').text(purchaseResult.order.id);
 				$('#purchaseResult_orderQuantity').text(purchaseResult.order.quantity);
 				$('#purchaseResult_productPrice').text(product.price);
 
