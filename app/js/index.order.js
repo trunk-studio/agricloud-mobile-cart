@@ -10,6 +10,41 @@ $( document ).delegate("#order", "pageshow", function() {
 		$('#syncInfo').slideDown(300);
 	});
 
+  $("#sendOrderSyncRequestForm").on('submit',function(e){
+    console.log("~~~~~~~~~~~~");
+    e.preventDefault();
+    var postData = $(this).serializeArray();
+    var formURL = $(this).attr("action");
+    $.ajax({
+      url : formURL,
+      type: "POST",
+      data : postData,
+      success:function(data, textStatus, jqXHR){}
+    });
+  });
+
+  $("#orderStatusRequestForm").on('submit',function(e){
+    e.preventDefault();
+    console.log('=== getOrderStatusRequestBtn ===');
+    var postData = $(this).serializeArray();
+    var formURL = $(this).attr("action");
+
+    console.log(formURL);
+    console.log(postData);
+    $.ajax({
+      url : formURL,
+      type: "POST",
+      data : postData,
+      success:function(data, textStatus, jqXHR){
+        console.log(data);
+      }
+    });
+  });
+
+
+
+
+
 	//方便測試用
 	// var purchaseHistorySpec = {
 	// 	purchaseHistory: [{
@@ -84,4 +119,3 @@ $( document ).delegate("#order", "pageshow", function() {
 		});
 	}
 });
-

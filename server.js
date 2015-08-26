@@ -38,16 +38,15 @@ router.get('/', function *(next) {
   this.redirect('/index.html');
 });
 
-router.post('/order/status', function *(next) {
-  var orderQuery = this.request.body;
-  var result = yield request.post(restServerUrl+'/api/order/status', {form: orderQuery});
-  var orderStatus = result.body;
-  this.body = orderStatus;
-});
+// router.post('/order/status', function *(next) {
+//   var orderQuery = this.request.body;
+//   var result = yield request.post(restServerUrl+'/api/order/status', {form: orderQuery});
+//   var orderStatus = result.body;
+//   this.body = orderStatus;
+// });
 
 router.post('/order', function *(next) {
   var purchaseForm = this.request.body;
-  console.log('=== purchaseForm ===', purchaseForm);
   var result = yield request.post(restServerUrl+'/api/order', {form: purchaseForm});
   var purchaseResult = result.body;
   this.body = purchaseResult;
@@ -55,9 +54,10 @@ router.post('/order', function *(next) {
 
 router.post('/order/sync', function *(next) {
   var email = this.request.body.email;
-  var traget = process.env.DOMAIN_HOST || 'localhost:1337';
+  var traget = process.env.DOMAIN_HOST || 'localhost:3000';
   var tragetHost = 'http://'+traget+'/index.html#order';
-  var result = yield request.get(restServerUrl+'/api/sync?eamil='+email+'&host'+tragetHost);
+  var apiUrl = restServerUrl+'/api/order/sync?email='+email+'&host='+encodeURIComponent(tragetHost);
+  var result = yield request.get(apiUrl);
   this.body = result.body;
 });
 
