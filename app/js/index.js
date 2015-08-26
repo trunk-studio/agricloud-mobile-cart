@@ -106,71 +106,71 @@ $(function() {
 
 
 
-	$("#purchaseForm").submit(function(e)
-	{
-    var postData = $(this).serializeArray();
-    var formURL = $(this).attr("action");
-    $.ajax(
-    {
-      url : formURL,
-      type: "POST",
-      data : postData,
-      success:function(data, textStatus, jqXHR)
-      {
-        var purchaseResult = JSON.parse(data);
-				var product = purchaseResult.order.product;
-				$('#purchaseResult_serialNumber').text(purchaseResult.order.id);
-				$('#purchaseResult_orderQuantity').text(purchaseResult.order.quantity);
-				$('#purchaseResult_productPrice').text(product.price);
-
-				var orderPrice =
-					parseInt(purchaseResult.order.quantity, 10) * parseInt(product.price, 10);
-
-				$('#purchaseResult_orderPrice').text(orderPrice);
-				$('#purchaseResult_bank_id').text(purchaseResult.bank.id);
-				$('#purchaseResult_bank_accountId').text(purchaseResult.bank.accountId);
-
-				window.location.assign("/index.html#purchaseResult");
-
-		localStorage["purchaseResult"] = JSON.stringify(purchaseResult);
-      },
-      error: function(jqXHR, textStatus, errorThrown)
-      {
-        //if fails
-      }
-    });
-    e.preventDefault(); //STOP default action
-	});
-
-	$('#order_infoto_shipment').change(function() {
-        if($(this).is(":checked")) {
-        	$("input[name='order[shipment][username]']").val($("input[name='order[user][username]']").val());
-   			$("input[name='order[shipment][email]']").val($("input[name='order[user][email]']").val());
-   			$("input[name='order[shipment][mobile]']").val($("input[name='order[user][mobile]']").val());
-   			$("input[name='order[shipment][address]']").val($("input[name='order[user][address]']").val());
-
-			$("input[name='order[user][username]']").change(function(){
-				$("input[name='order[shipment][username]']").val($(this).val());
-			});
-
-			$("input[name='order[user][email]']").change(function(){
-				$("input[name='order[shipment][email]']").val($(this).val());
-			});
-
-			$("input[name='order[user][mobile]']").change(function(){
-				$("input[name='order[shipment][mobile]']").val($(this).val());
-			});
-
-			$("input[name='order[user][address]']").change(function(){
-				$("input[name='order[shipment][address]']").val($(this).val());
-			});
-
-        }else{
-            $("input[name='order[shipment][username]']").val("");
-   			$("input[name='order[shipment][email]']").val("");
-   			$("input[name='order[shipment][mobile]']").val("");
-   			$("input[name='order[shipment][address]']").val("");
-        }
-    });
+	// $("#purchaseForm").submit(function(e)
+	// {
+  //   var postData = $(this).serializeArray();
+  //   var formURL = $(this).attr("action");
+  //   $.ajax(
+  //   {
+  //     url : formURL,
+  //     type: "POST",
+  //     data : postData,
+  //     success:function(data, textStatus, jqXHR)
+  //     {
+  //       var purchaseResult = JSON.parse(data);
+	// 			var product = purchaseResult.order.product;
+	// 			$('#purchaseResult_serialNumber').text(purchaseResult.order.id);
+	// 			$('#purchaseResult_orderQuantity').text(purchaseResult.order.quantity);
+	// 			$('#purchaseResult_productPrice').text(product.price);
+  //
+	// 			var orderPrice =
+	// 				parseInt(purchaseResult.order.quantity, 10) * parseInt(product.price, 10);
+  //
+	// 			$('#purchaseResult_orderPrice').text(orderPrice);
+	// 			$('#purchaseResult_bank_id').text(purchaseResult.bank.id);
+	// 			$('#purchaseResult_bank_accountId').text(purchaseResult.bank.accountId);
+  //
+	// 			window.location.assign("/index.html#purchaseResult");
+  //
+	// 	    localStorage["purchaseResult"] = JSON.stringify(purchaseResult);
+  //     },
+  //     error: function(jqXHR, textStatus, errorThrown)
+  //     {
+  //       //if fails
+  //     }
+  //   });
+  //   e.preventDefault(); //STOP default action
+	// });
+  //
+	// $('#order_infoto_shipment').change(function() {
+  //       if($(this).is(":checked")) {
+  //       	$("input[name='order[shipment][username]']").val($("input[name='order[user][username]']").val());
+  //    			$("input[name='order[shipment][email]']").val($("input[name='order[user][email]']").val());
+  //    			$("input[name='order[shipment][mobile]']").val($("input[name='order[user][mobile]']").val());
+  //    			$("input[name='order[shipment][address]']").val($("input[name='order[user][address]']").val());
+  //
+  //   			$("input[name='order[user][username]']").change(function(){
+  //   				$("input[name='order[shipment][username]']").val($(this).val());
+  //   			});
+  //
+  //   			$("input[name='order[user][email]']").change(function(){
+  //   				$("input[name='order[shipment][email]']").val($(this).val());
+  //   			});
+  //
+  //   			$("input[name='order[user][mobile]']").change(function(){
+  //   				$("input[name='order[shipment][mobile]']").val($(this).val());
+  //   			});
+  //
+  //   			$("input[name='order[user][address]']").change(function(){
+  //   				$("input[name='order[shipment][address]']").val($(this).val());
+  //   			});
+  //
+  //       }else{
+  //         $("input[name='order[shipment][username]']").val("");
+  //    			$("input[name='order[shipment][email]']").val("");
+  //    			$("input[name='order[shipment][mobile]']").val("");
+  //    			$("input[name='order[shipment][address]']").val("");
+  //       }
+  //   });
 
 });

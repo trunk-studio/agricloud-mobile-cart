@@ -5,31 +5,30 @@ $( document ).delegate("#purchase", "pagebeforecreate", function() {
 
 });
 
+
 $( document ).delegate("#purchase", "pageshow", function() {
 
+  // twzipcode
   console.log('=== load zipcode ===');
   $('#twzipcode').twzipcode({
     'detect': false,
     'zipcodeIntoDistrict': true
   });
-
   $('#twzipcode select').data('inline', 'true');
   $('#twzipcode > div').css('display', 'inline-block');
-
 
   $('#twzipcode_shipment').twzipcode({
     'zipcodeIntoDistrict': true
   });
-
   $('#twzipcode_shipment select').data('inline', 'true');
   $('#twzipcode_shipment > div').css('display', 'inline-block');
 
+  // purchase form submit button
+  console.log('=== submit purchaseForm ===');
   $("#purchaseForm").on('submit',function(e){
     e.preventDefault();
-
     var postData = $(this).serializeArray();
     var formURL = $(this).attr("action");
-
     console.log(formURL);
     console.log(postData);
     $.ajax({
@@ -37,14 +36,48 @@ $( document ).delegate("#purchase", "pageshow", function() {
       type: "POST",
       data : postData,
       success:function(data, textStatus, jqXHR){
+        console.log('=== submit successed ===');
         console.log(data);
+        localStorage["purchaseHistory"] = JSON.stringify(data);
+        $(this).attr('disabled', 'disabled');
+        window.location.replace("/index.html#order");
+      },
+      error: function(jqXHR, textStatus, errorThrown)
+      {
+        console.log('=== submitted error ===');
       }
     });
   });
 
+  // shipment-user sync info checkbox
+	$('#order_infoto_shipment').change(function() {
+    if($(this).is(":checked")) {
+    	$("input[name='order[shipment][username]']").val($("input[name='order[user][username]']").val());
+			$("input[name='order[shipment][email]']").val($("input[name='order[user][email]']").val());
+			$("input[name='order[shipment][mobile]']").val($("input[name='order[user][mobile]']").val());
+			$("input[name='order[shipment][address]']").val($("input[name='order[user][address]']").val());
+
+  		$("input[name='order[user][username]']").change(function(){
+  			$("input[name='order[shipment][username]']").val($(this).val());
+  		});
+  		$("input[name='order[user][email]']").change(function(){
+  			$("input[name='order[shipment][email]']").val($(this).val());
+  		});
+  		$("input[name='order[user][mobile]']").change(function(){
+  			$("input[name='order[shipment][mobile]']").val($(this).val());
+  		});
+  		$("input[name='order[user][address]']").change(function(){
+  			$("input[name='order[shipment][address]']").val($(this).val());
+  		});
+    }else{
+      $("input[name='order[shipment][username]']").val("");
+			$("input[name='order[shipment][email]']").val("");
+			$("input[name='order[shipment][mobile]']").val("");
+			$("input[name='order[shipment][address]']").val("");
+    }
+  });
 
 });
-
 
 
 $( document ).delegate("#purchase", "pageshow", function() {
@@ -96,6 +129,5 @@ $( document ).delegate("#purchase", "pageshow", function() {
       '<input type=\"hidden\" name=\"order[priceSum]\" value='+Math.round(priceSum*0.9+180)+'>'+
     '</tr>'
   );
-
 
 });
