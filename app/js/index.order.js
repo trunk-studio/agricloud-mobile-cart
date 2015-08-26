@@ -103,18 +103,18 @@ $( document ).delegate("#order", "pageshow", function() {
 	// localStorage["purchaseHistory"] = JSON.stringify(purchaseHistorySpec);
 
 	$('#orderStatusList').empty();
-
+  console.log('~~~~~~~~~~~~~~~~~~');
 	if(localStorage.purchaseHistory){
 		var list = JSON.parse(localStorage["purchaseHistory"]);
-		$.each(list.purchaseHistory,function (i) {
+		$.each(list, function (i) {
 			$('#orderStatusList').append(
 			'<li class=\"ui-li-has-thumb ui-last-child\">'+
 				'<a href=\"#orderStatus\" rel=\"external\" class=\"ui-btn ui-btn-icon-right ui-icon-carat-r\">'+
 				'<img src=\"img/blackcat.jpg\" />'+
 				'<h3>雲端文旦禮盒</h3>'+
-				'<p>訂單日期：'+ list.purchaseHistory[i].createdAt +'</p>'+
-				'<p>金額：$'+ list.purchaseHistory[i].priceSum +
-				'元、配送地址：'+ list.purchaseHistory[i].Shipment.address +'</p>'+
+				'<p>訂單日期：'+ list[i].createdAt +'</p>'+
+				'<p>金額：$'+ list[i].priceSum +
+				'元、配送地址：'+ list[i].Shipment.address +'</p>'+
 			'</a></li>');
 		});
 	}

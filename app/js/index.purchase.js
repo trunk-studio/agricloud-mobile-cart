@@ -37,18 +37,28 @@ $( document ).delegate("#purchase", "pageshow", function() {
       data : postData,
       success:function(data, textStatus, jqXHR){
         $(this).attr('disabled', 'disabled');
-        console.log('=== log data ===');
-        console.log(data);
-        var purchaseResult = {
-          [OrderItems]: data.products,
-    			Shipment: [data.Shipment],
-          User: [data.Shipment],
-          createdAt: 'YYYYMMDD',
-          priceSum: 111
-        };
-        console.log('=== log purchaseResult ===');
-        console.log(purchaseResult);
-        localStorage["purchaseHistory"] = JSON.stringify(purchaseResult);
+        // console.log('=== log data ===');
+        // console.log(data);
+        // var purchaseResult = {
+        //   [OrderItems]: data.products,
+    		// 	Shipment: [data.Shipment],
+        //   User: [data.Shipment],
+        //   createdAt: 'YYYYMMDD',
+        //   priceSum: 111
+        // };
+        // console.log('=== log purchaseResult ===');
+        // console.log(purchaseResult);
+
+        var order = JSON.parse(data).order;
+
+        var purchaseHistory = [];
+        if (localStorage.purchaseHistory)
+          purchaseHistory = JSON.parse(localStorage.purchaseHistory);
+        purchaseHistory.push(order);
+
+        localStorage['purchaseHistory'] = JSON.stringify(purchaseHistory);
+
+
         window.location.replace("/index.html#order");
       },
       error: function(jqXHR, textStatus, errorThrown)
