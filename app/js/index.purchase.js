@@ -24,6 +24,25 @@ $( document ).delegate("#purchase", "pageshow", function() {
   $('#twzipcode_shipment select').data('inline', 'true');
   $('#twzipcode_shipment > div').css('display', 'inline-block');
 
+  $("#purchaseForm").on('submit',function(e){
+    e.preventDefault();
+
+    var postData = $(this).serializeArray();
+    var formURL = $(this).attr("action");
+
+    console.log(formURL);
+    console.log(postData);
+    $.ajax({
+      url : formURL,
+      type: "POST",
+      data : postData,
+      success:function(data, textStatus, jqXHR){
+        console.log(data);
+      }
+    });
+  });
+
+
 });
 
 
