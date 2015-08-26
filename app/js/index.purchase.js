@@ -26,20 +26,29 @@ $( document ).delegate("#purchase", "pageshow", function() {
   // purchase form submit button
   console.log('=== submit purchaseForm ===');
   $("#purchaseForm").on('submit',function(e){
-    e.preventDefault();
     var postData = $(this).serializeArray();
     var formURL = $(this).attr("action");
     console.log(formURL);
+    console.log('=== log postData ===');
     console.log(postData);
     $.ajax({
       url : formURL,
       type: "POST",
       data : postData,
       success:function(data, textStatus, jqXHR){
-        console.log('=== submit successed ===');
-        console.log(data);
-        localStorage["purchaseHistory"] = JSON.stringify(data);
         $(this).attr('disabled', 'disabled');
+        console.log('=== log data ===');
+        console.log(data);
+        var purchaseResult = {
+          [OrderItems]: data.products,
+    			Shipment: [data.Shipment],
+          User: [data.Shipment],
+          createdAt: 'YYYYMMDD',
+          priceSum: 111
+        };
+        console.log('=== log purchaseResult ===');
+        console.log(purchaseResult);
+        localStorage["purchaseHistory"] = JSON.stringify(purchaseResult);
         window.location.replace("/index.html#order");
       },
       error: function(jqXHR, textStatus, errorThrown)
@@ -47,6 +56,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
         console.log('=== submitted error ===');
       }
     });
+    e.preventDefault();
   });
 
   // shipment-user sync info checkbox
