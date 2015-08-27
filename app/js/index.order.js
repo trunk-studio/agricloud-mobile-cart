@@ -15,12 +15,12 @@ $( document ).delegate("#order", "pageshow", function() {
     $.each(list, function (i) {
         try{
             $('#orderStatusList').append(
-            '<li class=\"ui-li-has-thumb ui-last-child\">'+
+            '<li class=\"ui-li-has-thumb ui-last-child\" id='+ i +'>'+
                 '<a href=\"#orderStatus\" rel=\"external\" class=\"ui-btn ui-btn-icon-right ui-icon-carat-r\">'+
                 '<img src=\"img/blackcat.jpg\" />'+
                 '<h3>雲端文旦禮盒</h3>'+
                 '<p>訂單日期：'+ list[i].createdAt +'</p>'+
-                '<p>金額：$'+ list[i].priceSum +
+                '<p>金額：$'+ list[i].paymentTotalAmount +
                 '元、配送地址：'+ list[i].Shipment.address +'</p>'+
             '</a></li>');
         }catch(e){
@@ -80,5 +80,40 @@ $( document ).delegate("#order", "pageshow", function() {
     $('#syncInfo').slideDown(300);
     $('#token').val(token);
   }
+
+  $('#orderStatusList li').click(function() {
+    var orderStatus = JSON.parse(localStorage["purchaseHistory"])[this.id];
+    console.log(orderStatus);
+
+    $('#orderStatus_quantity').text(orderStatus.quantity);
+    $('#orderStatus_id').text(orderStatus.id);
+
+    $.each(orderStatus.OrderItems ,function(i){
+      $('#orderItem').append(
+        '<div data-role=\"fieldcontain\">'+
+          '<label for=\"orderStatus_orderitem_name\">名稱:</label>'+
+          '<span id=\"orderStatus_orderitem_name\"/>'+ orderStatus.OrderItems[i].name +
+        '</div>'+
+
+        '<div data-role=\"fieldcontain\">'+
+          '<label for=\"orderStatus_orderitem_quantity\">數量:</label>'+
+          '<span id=\"orderStatus_orderitem_quantity\"/>'+ orderStatus.OrderItems[i].quantity +
+        '</div>');
+    });
+    $('#orderStatus_paymentTotalAmount').text(orderStatus.paymentTotalAmount);
+
+    $('#orderStatus_user_username').text(orderStatus.User.username);
+    $('#orderStatus_user_email').text(orderStatus.User.email);
+    $('#orderStatus_user_mobile').text(orderStatus.User.mobile);
+    $('#orderStatus_user_address').text(orderStatus.User.address);
+
+    $('#orderStatus_shipment_username').text(orderStatus.Shipment.username);
+    $('#orderStatus_shipment_email').text(orderStatus.Shipment.email);
+    $('#orderStatus_shipment_mobile').text(orderStatus.Shipment.mobile);
+    $('#orderStatus_shipment_address').text(orderStatus.Shipment.address);
+
+    $('#orderStatus_bank_accountId').text(orderStatus.bank.bank.accountId);
+    $('#orderStatus_bank_id').text(orderStatus.bank.bank.id);
+  });
 
 });
