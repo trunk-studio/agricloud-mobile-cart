@@ -8,6 +8,59 @@ $( document ).delegate("#purchase", "pagebeforecreate", function() {
 
 $( document ).delegate("#purchase", "pageshow", function() {
 
+  var submitFlag = false;
+  // purchase form submit button
+  $("#purchaseForm").on('submit',function(e){
+    console.log('=== purchaseForm submit button clicked ===');
+    if(!submitFlag){
+      submitFlag = true;
+      var postData = $(this).serializeArray();
+      var formURL = $(this).attr("action");
+      console.log(formURL);
+      console.log('=== log postData ===');
+      console.log(postData);
+      if(postData.length > 15 || !postData){
+        $.ajax({
+          url : formURL,
+          type: "POST",
+          data : postData,
+          success:function(data, textStatus, jqXHR){
+            console.log('=== submit successed ===');
+            $(this).attr('disabled', 'disabled');
+            var order = JSON.parse(data).order;
+            var purchaseHistory = [];
+            if (localStorage.purchaseHistory){
+              purchaseHistory = JSON.parse(localStorage.purchaseHistory);
+              //purchaseHistory.push(order);
+              Array.prototype.push.apply(purchaseHistory,order);
+            }else{
+              purchaseHistory = JSON.parse(data);
+            }
+            localStorage['purchaseHistory'] = JSON.stringify(purchaseHistory);
+            window.location.replace("/index.html#order");
+          },
+          error: function(jqXHR, textStatus, errorThrown)
+          {
+            console.log('=== submit error ==>',errorThrown);
+            var errTxt = '不好意思啦！我們遇到一點問題了：' + errorThrown;
+            alert(errTxt);
+          }
+        });
+      }else{
+        console.log('=== no any product selected ===');
+        alert("哇！我們忘記你選了哪些商品了:( \n\n我們去重新選擇商品:) ");
+        window.location.replace("/index.html#product");
+      }
+    }else {
+      console.log('=== from has being repert submit ===');
+    }
+    e.preventDefault();
+  });
+
+});
+
+$( document ).delegate("#purchase", "pageshow", function() {
+
   // twzipcode
   console.log('=== load zipcode ===');
   $('#twzipcode').twzipcode({
@@ -22,52 +75,6 @@ $( document ).delegate("#purchase", "pageshow", function() {
   });
   $('#twzipcode_shipment select').data('inline', 'true');
   $('#twzipcode_shipment > div').css('display', 'inline-block');
-
-  // purchase form submit button
-  console.log('=== submit purchaseForm ===');
-  $("#purchaseForm").on('submit',function(e){
-    var postData = $(this).serializeArray();
-    var formURL = $(this).attr("action");
-    console.log(formURL);
-    console.log('=== log postData ===');
-    console.log(postData);
-    $.ajax({
-      url : formURL,
-      type: "POST",
-      data : postData,
-      success:function(data, textStatus, jqXHR){
-        $(this).attr('disabled', 'disabled');
-        // console.log('=== log data ===');
-        // console.log(data);
-        // var purchaseResult = {
-        //   [OrderItems]: data.products,
-    		// 	Shipment: [data.Shipment],
-        //   User: [data.Shipment],
-        //   createdAt: 'YYYYMMDD',
-        //   priceSum: 111
-        // };
-        // console.log('=== log purchaseResult ===');
-        // console.log(purchaseResult);
-
-        var order = JSON.parse(data).order;
-
-        var purchaseHistory = [];
-        if (localStorage.purchaseHistory)
-          purchaseHistory = JSON.parse(localStorage.purchaseHistory);
-        purchaseHistory.push(order);
-
-        localStorage['purchaseHistory'] = JSON.stringify(purchaseHistory);
-
-
-        window.location.replace("/index.html#order");
-      },
-      error: function(jqXHR, textStatus, errorThrown)
-      {
-        console.log('=== submitted error ===');
-      }
-    });
-    e.preventDefault();
-  });
 
   // shipment-user sync info checkbox
 	$('#order_infoto_shipment').change(function() {
@@ -89,18 +96,28 @@ $( document ).delegate("#purchase", "pageshow", function() {
   		$("input[name='order[user][address]']").change(function(){
   			$("input[name='order[shipment][address]']").val($(this).val());
   		});
+
+      var twzipcode_shipment = $('#twzipcode_shipment');
+      twzipcode_shipment.find("[name='order[shipment][county]']")
+          .val($("select[name='order[user][county]']").val())
+          .trigger('change');
+      twzipcode_shipment.find("[name='order[shipment][district]']")
+          .val($("select[name='order[user][district]']").val())
+          .trigger('change');
+
     }else{
       $("input[name='order[shipment][username]']").val("");
 			$("input[name='order[shipment][email]']").val("");
 			$("input[name='order[shipment][mobile]']").val("");
 			$("input[name='order[shipment][address]']").val("");
+      $('#twzipcode_shipment').twzipcode('reset');
     }
   });
 
-});
-
-
-$( document ).delegate("#purchase", "pageshow", function() {
+// });
+//
+//
+// $( document ).delegate("#purchase", "pageshow", function() {
 
   var productName = $("div[name=productInfo] h2").map(function(){
     return $(this).text();
