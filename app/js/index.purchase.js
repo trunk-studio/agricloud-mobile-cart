@@ -27,15 +27,17 @@ $( document ).delegate("#purchase", "pageshow", function() {
           success:function(data, textStatus, jqXHR){
             console.log('=== submit successed ===');
             $(this).attr('disabled', 'disabled');
-            var order = JSON.parse(data).order;
+            var order = JSON.parse(data);
             var purchaseHistory = [];
             if (localStorage.purchaseHistory){
               purchaseHistory = JSON.parse(localStorage.purchaseHistory);
-              //purchaseHistory.push(order);
-              Array.prototype.push.apply(purchaseHistory,order);
+              // purchaseHistory.push(order);
+              Array.prototype.push.apply(purchaseHistory,order.order);
             }else{
               purchaseHistory = JSON.parse(data);
             }
+            console.log('=== log purchaseHistory ===');
+            console.log(purchaseHistory);
             localStorage['purchaseHistory'] = JSON.stringify(purchaseHistory);
             window.location.replace("/index.html#order");
           },
@@ -98,8 +100,8 @@ $( document ).delegate("#purchase", "pageshow", function() {
   		});
 
       var twzipcode_shipment = $('#twzipcode_shipment');
-      twzipcode_shipment.find("[name='order[shipment][county]']")
-          .val($("select[name='order[user][county]']").val())
+      twzipcode_shipment.find("[name='order[shipment][city]']")
+          .val($("select[name='order[user][city]']").val())
           .trigger('change');
       twzipcode_shipment.find("[name='order[shipment][district]']")
           .val($("select[name='order[user][district]']").val())
