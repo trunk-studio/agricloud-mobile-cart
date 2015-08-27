@@ -134,9 +134,11 @@ $( document ).delegate("#purchase", "pageshow", function() {
   }).get();
 
   var priceSum = 0;
+  var allProductQuantity = 0
   $('#purchaseTable tbody').empty();
   $.each(productInfoArray,function (i) {
     priceSum += (productInfoArray[i].price*quantity[i]);
+    allProductQuantity += Number(quantity[i]);
     $('#purchaseTable').find('tbody:last').append(
       '<tr>'+
         '<td>'+
@@ -155,17 +157,23 @@ $( document ).delegate("#purchase", "pageshow", function() {
         '</td>'+
       '</tr>');
   });
+  console.log(allProductQuantity);
+  var shippingRate = 0;
+  if(allProductQuantity == 1)
+    shippingRate = 90;
+  else
+    shippingRate = allProductQuantity * 60;
 
   $('#purchaseTable').find('tbody:last').append(
+    // '<tr>'+
+    //   '<td colspan=\"4\" align=\"right\"><font color=\"red\">預購優惠九折 - <b>$'+ Math.round(priceSum*0.1) +'</b> 元</font></td>'+
+    // '</tr>'+
     '<tr>'+
-      '<td colspan=\"4\" align=\"right\"><font color=\"red\">預購優惠九折 - <b>$'+ Math.round(priceSum*0.1) +'</b> 元</font></td>'+
+      '<td colspan=\"4\" align=\"right\"><font color=\"green\">運費 <b>$'+ shippingRate +'</b> 元</font></td>'+
     '</tr>'+
     '<tr>'+
-      '<td colspan=\"4\" align=\"right\"><font color=\"green\">運費 <b>$'+ 180 +'</b> 元</font></td>'+
-    '</tr>'+
-    '<tr>'+
-      '<td colspan=\"4\" align=\"right\"><font color=\"blue\">訂單金額總計（含運費）  <b>$'+ Math.round(priceSum*0.9+180) +'</b> 元</font></td>'+
-      '<input type=\"hidden\" name=\"order[priceSum]\" value='+Math.round(priceSum*0.9+180)+'>'+
+      '<td colspan=\"4\" align=\"right\"><font color=\"blue\">訂單金額總計（含運費）  <b>$'+ priceSum+'</b> 元</font></td>'+
+      '<input type=\"hidden\" name=\"order[paymentTotalAmount]\" value='+priceSum + shippingRate+'>'+
     '</tr>'
   );
 
