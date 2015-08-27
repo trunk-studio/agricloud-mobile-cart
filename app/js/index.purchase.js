@@ -8,53 +8,66 @@ $( document ).delegate("#purchase", "pagebeforecreate", function() {
 
 $( document ).delegate("#purchase", "pageshow", function() {
 
-  var submitFlag = false;
   // purchase form submit button
+  var submitFlag = false;
   $("#purchaseForm").on('submit',function(e){
-    console.log('=== purchaseForm submit button clicked ===');
-    if(!submitFlag){
-      submitFlag = true;
-      var postData = $(this).serializeArray();
-      var formURL = $(this).attr("action");
-      console.log(formURL);
-      console.log('=== log postData ===');
-      console.log(postData);
-      if(postData.length > 15 || !postData){
-        $.ajax({
-          url : formURL,
-          type: "POST",
-          data : postData,
-          success:function(data, textStatus, jqXHR){
-            console.log('=== submit successed ===');
-            $(this).attr('disabled', 'disabled');
-            var order = JSON.parse(data);
-            var purchaseHistory = [];
-            if (localStorage.purchaseHistory){
-              purchaseHistory = JSON.parse(localStorage.purchaseHistory);
-              // purchaseHistory.push(order);
-              Array.prototype.push.apply(purchaseHistory,order.order);
-            }else{
-              purchaseHistory = JSON.parse(data);
-            }
-            console.log('=== log purchaseHistory ===');
-            console.log(purchaseHistory);
-            localStorage['purchaseHistory'] = JSON.stringify(purchaseHistory);
-            window.location.replace("/index.html#order");
-          },
-          error: function(jqXHR, textStatus, errorThrown)
-          {
-            console.log('=== submit error ==>',errorThrown);
-            var errTxt = '不好意思啦！我們遇到一點問題了：' + errorThrown;
-            alert(errTxt);
-          }
-        });
+    console.log('=== purchase submit button clicked ===');
+    var postData = $(this).serializeArray();
+    var formURL = $(this).attr("action");
+    console.log('=== log formURL ==>',formURL);
+    console.log('=== log postData ==>',postData);
+    // check if cart is empty
+    if(postData === undefined || postData.length < 16){
+      console.log('=== no any product selected ===');
+      alert("哇！我們忘記你選了哪些商品了:( \n\n我們去重新選擇商品吧:)");
+      window.location.replace("/index.html#product");
+    }else{
+      var name = $("input[name='order[user][username]']").val();
+      var email = $("input[name='order[user][email]']").val();
+      var mobile = $("input[name='order[user][mobile]']").val();
+      var address = $("input[name='order[user][address]']").val();
+      console.log('=== count name ==>',name.length);
+      console.log('=== count email ==>',email.length);
+      console.log('=== count mobile ==>',mobile.length);
+      console.log('=== count address ==>',address.length);
+      // chekc if any field is empty.
+      if(name.length<2 || email.length<5 || mobile.length<9 || address.length<5){
+        alert("哇！你好像有欄位忘記填囉！:(");
       }else{
-        console.log('=== no any product selected ===');
-        alert("哇！我們忘記你選了哪些商品了:( \n\n我們去重新選擇商品:) ");
-        window.location.replace("/index.html#product");
+        // check any redundancy submit.
+        if(!submitFlag){
+          submitFlag = true;
+          $.ajax({
+            url : formURL,
+            type: "POST",
+            data : postData,
+            success:function(data, textStatus, jqXHR){
+              console.log('=== submit successed ===');
+              $(this).attr('disabled', 'disabled');
+              var order = JSON.parse(data);
+              var purchaseHistory = [];
+              if (localStorage.purchaseHistory){
+                purchaseHistory = JSON.parse(localStorage.purchaseHistory);
+                Array.prototype.push.apply(purchaseHistory,order.order);
+              }else{
+                purchaseHistory = JSON.parse(data);
+              }
+              console.log('=== log purchaseHistory ===');
+              console.log(purchaseHistory);
+              localStorage['purchaseHistory'] = JSON.stringify(purchaseHistory);
+              window.location.replace("/index.html#order");
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+              console.log('=== submit error ==>',errorThrown);
+              var errTxt = '不好意思啦！我們遇到一點問題了：' + errorThrown;
+              alert(errTxt);
+            }
+          });
+        }else {
+          console.log('=== redundancy submit ===');
+        }
       }
-    }else {
-      console.log('=== from has being repert submit ===');
     }
     e.preventDefault();
   });
@@ -157,7 +170,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
         '</td>'+
       '</tr>');
   });
-  console.log(allProductQuantity);
+  console.log('=== allProductQuantity ==>',allProductQuantity);
   var shippingRate = 0;
   if(allProductQuantity == 1)
     shippingRate = 90;
