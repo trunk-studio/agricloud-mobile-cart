@@ -18,6 +18,8 @@ $( document ).delegate("#product", "pageshow", function() {
 	    }
 	});
 */
+  $("input[name='quantity[0]']").val(0);
+
   $("#purchaseButton").click( function() {
     console.log('=== purchaseButton clicked ===');
     // list array
