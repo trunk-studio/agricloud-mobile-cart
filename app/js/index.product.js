@@ -18,6 +18,23 @@ $( document ).delegate("#product", "pageshow", function() {
 	    }
 	});
 */
+  $("#purchaseButton").click( function() {
+    console.log('=== purchaseButton clicked ===');
+    // list array
+    var quantity = $("input[name='quantity[0]']").map(function(){
+      return $(this).val();
+    }).get();
+    // console.log('=== quantity is',quantity);
+    // console.log('=== JSON.stringify(quantity) is',JSON.stringify(quantity));
+    // compare
+    var unOrder = [ "0","0","0","0","0" ];
+    // console.log('=== JSON.stringify(unOrder) is',JSON.stringify(unOrder));
+    if( JSON.stringify(quantity) != JSON.stringify(unOrder) ){
+      window.location.replace("/index.html#purchase")
+    }else{
+      alert("不好意思啦！需要至少選擇一樣產品才能結帳哟 :) ");
+    }
+  });
 });
 
 $( document ).delegate("#product", "pagebeforecreate", function() {
@@ -42,22 +59,22 @@ $( document ).delegate("#product", "pagebeforecreate", function() {
   });
 
 
-  $("#purchaseButton").delegate("click", function() {
-	  var orderQuantity = $("#order_quantity").val();
-		console.log('orderQuantity', orderQuantity);
-		$("input[name='order[quantity]']").val(orderQuantity);
-
-		if (localStorage.purchaseResult) {
-   			purchaseResult = JSON.parse(localStorage["purchaseResult"]);
-   			$("input[name='order[user][username]']").val(purchaseResult.order.user.username);
-   			$("input[name='order[user][email]']").val(purchaseResult.order.user.email);
-   			$("input[name='order[user][mobile]']").val(purchaseResult.order.user.mobile);
-   			$("input[name='order[user][address]']").val(purchaseResult.order.user.address);
-   			$("input[name='order[shipment][username]']").val(purchaseResult.order.shipment.username);
-   			$("input[name='order[shipment][email]']").val(purchaseResult.order.shipment.email);
-   			$("input[name='order[shipment][mobile]']").val(purchaseResult.order.shipment.mobile);
-   			$("input[name='order[shipment][address]']").val(purchaseResult.order.shipment.address);
-		}
-	});
+//   $("#purchaseButton").delegate("click", function() {
+// 	  var orderQuantity = $("#order_quantity").val();
+// 		console.log('orderQuantity', orderQuantity);
+// 		$("input[name='order[quantity]']").val(orderQuantity);
+//
+// 		if (localStorage.purchaseResult) {
+//    			purchaseResult = JSON.parse(localStorage["purchaseResult"]);
+//    			$("input[name='order[user][username]']").val(purchaseResult.order.user.username);
+//    			$("input[name='order[user][email]']").val(purchaseResult.order.user.email);
+//    			$("input[name='order[user][mobile]']").val(purchaseResult.order.user.mobile);
+//    			$("input[name='order[user][address]']").val(purchaseResult.order.user.address);
+//    			$("input[name='order[shipment][username]']").val(purchaseResult.order.shipment.username);
+//    			$("input[name='order[shipment][email]']").val(purchaseResult.order.shipment.email);
+//    			$("input[name='order[shipment][mobile]']").val(purchaseResult.order.shipment.mobile);
+//    			$("input[name='order[shipment][address]']").val(purchaseResult.order.shipment.address);
+// 		}
+// 	});
 
 });
