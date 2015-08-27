@@ -31,7 +31,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
       console.log('=== count mobile ==>',mobile.length);
       console.log('=== count address ==>',address.length);
       // chekc if any field is empty.
-      if(name.length<2 || email.length<5 || mobile.length<9 || address.length<5){
+      if(name.length<1 || email.length<5 || mobile.length<9 || address.length<5){
         alert("哇！你好像有欄位忘記填囉！:(");
       }else{
         // check any redundancy submit.
