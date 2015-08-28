@@ -45,8 +45,7 @@ $( document ).delegate("#order", "pageshow", function() {
       data : postData,
       error: function (jqXHR, textStatus, errorThrown) {
         console.log(jqXHR);
-        console.log(textStatus);
-        console.log(errorThrown);
+        alert(JSON.parse(jqXHR.responseText).message);
       },
       success:function(data, textStatus, jqXHR){
         alert('驗證碼已經寄到你的信箱了喔～');
@@ -71,7 +70,7 @@ $( document ).delegate("#order", "pageshow", function() {
         localStorage['purchaseHistory'] = JSON.stringify(data.purchaseHistory);
         showPurchaseList(data.purchaseHistory);
       },
-      error: function () {
+      error: function (data, textStatus, jqXHR) {
         alert('再確認一下喔，驗證碼錯誤哟 :)')
       }
     });

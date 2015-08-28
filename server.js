@@ -59,8 +59,10 @@ router.post('/order/sync', function *(next) {
   var apiUrl = restServerUrl+'/api/order/sync?email='+email+'&host='+encodeURIComponent(tragetHost);
   var result = yield request.get(apiUrl);
   console.log(result.body);
-  if(result.statusCode == 500)
-    this.throw(result.body, 500);
+  if(result.statusCode == 500){
+    this.body = result.body;
+    this.status = 500;
+  }
   else
     this.body = result.body;
 });
@@ -68,8 +70,10 @@ router.post('/order/sync', function *(next) {
 router.post('/order/status', function *(next) {
   var token = this.request.body.token;
   var result = yield request.get(restServerUrl+'/api/order/status?token='+token);
-  if(result.statusCode == 500)
-    this.throw(result.body, 500);
+  if(result.statusCode == 500){
+    this.body = result.body;
+    this.status = 500;
+  }
   else
     this.body = result.body;
 });
