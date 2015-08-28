@@ -5,6 +5,20 @@ $( document ).delegate("#purchase", "pagebeforecreate", function() {
 
 });
 
+$( document ).delegate("#purchase", "pagecreate", function() {
+
+  // replace window if postData(cart) is empty.
+  var postData = $(this).serializeArray();
+  var formURL = $(this).attr("action");
+  console.log('=== log formURL ==>',formURL);
+  console.log('=== log postData ==>',postData);
+  if(postData === undefined || postData.length < 16){
+    console.log('=== no any product selected ===');
+    alert("哇！我們忘記你選了哪些商品了:( \n\n我們去重新選擇商品吧:)");
+    window.location.replace("/index.html#product");
+  }
+
+});
 
 $( document ).delegate("#purchase", "pageshow", function() {
 
@@ -16,59 +30,91 @@ $( document ).delegate("#purchase", "pageshow", function() {
     var formURL = $(this).attr("action");
     console.log('=== log formURL ==>',formURL);
     console.log('=== log postData ==>',postData);
-    // check if cart is empty
+    // check if postData(cart) is empty
     if(postData === undefined || postData.length < 16){
       console.log('=== no any product selected ===');
       alert("哇！我們忘記你選了哪些商品了:( \n\n我們去重新選擇商品吧:)");
       window.location.replace("/index.html#product");
     }else{
+      // get payer info
       var name = $("input[name='order[user][username]']").val();
       var email = $("input[name='order[user][email]']").val();
       var mobile = $("input[name='order[user][mobile]']").val();
       var address = $("input[name='order[user][address]']").val();
+      var city = $("select[name='order[user][city]']").val();
       console.log('=== count name ==>',name.length);
       console.log('=== count email ==>',email.length);
       console.log('=== count mobile ==>',mobile.length);
-      console.log('=== count address ==>',address.length);
-      // chekc if any field is empty.
-      if(name.length<1 || email.length<5 || mobile.length<9 || address.length<5){
-        alert("哇！你好像有欄位忘記填囉！:(");
+      console.log('=== count city selected ==>',city.length);
+      // chekc if payer empty.
+      if(name.length<1 || email.length<5 || mobile.length<=8 || address.length<2 || city.length<2){
+        if(name.length==0 || email.length==0 || mobile.length==0 || address.length==0)
+          alert("哇！訂購者資訊好像有欄位忘記填囉！:(\n\n（姓名/Email/電話/縣市/地址）");
+        else if(mobile.length<=8)
+          alert("哇！訂購者電話號碼不足 9 碼喔！:(");
+        else if(address.length<5)
+          alert("訂購者地址太短囉！是不是填錯了呢？:(");
+        else if(city.length<2)
+          alert("請選擇訂購者所在縣市:)");
       }else{
-        // check any redundancy submit.
-        if(!submitFlag){
-          submitFlag = true;
-          $.ajax({
-            url : formURL,
-            type: "POST",
-            data : postData,
-            success:function(data, textStatus, jqXHR){
-              console.log('=== submit successed ===');
-              $(this).attr('disabled', 'disabled');
-              var order = JSON.parse(data);
-              var purchaseHistory = [];
-              if (localStorage.purchaseHistory){
-                purchaseHistory = JSON.parse(localStorage.purchaseHistory);
-                Array.prototype.push.apply(purchaseHistory,order.order);
-              }else{
-                purchaseHistory = JSON.parse(data);
+        // get shipment info
+        var sname = $("input[name='order[shipment][username]']").val();
+        var semail = $("input[name='order[shipment][email]']").val();
+        var smobile = $("input[name='order[shipment][mobile]']").val();
+        var saddress = $("input[name='order[shipment][address]']").val();
+        var scity = $("select[name='order[user][city]']").val();
+        console.log('=== count sname ==>',sname.length);
+        console.log('=== count semail ==>',semail.length);
+        console.log('=== count smobile ==>',smobile.length);
+        console.log('=== count saddress ==>',saddress.length);
+        console.log('=== count scity selected ==>',scity.length);
+        // check if shipment empty
+        if(sname.length<1 || semail.length<5 || smobile.length<8 || saddress.length<3 || city.length<2){
+          if(sname.length==0 || semail.length==0 || smobile.length==0 || saddress.length==0)
+            alert("收件人欄位是空的喲！\n\n（或是點選「同訂購者資訊」）");
+          else if(smobile.length<8)
+            alert("哇！收件人電話號碼不足 9 碼喔！:(");
+          else if (saddress.length<5)
+            alert("收件人地址太短囉！是不是填錯了呢？:(");
+          else if(scity.length<2)
+            alert("請選擇收件人所在縣市:)");
+        }else{
+          // check any redundancy submit.
+          if(!submitFlag){
+            submitFlag = true;
+            $.ajax({
+              url : formURL,
+              type: "POST",
+              data : postData,
+              success:function(data, textStatus, jqXHR){
+                console.log('=== submit successed ===');
+                $(this).attr('disabled', 'disabled');
+                var order = JSON.parse(data);
+                var purchaseHistory = [];
+                if (localStorage.purchaseHistory){
+                  purchaseHistory = JSON.parse(localStorage.purchaseHistory);
+                  Array.prototype.push.apply(purchaseHistory,order.order);
+                }else{
+                  purchaseHistory = JSON.parse(data);
+                }
+                console.log('=== log purchaseHistory ===');
+                console.log(purchaseHistory);
+                localStorage['purchaseHistory'] = JSON.stringify(purchaseHistory);
+                window.location.replace("/index.html#order");
+              },
+              error: function(jqXHR, textStatus, errorThrown)
+              {
+                console.log('=== submit error ==>',errorThrown);
+                var errTxt = '不好意思啦！我們遇到一點問題了：' + errorThrown;
+                alert(errTxt);
               }
-              console.log('=== log purchaseHistory ===');
-              console.log(purchaseHistory);
-              localStorage['purchaseHistory'] = JSON.stringify(purchaseHistory);
-              window.location.replace("/index.html#order");
-            },
-            error: function(jqXHR, textStatus, errorThrown)
-            {
-              console.log('=== submit error ==>',errorThrown);
-              var errTxt = '不好意思啦！我們遇到一點問題了：' + errorThrown;
-              alert(errTxt);
-            }
-          });
-        }else {
-          console.log('=== redundancy submit ===');
-        }
-      }
-    }
+            });
+          }else {
+            console.log('=== redundancy submit ===');
+          } // check any redundancy submit end
+        } // check if shipment info empty end
+      } // check if payer info empty end
+    } // check if cart empty end
     e.preventDefault();
   });
 
