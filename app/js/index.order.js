@@ -43,7 +43,12 @@ $( document ).delegate("#order", "pageshow", function() {
       url : formURL,
       type: "POST",
       data : postData,
-      success:function(data, textStatus, jqXHR){}
+      error: function (jqXHR, textStatus, errorThrown) {
+        alert(JSON.parse(jqXHR.responseText).message);
+      },
+      success:function(data, textStatus, jqXHR){
+        alert('驗證碼已經寄到你的信箱了喔～');
+      }
     });
   });
 
@@ -60,11 +65,11 @@ $( document ).delegate("#order", "pageshow", function() {
       type: "POST",
       data : postData,
       success:function(data, textStatus, jqXHR){
-        var list = JSON.parse(data).purchaseHistory
-        localStorage['purchaseHistory'] = JSON.stringify(list);
-        showPurchaseList(list);
+        var data = JSON.parse(data)
+        localStorage['purchaseHistory'] = JSON.stringify(data.purchaseHistory);
+        showPurchaseList(data.purchaseHistory);
       },
-      error: function () {
+      error: function (data, textStatus, jqXHR) {
         alert('再確認一下喔，驗證碼錯誤哟 :)')
       }
     });
