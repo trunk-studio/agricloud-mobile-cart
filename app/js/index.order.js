@@ -43,7 +43,12 @@ $( document ).delegate("#order", "pageshow", function() {
       url : formURL,
       type: "POST",
       data : postData,
-      success:function(data, textStatus, jqXHR){}
+      error: function () {
+        alert('再確認一下喔，mail錯誤哟:)')
+      },
+      success:function(data, textStatus, jqXHR){
+        console.log('success',data);
+      }
     });
   });
 
@@ -61,12 +66,8 @@ $( document ).delegate("#order", "pageshow", function() {
       data : postData,
       success:function(data, textStatus, jqXHR){
         var data = JSON.parse(data)
-        if(data.msg)
-          alert(data.msg)
-        else{
-          localStorage['purchaseHistory'] = JSON.stringify(data.purchaseHistory);
-          showPurchaseList(data.purchaseHistory);
-        }
+        localStorage['purchaseHistory'] = JSON.stringify(data.purchaseHistory);
+        showPurchaseList(data.purchaseHistory);
       },
       error: function () {
         alert('再確認一下喔，驗證碼錯誤哟 :)')
