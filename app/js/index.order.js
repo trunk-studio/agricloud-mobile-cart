@@ -60,10 +60,12 @@ $( document ).delegate("#order", "pageshow", function() {
       type: "POST",
       data : postData,
       success:function(data, textStatus, jqXHR){
-        console.log(data);
         var list = JSON.parse(data).purchaseHistory
         localStorage['purchaseHistory'] = JSON.stringify(list);
         showPurchaseList(list);
+      },
+      error: function () {
+        alert('再確認一下喔，驗證碼錯誤哟 :)')
       }
     });
   });
@@ -85,8 +87,7 @@ $( document ).delegate("#order", "pageshow", function() {
     var orderStatus = JSON.parse(localStorage["purchaseHistory"])[this.id];
     console.log(orderStatus);
 
-    $('#orderStatus_quantity').text(orderStatus.quantity);
-    $('#orderStatus_id').text(orderStatus.id);
+    $('#orderStatus_id').text(orderStatus.serialNumber);
 
     $.each(orderStatus.OrderItems ,function(i){
       $('#orderItem').append(
@@ -112,8 +113,6 @@ $( document ).delegate("#order", "pageshow", function() {
     $('#orderStatus_shipment_mobile').text(orderStatus.Shipment.mobile);
     $('#orderStatus_shipment_address').text(orderStatus.Shipment.address);
 
-    $('#orderStatus_bank_accountId').text(orderStatus.bank.bank.accountId);
-    $('#orderStatus_bank_id').text(orderStatus.bank.bank.id);
   });
 
 });
