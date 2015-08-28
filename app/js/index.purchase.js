@@ -2,10 +2,6 @@
 $( document ).delegate("#purchase", "pagebeforecreate", function() {
   $('div.ui-content', '#purchase').installContent();
   //$('div[data-role=footer]', '#purchase').installGlobalFooter();
-// 
-// });
-//
-// $( document ).delegate("#purchase", "pagecreate", function() {
 
   // transform window if postData(cart) is empty.
   var checkLock = false;
@@ -29,8 +25,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
 
   // purchase form submit button
   var submitLock = false;
-  $("#purchaseForm").unbind('click').on('submit',function(e){
-  // $("#purchaseFormButton").unbind('click').click(function(){
+  $("#purchaseForm").on('submit',function(e){
     console.log('=== purchase submit button clicked ===');
     var postData = $(this).serializeArray();
     var formURL = $(this).attr("action");
@@ -51,14 +46,15 @@ $( document ).delegate("#purchase", "pageshow", function() {
       console.log('=== count name ==>',name.length);
       console.log('=== count email ==>',email.length);
       console.log('=== count mobile ==>',mobile.length);
+      console.log('=== count address ==>',address.length);
       console.log('=== count city selected ==>',city.length);
-      // chekc if payer empty.
-      if(name.length<1 || email.length<5 || mobile.length<=8 || address.length<2 || city.length<2){
+      // check if user empty.
+      if(name.length<=1 || email.length<=5 || mobile.length<=8 || address.length<=3  || city.length<2){
         if(name.length==0 || email.length==0 || mobile.length==0 || address.length==0)
           alert("哇！訂購者資訊好像有欄位忘記填囉！:(\n\n（姓名/Email/電話/縣市/地址）");
         else if(mobile.length<=8)
           alert("哇！訂購者電話號碼不足 9 碼喔！:(");
-        else if(address.length<5)
+        else if(address.length<=3)
           alert("訂購者地址太短囉！是不是填錯了呢？:(");
         else if(city.length<2)
           alert("請選擇訂購者所在縣市:)");
@@ -75,12 +71,12 @@ $( document ).delegate("#purchase", "pageshow", function() {
         console.log('=== count saddress ==>',saddress.length);
         console.log('=== count scity selected ==>',scity.length);
         // check if shipment empty
-        if(sname.length<1 || semail.length<5 || smobile.length<8 || saddress.length<3 || city.length<2){
+        if(sname.length<=1 || semail.length<=5 || smobile.length<=8 || saddress.length<=3 || city.length<2){
           if(sname.length==0 || semail.length==0 || smobile.length==0 || saddress.length==0)
             alert("收件人欄位是空的喲！\n\n（或是點選「同訂購者資訊」）");
-          else if(smobile.length<8)
+          else if(smobile.length<=8)
             alert("哇！收件人電話號碼不足 9 碼喔！:(");
-          else if (saddress.length<5)
+          else if (saddress.length<=3)
             alert("收件人地址太短囉！是不是填錯了呢？:(");
           else if(scity.length<2)
             alert("請選擇收件人所在縣市:)");
@@ -106,6 +102,8 @@ $( document ).delegate("#purchase", "pageshow", function() {
                 console.log('=== log purchaseHistory ===');
                 console.log(purchaseHistory);
                 localStorage['purchaseHistory'] = JSON.stringify(purchaseHistory);
+                // unlock after submit successed.
+                submitLock = false;
                 window.location.replace("/index.html#order");
               },
               error: function(jqXHR, textStatus, errorThrown)
@@ -116,10 +114,10 @@ $( document ).delegate("#purchase", "pageshow", function() {
               }
             });
           }else {
-            console.log('=== redundancy submit ===');
+            console.log('!!! redundancy submit !!!');
           } // check any redundancy submit end
         } // check if shipment info empty end
-      } // check if payer info empty end
+      } // check if user info empty end
     } // check if cart(postDate) empty end
     e.preventDefault();
     e.stopImmediatePropagation();
@@ -147,11 +145,12 @@ $( document ).delegate("#purchase", "pageshow", function() {
   // shipment-user sync info checkbox
 	$('#order_infoto_shipment').change(function() {
     if($(this).is(":checked")) {
+      // copy user to shipment
     	$("input[name='order[shipment][username]']").val($("input[name='order[user][username]']").val());
 			$("input[name='order[shipment][email]']").val($("input[name='order[user][email]']").val());
 			$("input[name='order[shipment][mobile]']").val($("input[name='order[user][mobile]']").val());
 			$("input[name='order[shipment][address]']").val($("input[name='order[user][address]']").val());
-
+      // target change
   		$("input[name='order[user][username]']").change(function(){
   			$("input[name='order[shipment][username]']").val($(this).val());
   		});
@@ -164,7 +163,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
   		$("input[name='order[user][address]']").change(function(){
   			$("input[name='order[shipment][address]']").val($(this).val());
   		});
-
+      // twzipcode_shipment
       var twzipcode_shipment = $('#twzipcode_shipment');
       twzipcode_shipment.find("[name='order[shipment][city]']")
           .val($("select[name='order[user][city]']").val())
@@ -172,7 +171,6 @@ $( document ).delegate("#purchase", "pageshow", function() {
       twzipcode_shipment.find("[name='order[shipment][district]']")
           .val($("select[name='order[user][district]']").val())
           .trigger('change');
-
     }else{
       $("input[name='order[shipment][username]']").val("");
 			$("input[name='order[shipment][email]']").val("");
@@ -181,11 +179,6 @@ $( document ).delegate("#purchase", "pageshow", function() {
       $('#twzipcode_shipment').twzipcode('reset');
     }
   });
-
-// });
-//
-//
-// $( document ).delegate("#purchase", "pageshow", function() {
 
   var productName = $("div[name=productInfo] h2").map(function(){
     return $(this).text();
