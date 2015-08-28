@@ -60,9 +60,13 @@ $( document ).delegate("#order", "pageshow", function() {
       type: "POST",
       data : postData,
       success:function(data, textStatus, jqXHR){
-        var list = JSON.parse(data).purchaseHistory
-        localStorage['purchaseHistory'] = JSON.stringify(list);
-        showPurchaseList(list);
+        var data = JSON.parse(data)
+        if(data.msg)
+          alert(data.msg)
+        else{
+          localStorage['purchaseHistory'] = JSON.stringify(data.purchaseHistory);
+          showPurchaseList(data.purchaseHistory);
+        }
       },
       error: function () {
         alert('再確認一下喔，驗證碼錯誤哟 :)')
