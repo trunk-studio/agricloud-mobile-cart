@@ -17,12 +17,13 @@ $( document ).delegate("#purchase", "pageshow", function() {
 
 });
 
-$(document).ajaxError(function (event, jqxhr, settings) {
-  // if (settings.url == "/order") {
-
-    alert("哇！！！！");
-  // }
-});
+// for multiple error event handler.
+// $(document).ajaxError(function (event, jqxhr, settings) {
+//   // if (settings.url == "/order") {
+//
+//     alert("哇！！！！");
+//   // }
+// });
 
 $( document ).delegate("#purchase", "pageshow", function() {
 
@@ -101,8 +102,13 @@ $( document ).delegate("#purchase", "pageshow", function() {
                 data : postData,
                 error: function (jqXHR, textStatus, errorThrown) {
                   //console.log('=== submit error ==>',errorThrown);
-                  var errTxt = '不好意思啦！我們遇到一點問題了：' + JSON.parse(jqXHR.responseText).message;;
+                  var errTxt = '不好意思啦！:(\n\n"' +
+                    JSON.parse(jqXHR.responseText).message +
+                    '\"\n\n請使用下一頁的方式聯絡我們，我們會立刻處理:)';
                   alert(errTxt);
+                  // unlock after submit failed.
+                  submitLock = false;
+                  window.location.replace("/index.html#contact");
                 },
                 success:function(data, textStatus, jqXHR){
                   console.log('=== submit successed ===');
