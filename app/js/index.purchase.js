@@ -8,6 +8,17 @@ $( document ).delegate("#purchase", "pagebeforecreate", function() {
 
 $( document ).delegate("#purchase", "pageshow", function() {
 
+  if(localStorage.purchaseResult){
+    var purchaseResult = JSON.parse(localStorage["purchaseResult"]);
+    for (var i = 11; i<purchaseResult.length; i++) {
+      var find = $("input[name=\"" + purchaseResult[i].name + "\"]");
+      if(find.length)
+        $("input[name=\"" + purchaseResult[i].name + "\"]").val(purchaseResult[i].value);
+      else
+        $("select[name=\"" + purchaseResult[i].name + "\"]").val(purchaseResult[i].value);
+    }
+  }
+
   var submitFlag = false;
   // purchase form submit button
   $("#purchaseForm").on('submit',function(e){
@@ -19,6 +30,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
       console.log(formURL);
       console.log('=== log postData ===');
       console.log(postData);
+      localStorage["purchaseResult"] = JSON.stringify(postData);
       if(postData.length > 15 || !postData){
         $.ajax({
           url : formURL,
