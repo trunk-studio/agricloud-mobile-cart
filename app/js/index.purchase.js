@@ -13,14 +13,14 @@ $( document ).delegate("#purchase", "pagebeforecreate", function() {
 
 $( document ).delegate("#purchase", "pageshow", function() {
 
-  if(localStorage.purchaseResult){
-    var purchaseResult = JSON.parse(localStorage["purchaseResult"]);
-    for (var i = 11; i<purchaseResult.length; i++) {
-      var find = $("input[name=\"" + purchaseResult[i].name + "\"]");
+  if(localStorage.shipmentInfo){
+    var shipmentInfo = JSON.parse(localStorage["shipmentInfo"]);
+    for (var i = 11; i<shipmentInfo.length; i++) {
+      var find = $("input[name=\"" + shipmentInfo[i].name + "\"]");
       if(find.length)
-        $("input[name=\"" + purchaseResult[i].name + "\"]").val(purchaseResult[i].value);
+        $("input[name=\"" + shipmentInfo[i].name + "\"]").val(shipmentInfo[i].value);
       else
-        $("select[name=\"" + purchaseResult[i].name + "\"]").val(purchaseResult[i].value);
+        $("select[name=\"" + shipmentInfo[i].name + "\"]").val(shipmentInfo[i].value);
     }
   }
   // purchase form submit button
@@ -31,7 +31,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
     var formURL = $(this).attr("action");
     console.log('=== log formURL ==>',formURL);
     console.log('=== log postData ==>',postData);
-    localStorage["purchaseResult"] = JSON.stringify(postData);
+    localStorage["shipmentInfo"] = JSON.stringify(postData);
     // check if postData(cart) is empty
     if(postData === undefined || postData.length < 16){
       console.log('=== no any product selected ===');
