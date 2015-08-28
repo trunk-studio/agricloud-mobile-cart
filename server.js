@@ -48,8 +48,12 @@ router.get('/', function *(next) {
 router.post('/order', function *(next) {
   var purchaseForm = this.request.body;
   var result = yield request.post(restServerUrl+'/api/order', {form: purchaseForm});
-  var purchaseResult = result.body;
-  this.body = purchaseResult;
+  if(result.statusCode == 500){
+    this.body = result.body;
+    this.status = 500;
+  }
+  else
+    this.body = result.body;
 });
 
 router.post('/order/sync', function *(next) {
