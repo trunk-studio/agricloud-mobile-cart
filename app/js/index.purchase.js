@@ -2,20 +2,25 @@
 $( document ).delegate("#purchase", "pagebeforecreate", function() {
   $('div.ui-content', '#purchase').installContent();
   //$('div[data-role=footer]', '#purchase').installGlobalFooter();
+// 
+// });
+//
+// $( document ).delegate("#purchase", "pagecreate", function() {
 
-});
-
-$( document ).delegate("#purchase", "pagecreate", function() {
-
-  // replace window if postData(cart) is empty.
-  var postData = $(this).serializeArray();
-  var formURL = $(this).attr("action");
-  console.log('=== log formURL ==>',formURL);
-  console.log('=== log postData ==>',postData);
-  if(postData === undefined || postData.length < 16){
-    console.log('=== no any product selected ===');
-    alert("哇！我們忘記你選了哪些商品了:( \n\n我們去重新選擇商品吧:)");
-    window.location.replace("/index.html#product");
+  // transform window if postData(cart) is empty.
+  var checkLock = false;
+  if(!checkLock){
+    checkLock = true;
+    console.log('=== checkLock status ==>',checkLock);
+    var postData = $(this).serializeArray();
+    var formURL = $(this).attr("action");
+    console.log('=== log formURL ==>',formURL);
+    console.log('=== log postData.length ==>',postData.length);
+    if(postData === undefined || postData.length < 16){
+      console.log('=== no any product selected ===');
+      alert("哇！我們忘記你選了哪些商品了:( \n\n我們去重新選擇商品吧:)");
+      window.location.replace("/index.html#product");
+    }
   }
 
 });
@@ -23,8 +28,9 @@ $( document ).delegate("#purchase", "pagecreate", function() {
 $( document ).delegate("#purchase", "pageshow", function() {
 
   // purchase form submit button
-  var submitFlag = false;
-  $("#purchaseForm").on('submit',function(e){
+  var submitLock = false;
+  $("#purchaseForm").unbind('click').on('submit',function(e){
+  // $("#purchaseFormButton").unbind('click').click(function(){
     console.log('=== purchase submit button clicked ===');
     var postData = $(this).serializeArray();
     var formURL = $(this).attr("action");
@@ -80,8 +86,8 @@ $( document ).delegate("#purchase", "pageshow", function() {
             alert("請選擇收件人所在縣市:)");
         }else{
           // check any redundancy submit.
-          if(!submitFlag){
-            submitFlag = true;
+          if(!submitLock){
+            submitLock = true;
             $.ajax({
               url : formURL,
               type: "POST",
@@ -114,9 +120,10 @@ $( document ).delegate("#purchase", "pageshow", function() {
           } // check any redundancy submit end
         } // check if shipment info empty end
       } // check if payer info empty end
-    } // check if cart empty end
+    } // check if cart(postDate) empty end
     e.preventDefault();
-  });
+    e.stopImmediatePropagation();
+  }); // purchase form submit button end
 
 });
 
