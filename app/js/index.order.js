@@ -44,7 +44,6 @@ $( document ).delegate("#order", "pageshow", function() {
       type: "POST",
       data : postData,
       error: function (jqXHR, textStatus, errorThrown) {
-        console.log(jqXHR);
         alert(JSON.parse(jqXHR.responseText).message);
       },
       success:function(data, textStatus, jqXHR){
