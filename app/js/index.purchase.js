@@ -1,25 +1,22 @@
 
+function isNumeric(num) {
+    return (num > 0 || num === 0 || num === '0' || num < 0) && num !== true && isFinite(num);
+}
+
+
 $( document ).delegate("#purchase", "pagebeforecreate", function() {
   $('div.ui-content', '#purchase').installContent();
   //$('div[data-role=footer]', '#purchase').installGlobalFooter();
 
-  // transform window if postData(cart) is empty.
-  var checkLock = false;
-  if(!checkLock){
-    checkLock = true;
-    console.log('=== checkLock status ==>',checkLock);
-    var postData = $(this).serializeArray();
-    var formURL = $(this).attr("action");
-    console.log('=== log formURL ==>',formURL);
-    console.log('=== log postData.length ==>',postData.length);
-    if(postData === undefined || postData.length < 16){
-      console.log('=== no any product selected ===');
-      alert("哇！我們忘記你選了哪些商品了:( \n\n我們去重新選擇商品吧:)");
-      window.location.replace("/index.html#product");
-    }
-  }
+});
+
+
+$( document ).delegate("#purchase", "pageshow", function() {
+
+
 
 });
+
 
 $( document ).delegate("#purchase", "pageshow", function() {
 
@@ -58,6 +55,8 @@ $( document ).delegate("#purchase", "pageshow", function() {
           alert("訂購者地址太短囉！是不是填錯了呢？:(");
         else if(city.length<2)
           alert("請選擇訂購者所在縣市:)");
+        else if(name.length<=1)
+          alert("哇！不好意思！訂購者姓名請至少輸入兩個字 :)");
       }else{
         // get shipment info
         var sname = $("input[name='order[shipment][username]']").val();
@@ -80,42 +79,49 @@ $( document ).delegate("#purchase", "pageshow", function() {
             alert("收件人地址太短囉！是不是填錯了呢？:(");
           else if(scity.length<2)
             alert("請選擇收件人所在縣市:)");
+          else if(sname.length<=1)
+            alert("哇！不好意思！收件人姓名請至少輸入兩個字 :)");
         }else{
-          // check any redundancy submit.
-          if(!submitLock){
-            submitLock = true;
-            $.ajax({
-              url : formURL,
-              type: "POST",
-              data : postData,
-              success:function(data, textStatus, jqXHR){
-                console.log('=== submit successed ===');
-                $(this).attr('disabled', 'disabled');
-                var order = JSON.parse(data);
-                var purchaseHistory = [];
-                if (localStorage.purchaseHistory){
-                  purchaseHistory = JSON.parse(localStorage.purchaseHistory);
-                  Array.prototype.push.apply(purchaseHistory,order.order);
-                }else{
-                  purchaseHistory = JSON.parse(data);
+          // check mobile/smobile numeric
+          if(!isNumeric(mobile) || !isNumeric(smobile)){
+              alert("哇！訂購者/收件人電話號碼含有非數字哟 :(");
+          }else{
+            // check any redundancy submit.
+            if(!submitLock){
+              submitLock = true;
+              $.ajax({
+                url : formURL,
+                type: "POST",
+                data : postData,
+                success:function(data, textStatus, jqXHR){
+                  console.log('=== submit successed ===');
+                  $(this).attr('disabled', 'disabled');
+                  var order = JSON.parse(data);
+                  var purchaseHistory = [];
+                  if (localStorage.purchaseHistory){
+                    purchaseHistory = JSON.parse(localStorage.purchaseHistory);
+                    Array.prototype.push.apply(purchaseHistory,order.order);
+                  }else{
+                    purchaseHistory = JSON.parse(data);
+                  }
+                  console.log('=== log purchaseHistory ===');
+                  console.log(purchaseHistory);
+                  localStorage['purchaseHistory'] = JSON.stringify(purchaseHistory);
+                  // unlock after submit successed.
+                  submitLock = false;
+                  window.location.replace("/index.html#order");
+                },
+                error: function(jqXHR, textStatus, errorThrown)
+                {
+                  console.log('=== submit error ==>',errorThrown);
+                  var errTxt = '不好意思啦！我們遇到一點問題了：' + errorThrown;
+                  alert(errTxt);
                 }
-                console.log('=== log purchaseHistory ===');
-                console.log(purchaseHistory);
-                localStorage['purchaseHistory'] = JSON.stringify(purchaseHistory);
-                // unlock after submit successed.
-                submitLock = false;
-                window.location.replace("/index.html#order");
-              },
-              error: function(jqXHR, textStatus, errorThrown)
-              {
-                console.log('=== submit error ==>',errorThrown);
-                var errTxt = '不好意思啦！我們遇到一點問題了：' + errorThrown;
-                alert(errTxt);
-              }
-            });
-          }else {
-            console.log('!!! redundancy submit !!!');
-          } // check any redundancy submit end
+              });
+            }else {
+              console.log('!!! redundancy submit !!!');
+            } // check any redundancy submit end
+          } // check mobile/smobile numeric end
         } // check if shipment info empty end
       } // check if user info empty end
     } // check if cart(postDate) empty end
@@ -235,5 +241,18 @@ $( document ).delegate("#purchase", "pageshow", function() {
       '<input type=\"hidden\" name=\"order[paymentTotalAmount]\" value='+priceSum + shippingRate+'>'+
     '</tr>'
   );
+
+  // transform window if postData(cart) is empty.
+  var checkLock = false;
+  if(!checkLock){
+    checkLock = true;
+    console.log('=== checkLock status ==>',checkLock);
+    console.log('=== allProductQuantity ==>',allProductQuantity);
+    if( allProductQuantity === 0 ){
+      console.log('=== no any product selected ===');
+      alert("哇！我們忘記你選了哪些商品了:( \n\n我們去重新選擇商品吧:)");
+      window.location.replace("/index.html#product");
+    }
+  }
 
 });
