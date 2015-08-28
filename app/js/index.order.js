@@ -43,11 +43,13 @@ $( document ).delegate("#order", "pageshow", function() {
       url : formURL,
       type: "POST",
       data : postData,
-      error: function () {
-        alert('再確認一下喔，mail錯誤哟:)')
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR);
+        console.log(textStatus);
+        console.log(errorThrown);
       },
       success:function(data, textStatus, jqXHR){
-        console.log('success',data);
+        alert('驗證碼已經寄到你的信箱了喔～');
       }
     });
   });

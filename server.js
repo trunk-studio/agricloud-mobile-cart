@@ -58,7 +58,11 @@ router.post('/order/sync', function *(next) {
   var tragetHost = 'http://'+traget+'/index.html#order';
   var apiUrl = restServerUrl+'/api/order/sync?email='+email+'&host='+encodeURIComponent(tragetHost);
   var result = yield request.get(apiUrl);
-  this.body = result.body;
+  console.log(result.body);
+  if(result.statusCode == 500)
+    this.throw(result.body, 500);
+  else
+    this.body = result.body;
 });
 
 router.post('/order/status', function *(next) {
