@@ -246,7 +246,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
       '<td colspan=\"4\" align=\"right\"><font color=\"green\">運費 <b>$'+ shippingRate +'</b> 元</font></td>'+
     '</tr>'+
     '<tr>'+
-      '<td colspan=\"4\" align=\"right\"><font color=\"blue\">訂單金額總計（含運費）  <b>$'+ priceSum+'</b> 元</font></td>'+
+      '<td colspan=\"4\" align=\"right\"><font color=\"blue\">訂單金額總計（含運費）  <b>$'+ (priceSum + shippingRate)+'</b> 元</font></td>'+
       '<input type=\"hidden\" name=\"order[paymentTotalAmount]\" value='+priceSum + shippingRate+'>'+
     '</tr>'
   );
