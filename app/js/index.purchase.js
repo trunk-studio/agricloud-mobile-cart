@@ -75,7 +75,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
         console.log('=== count saddress ==>',saddress.length);
         console.log('=== count scity selected ==>',scity.length);
         // check if shipment empty
-        if(sname.length<=1 || semail.length<=5 || smobile.length<=8 || saddress.length<=3 || city.length<2){
+        if(sname.length<=1 || smobile.length<=8 || saddress.length<=3 || city.length<2){
           if(sname.length==0 || semail.length==0 || smobile.length==0 || saddress.length==0)
             alert("收件人欄位是空的喲！\n\n（或是點選「同訂購者資訊」）");
           else if(smobile.length<=8)
@@ -113,14 +113,14 @@ $( document ).delegate("#purchase", "pageshow", function() {
                   $(this).attr('disabled', 'disabled');
                   var order = JSON.parse(data);
                   var purchaseHistory = [];
+
                   if (localStorage.purchaseHistory){
                     purchaseHistory = JSON.parse(localStorage.purchaseHistory);
-                    Array.prototype.push.apply(purchaseHistory,order.order);
-                  }else{
-                    purchaseHistory = JSON.parse(data);
                   }
-                  console.log('=== log purchaseHistory ===');
-                  console.log(purchaseHistory);
+                  purchaseHistory.push(JSON.parse(data).order);
+
+                  console.log('=== data ===', data);
+
                   localStorage['purchaseHistory'] = JSON.stringify(purchaseHistory);
                   // unlock after submit successed.
                   submitLock = false;
