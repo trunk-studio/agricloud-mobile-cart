@@ -14,19 +14,16 @@ $( document ).delegate("#purchase", "pagebeforecreate", function() {
 $( document ).delegate("#purchase", "pageshow", function() {
 
 
-
-});
-
-// for multiple error event handler.
-// $(document).ajaxError(function (event, jqxhr, settings) {
-//   // if (settings.url == "/order") {
-//
-//     alert("哇！！！！");
-//   // }
-// });
-
-$( document ).delegate("#purchase", "pageshow", function() {
-
+  if(localStorage.shipmentInfo){
+    var shipmentInfo = JSON.parse(localStorage["shipmentInfo"]);
+    for (var i = 11; i<shipmentInfo.length; i++) {
+      var find = $("input[name=\"" + shipmentInfo[i].name + "\"]");
+      if(find.length)
+        $("input[name=\"" + shipmentInfo[i].name + "\"]").val(shipmentInfo[i].value);
+      else
+        $("select[name=\"" + shipmentInfo[i].name + "\"]").val(shipmentInfo[i].value);
+    }
+  }
   // purchase form submit button
   var submitLock = false;
   $("#purchaseForm").on('submit',function(e){
@@ -35,6 +32,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
     var formURL = $(this).attr("action");
     console.log('=== log formURL ==>',formURL);
     console.log('=== log postData ==>',postData);
+    localStorage["shipmentInfo"] = JSON.stringify(postData);
     // check if postData(cart) is empty
     if(postData === undefined || postData.length < 16){
       console.log('=== no any product selected ===');
