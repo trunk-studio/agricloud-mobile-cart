@@ -240,7 +240,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
 
   $('#purchaseTable').find('tbody:last').append(
     // '<tr>'+
-    //   '<td colspan=\"4\" align=\"right\"><font color=\"red\">預購優惠九折 - <b>$'+ Math.round(priceSum*0.1) +'</b> 元</font></td>'+
+    //   '<td colspan=\"4\" align=\"right\"><font color=\"red\">訂購優惠九折 - <b>$'+ Math.round(priceSum*0.1) +'</b> 元</font></td>'+
     // '</tr>'+
     '<tr>'+
       '<td colspan=\"4\" align=\"right\"><font color=\"green\">運費 <b>$'+ shippingRate +'</b> 元</font></td>'+
