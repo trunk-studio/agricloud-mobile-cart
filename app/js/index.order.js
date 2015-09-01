@@ -94,16 +94,17 @@ $( document ).delegate("#order", "pageshow", function() {
 
     $('#orderStatus_id').text(orderStatus.serialNumber);
 
+    $("div[name='orderItemInfo']").remove();
     $.each(orderStatus.OrderItems ,function(i){
-      $('#orderItem').append(
-        '<div data-role=\"fieldcontain\">'+
+      $('#orderItem').after(
+        '<div name=\"orderItemInfo\" data-role=\"fieldcontain\" class=\"ui-field-contain\">'+
           '<label for=\"orderStatus_orderitem_name\">名稱:</label>'+
-          '<span id=\"orderStatus_orderitem_name\"/>'+ orderStatus.OrderItems[i].name +
+          '<span id=\"orderStatus_orderitem_name\">'+ orderStatus.OrderItems[i].name +'</span>'+
         '</div>'+
 
-        '<div data-role=\"fieldcontain\">'+
+        '<div name=\"orderItemInfo\"  data-role=\"fieldcontain\" class=\"ui-field-contain\">'+
           '<label for=\"orderStatus_orderitem_quantity\">數量:</label>'+
-          '<span id=\"orderStatus_orderitem_quantity\"/>'+ orderStatus.OrderItems[i].quantity +
+          '<span id=\"orderStatus_orderitem_quantity\">'+ orderStatus.OrderItems[i].quantity +'</span>'+
         '</div>');
     });
     $('#orderStatus_paymentTotalAmount').text(orderStatus.paymentTotalAmount);
