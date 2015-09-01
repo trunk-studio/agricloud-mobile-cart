@@ -40,6 +40,8 @@
 
 </head>
 <body>
+
+<!-- [page: splash] -->
 <div data-role="page" id="splash">
 </div>
 
@@ -136,7 +138,9 @@
 		<a href="#order" data-icon="back" data-iconpos="notext">返回</a>
 		<h1>訂單狀態</h1>
 	</div>
-	<div data-role="orderStatus">
+
+
+	<div role="main" class="ui-content">
 
 		<h1>訂單資訊</h1>
 
@@ -160,7 +164,7 @@
 		</div>
 
 		<div data-role="fieldcontain">
-			<label for="orderStatus_user_email">email:</label>
+			<label for="orderStatus_user_email">E-Mail:</label>
 			<span id="orderStatus_user_email"/>
 		</div>
 
@@ -183,7 +187,7 @@
 		</div>
 
 		<div data-role="fieldcontain">
-			<label for="orderStatus_shipment_email">email:</label>
+			<label for="orderStatus_shipment_email">E-Mail:</label>
 			<span id="orderStatus_shipment_email"/>
 		</div>
 
@@ -197,6 +201,7 @@
 			<span id="orderStatus_shipment_address"/>
 		</div>
 
+    <a href="#order" class="ui-btn">返回</a>
 	</div>
 </div>
 
