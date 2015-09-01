@@ -35,21 +35,34 @@ $( document ).delegate("#order", "pageshow", function() {
   };
 
   $("#sendOrderSyncRequestForm").on('submit',function(e){
-    console.log("~~~~~~~~~~~~");
+    console.log("=== send verified code clicked ===");
     e.preventDefault();
-    var postData = $(this).serializeArray();
-    var formURL = $(this).attr("action");
-    $.ajax({
-      url : formURL,
-      type: "POST",
-      data : postData,
-      error: function (jqXHR, textStatus, errorThrown) {
-        alert(JSON.parse(jqXHR.responseText).message);
-      },
-      success:function(data, textStatus, jqXHR){
-        alert('驗證碼已經寄到你的信箱了喔～');
-      }
-    });
+    // check email length ensure no empty
+    var email = $("input[name='email']").val();
+    console.log("=== email is ==>",email.length);
+    if(email.length<=5){
+      console.log('=== email fiele is empty ===');
+      alert("哇！你好像沒有輸入完整的 Email 喔！:(");
+    }else{
+      var postData = $(this).serializeArray();
+      var formURL = $(this).attr("action");
+      console.log("=== postData is ==>",postData);
+      $.ajax({
+        url : formURL,
+        type: "POST",
+        data : postData,
+        error: function (jqXHR, textStatus, errorThrown) {
+          alert(JSON.parse(jqXHR.responseText).message);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          var errTxt = '我們查不到你的訂單記錄:( \n\n如果你很確定這是我們的問題，請跟我們聯絡囉:)';
+          alert(errTxt);
+        },
+        success:function(data, textStatus, jqXHR){
+          alert('驗證碼已經寄到你的信箱了喔～');
+        }
+      });
+    }
   });
 
   $("#orderStatusRequestForm").on('submit',function(e){
