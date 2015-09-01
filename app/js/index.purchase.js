@@ -21,7 +21,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
       if(find.length)
         $("input[name=\"" + shipmentInfo[i].name + "\"]").val(shipmentInfo[i].value);
       else
-        $("select[name=\"" + shipmentInfo[i].name + "\"]").val(shipmentInfo[i].value);
+        $("select[name=\"" + shipmentInfo[i].name + "\"]").val(shipmentInfo[i].value).trigger('change');;
     }
   }
   // purchase form submit button
