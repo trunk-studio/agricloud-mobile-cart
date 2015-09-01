@@ -20,8 +20,6 @@ $( document ).delegate("#purchase", "pageshow", function() {
       var find = $("input[name=\"" + shipmentInfo[i].name + "\"]");
       if(find.length)
         $("input[name=\"" + shipmentInfo[i].name + "\"]").val(shipmentInfo[i].value);
-      else
-        $("select[name=\"" + shipmentInfo[i].name + "\"]").val(shipmentInfo[i].value).trigger('change');
     }
   }
   // purchase form submit button
@@ -145,16 +143,36 @@ $( document ).delegate("#purchase", "pageshow", function() {
 
   // twzipcode
   console.log('=== load zipcode ===');
-  $('#twzipcode').twzipcode({
-    'detect': false,
-    'zipcodeIntoDistrict': true
-  });
+  if(localStorage.shipmentInfo){
+    var shipmentInfo = JSON.parse(localStorage["shipmentInfo"]);
+    $('#twzipcode').twzipcode({
+      'detect': false,
+      'zipcodeIntoDistrict': true,
+      'zipcodeSel'  : shipmentInfo[21].value,
+      'countySel'   : shipmentInfo[19].value,
+      'districtSel' : shipmentInfo[20].value
+    });
+
+    $('#twzipcode_shipment').twzipcode({
+      'zipcodeIntoDistrict': true,
+      'zipcodeSel'  : shipmentInfo[28].value,
+      'countySel'   : shipmentInfo[26].value,
+      'districtSel' : shipmentInfo[27].value
+    });
+
+  }else{
+    $('#twzipcode').twzipcode({
+      'detect': false,
+      'zipcodeIntoDistrict': true
+    });
+
+    $('#twzipcode_shipment').twzipcode({
+      'zipcodeIntoDistrict': true
+    });
+  }
   $('#twzipcode select').data('inline', 'true');
   $('#twzipcode > div').css('display', 'inline-block');
 
-  $('#twzipcode_shipment').twzipcode({
-    'zipcodeIntoDistrict': true
-  });
   $('#twzipcode_shipment select').data('inline', 'true');
   $('#twzipcode_shipment > div').css('display', 'inline-block');
 
