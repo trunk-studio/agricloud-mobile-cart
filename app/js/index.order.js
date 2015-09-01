@@ -19,7 +19,7 @@ $( document ).delegate("#order", "pageshow", function() {
                 '<a href=\"#orderStatus\" rel=\"external\" class=\"ui-btn ui-btn-icon-right ui-icon-carat-r\">'+
                 '<img src=\"img/blackcat.jpg\" />'+
                 '<h3>雲端文旦禮盒</h3>'+
-                '<p>訂單日期：'+ list[i].createdAt +'</p>'+
+                '<p>訂單日期：'+ list[i].createdAt.split("T")[0] +'</p>'+
                 '<p>金額：$'+ list[i].paymentTotalAmount +
                 '元、配送地址：'+ list[i].Shipment.address +'</p>'+
             '</a></li>');
@@ -93,6 +93,7 @@ $( document ).delegate("#order", "pageshow", function() {
     console.log(orderStatus);
 
     $('#orderStatus_id').text(orderStatus.serialNumber);
+    $('#orderStatus_createdDate').text(orderStatus.createdAt.split("T")[0]);
 
     $("div[name='orderItemInfo']").remove();
     $.each(orderStatus.OrderItems ,function(i){
