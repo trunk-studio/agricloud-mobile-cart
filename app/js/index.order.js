@@ -52,9 +52,7 @@ $( document ).delegate("#order", "pageshow", function() {
         type: "POST",
         data : postData,
         error: function (jqXHR, textStatus, errorThrown) {
-          alert(JSON.parse(jqXHR.responseText).message);
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
+          // alert(JSON.parse(jqXHR.responseText).message);
           var errTxt = '我們查不到你的訂單記錄:( \n\n如果你很確定這是我們的問題，請跟我們聯絡囉:)';
           alert(errTxt);
         },
