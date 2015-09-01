@@ -6,6 +6,7 @@ $( document ).delegate('#order', 'pagecreate', function() {
 
 
 $( document ).delegate("#order", "pageshow", function() {
+
 	$('#syncOrderHistory').bind('click',function(){
 		$('#syncInfo').slideDown(300);
 	});
@@ -34,9 +35,11 @@ $( document ).delegate("#order", "pageshow", function() {
     return results === null ? false : results[1];
   };
 
+  var submitLock = false;
   $("#sendOrderSyncRequestForm").on('submit',function(e){
     console.log("=== send verified code clicked ===");
     e.preventDefault();
+    e.stopImmediatePropagation();
     // check email length ensure no empty
     var email = $("input[name='email']").val();
     console.log("=== email is ==>",email.length);
@@ -47,19 +50,27 @@ $( document ).delegate("#order", "pageshow", function() {
       var postData = $(this).serializeArray();
       var formURL = $(this).attr("action");
       console.log("=== postData is ==>",postData);
-      $.ajax({
-        url : formURL,
-        type: "POST",
-        data : postData,
-        error: function (jqXHR, textStatus, errorThrown) {
-          // alert(JSON.parse(jqXHR.responseText).message);
-          var errTxt = '我們查不到你的訂單記錄:( \n\n如果你很確定這是我們的問題，請跟我們聯絡囉:)';
-          alert(errTxt);
-        },
-        success:function(data, textStatus, jqXHR){
-          alert('驗證碼已經寄到你的信箱了喔～');
-        }
-      });
+      if(!submitLock){
+        submitLock = true;
+        $.ajax({
+          url : formURL,
+          type: "POST",
+          data : postData,
+          error: function (jqXHR, textStatus, errorThrown) {
+            submitLock = false;
+            // alert(JSON.parse(jqXHR.responseText).message);
+            var errTxt = '我們查不到你的訂單記錄:( \n\n如果你很確定這是我們的問題，請跟我們聯絡囉:)';
+            alert(errTxt);
+          },
+          success:function(data, textStatus, jqXHR){
+            submitLock = false;
+            alert('驗證碼已經寄到你的信箱了喔～');
+          }
+        });
+      }else {
+        console.log('!!! redundancy submit !!!');
+        alert('');
+      }
     }
   });
 
