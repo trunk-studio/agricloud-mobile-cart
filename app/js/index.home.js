@@ -18,4 +18,10 @@ $( document ).delegate('#home', 'pageshow', function() {
       items: 1
 	});
   */
+ 
+ if(localStorage.purchaseHistory){
+   if(!$.isArray(JSON.parse(localStorage.purchaseHistory)))
+    localStorage.removeItem('purchaseHistory');
+ }
+ 
 });
