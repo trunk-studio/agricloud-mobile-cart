@@ -76,6 +76,7 @@ $( document ).delegate("#order", "pageshow", function() {
 
   $("#orderStatusRequestForm").on('submit',function(e){
     e.preventDefault();
+    e.stopImmediatePropagation();
     console.log('=== getOrderStatusRequestBtn ===');
     var postData = $(this).serializeArray();
     var formURL = $(this).attr("action");
