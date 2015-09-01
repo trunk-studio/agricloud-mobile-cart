@@ -21,7 +21,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
       if(find.length)
         $("input[name=\"" + shipmentInfo[i].name + "\"]").val(shipmentInfo[i].value);
       else
-        $("select[name=\"" + shipmentInfo[i].name + "\"]").val(shipmentInfo[i].value).trigger('change');;
+        $("select[name=\"" + shipmentInfo[i].name + "\"]").val(shipmentInfo[i].value).trigger('change');
     }
   }
   // purchase form submit button
@@ -124,7 +124,8 @@ $( document ).delegate("#purchase", "pageshow", function() {
                   localStorage['purchaseHistory'] = JSON.stringify(purchaseHistory);
                   // unlock after submit successed.
                   submitLock = false;
-                  window.location.replace("/index.html#order");
+
+                  setTimeout(function(){ window.location.replace("/index.html#order"); },500);
                 }
               });
             }else {
