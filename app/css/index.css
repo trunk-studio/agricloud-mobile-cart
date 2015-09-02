@@ -33,14 +33,14 @@ img { max-width: 100%; }
   text-shadow: none;
 }
 
-.ui-page-theme-a .ui-btn.ui-btn-active{
+.ui-page-theme-a .ui-btn.ui-btn-active {
   background-color: #72B844;
   border-color: #72B844;
   color: #fff;
   text-shadow: 0 1px 0 #72B844;
 }
 
-a.ui-btn.ui-corner-all.ui-last-child{
+a.ui-btn.ui-corner-all.ui-last-child {
   background-color: #72B844;
   border-color: #72B844;
   color: #fff;
