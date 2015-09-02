@@ -94,9 +94,10 @@ $( document ).delegate("#order", "pageshow", function() {
         showPurchaseList(data.purchaseHistory);
         $('#syncToken').hide();
         $('#syncOrderHistory').show();
+        alert('歷史訂單資料載入完成囉！:)');
       },
       error: function (data, textStatus, jqXHR) {
-        alert('再確認一下喔，驗證碼錯誤哟 :)')
+        alert('再確認一下喔，驗證碼錯誤哟 :)');
       }
     });
   });
