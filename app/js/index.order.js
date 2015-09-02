@@ -7,9 +7,10 @@ $( document ).delegate('#order', 'pagecreate', function() {
 
 $( document ).delegate("#order", "pageshow", function() {
 
-	$('#syncOrderHistory').bind('click',function(){
-		$('#syncInfo').slideDown(300);
-	});
+  $('#syncOrderHistory').bind('click',function(){
+    $('#syncMail').slideDown(300);
+    $('#syncOrderHistory').hide();
+  });
 
   var showPurchaseList = function(list){
     $('#orderStatusList').empty();
@@ -91,6 +92,8 @@ $( document ).delegate("#order", "pageshow", function() {
         var data = JSON.parse(data)
         localStorage['purchaseHistory'] = JSON.stringify(data.purchaseHistory);
         showPurchaseList(data.purchaseHistory);
+        $('#syncToken').hide();
+        $('#syncOrderHistory').show();
       },
       error: function (data, textStatus, jqXHR) {
         alert('再確認一下喔，驗證碼錯誤哟 :)')
@@ -107,8 +110,9 @@ $( document ).delegate("#order", "pageshow", function() {
 
   var token = urlParam('token');
   if(token){
-    $('#syncInfo').slideDown(300);
+    $('#syncToken').slideDown(300);
     $('#token').val(token);
+    $('#syncOrderHistory').hide();
   }
 
   $('#orderStatusList li').click(function() {

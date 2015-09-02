@@ -4,14 +4,15 @@
 <button type='button' id='syncOrderHistory'>同步歷史訂單記錄</button>
 
 
-<div id='syncInfo' style="display: none;">
-
+<div id='syncMail' style="display: none;">
   <form id='sendOrderSyncRequestForm' action='/order/sync' method="post">
     請輸入 E-Mail
     <input type="email" name="email" id='email' value="" />
     <button id='sendOrderSyncRequestBtn'>寄出驗證碼</button>
   </form>
+</div>
 
+<div id='syncToken' style="display: none;">
   <form id='orderStatusRequestForm' action='/order/status' method="post">
     請輸入您收到的驗證碼
     <input type="text" name="token" id='token' value="" />

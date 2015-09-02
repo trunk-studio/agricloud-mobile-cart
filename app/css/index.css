@@ -40,6 +40,13 @@ img { max-width: 100%; }
   text-shadow: 0 1px 0 #72B844;
 }
 
+a.ui-btn.ui-corner-all.ui-last-child {
+  background-color: #72B844;
+  border-color: #72B844;
+  color: #fff;
+  text-shadow: 0 1px 0 #72B844;
+}
+
 .myWrapper {
   position: relative;
   padding-bottom: 56%;
