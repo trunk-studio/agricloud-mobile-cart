@@ -8,7 +8,8 @@ $( document ).delegate('#order', 'pagecreate', function() {
 $( document ).delegate("#order", "pageshow", function() {
 
 	$('#syncOrderHistory').bind('click',function(){
-		$('#syncInfo').slideDown(300);
+		$('#syncMail').slideDown(300);
+    $('#syncOrderHistory').hide();
 	});
 
   var showPurchaseList = function(list){
@@ -107,8 +108,9 @@ $( document ).delegate("#order", "pageshow", function() {
 
   var token = urlParam('token');
   if(token){
-    $('#syncInfo').slideDown(300);
+    $('#syncToken').slideDown(300);
     $('#token').val(token);
+    $('#syncOrderHistory').hide();
   }
 
   $('#orderStatusList li').click(function() {
