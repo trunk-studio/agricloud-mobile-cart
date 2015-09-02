@@ -92,6 +92,8 @@ $( document ).delegate("#order", "pageshow", function() {
         var data = JSON.parse(data)
         localStorage['purchaseHistory'] = JSON.stringify(data.purchaseHistory);
         showPurchaseList(data.purchaseHistory);
+        $('#syncToken').hide();
+        $('#syncOrderHistory').show();
       },
       error: function (data, textStatus, jqXHR) {
         alert('再確認一下喔，驗證碼錯誤哟 :)')
