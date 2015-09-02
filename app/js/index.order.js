@@ -8,7 +8,7 @@ $( document ).delegate('#order', 'pagecreate', function() {
 $( document ).delegate("#order", "pageshow", function() {
 
 	$('#syncOrderHistory').bind('click',function(){
-		$('#syncMail').slideDown(300);
+    $('#syncMail').slideDown(300);
     $('#syncOrderHistory').hide();
 	});
 
