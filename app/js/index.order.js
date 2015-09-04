@@ -16,7 +16,7 @@ $( document ).delegate("#order", "pageshow", function() {
     $('#orderStatusList').empty();
     var status = {
       new: '尚未付款',
-      paymentConfirm: '確認已付款，尚未出貨',
+      paymentConfirm: '已付款，待出貨',
       deliveryConfirm: '已出貨完成'
     }
     $.each(list, function (i) {
@@ -25,10 +25,11 @@ $( document ).delegate("#order", "pageshow", function() {
             '<li class=\"ui-li-has-thumb ui-last-child\" id='+ i +'>'+
                 '<a href=\"#orderStatus\" rel=\"external\" class=\"ui-btn ui-btn-icon-right ui-icon-carat-r\">'+
                 '<img src=\"img/blackcat.jpg\" />'+
-                '<h3>雲端文旦禮盒 狀態：'+status[list[i].status]+'</h3>'+
+                '<h3>雲端文旦禮盒</h3>'+
+                '<h3>狀態：'+status[list[i].status]+'</h3>'+
                 '<p>訂單日期：'+ list[i].createdAt.split("T")[0] +'</p>'+
-                '<p>金額：$'+ list[i].paymentTotalAmount +
-                '元、配送地址：'+ list[i].Shipment.address +'</p>'+
+                '<p>金額：$'+ list[i].paymentTotalAmount +'元</p>'+
+                '<p>配送地址：'+ list[i].Shipment.address +'</p>'+
             '</a></li>');
         }catch(e){
 
