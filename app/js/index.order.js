@@ -16,7 +16,7 @@ $( document ).delegate("#order", "pageshow", function() {
     $('#orderStatusList').empty();
     var status = {
       new: '尚未付款',
-      paymentConfirm: '確認已付款，尚未出貨',
+      paymentConfirm: '已付款，待出貨',
       deliveryConfirm: '已出貨完成'
     }
     $.each(list, function (i) {
