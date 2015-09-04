@@ -72,8 +72,10 @@ router.post('/order/sync', function *(next) {
 });
 
 router.post('/order/status', function *(next) {
-  var token = this.request.body.token;
-  var result = yield request.get(restServerUrl+'/api/order/status?token='+token);
+  var email = this.request.body.email;
+  console.log('=== email ===', email);
+  var result = yield request.get(restServerUrl+'/api/order/status?email='+email);
+  console.log('result', result);
   if(result.statusCode == 500){
     this.body = result.body;
     this.status = 500;

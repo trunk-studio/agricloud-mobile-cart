@@ -1,22 +1,26 @@
 <ul data-role="listview" data-inset="true" id="orderStatusList">
 </ul>
 
-<button type='button' id='syncOrderHistory'>同步歷史訂單記錄</button>
+<div style="display: none;">
+
+  <button type='button' id='syncOrderHistory'>同步歷史訂單記錄</button>
 
 
-<div id='syncMail' style="display: none;">
-  <form id='sendOrderSyncRequestForm' action='/order/sync' method="post">
-    請輸入 E-Mail
-    <input type="email" name="email" id='email' value="" />
-    <button id='sendOrderSyncRequestBtn'>寄出驗證碼</button>
-  </form>
-</div>
+  <div id='syncMail' style="display: none;">
+    <form id='sendOrderSyncRequestForm' action='/order/sync' method="post">
+      請輸入 E-Mail
+      <input type="email" name="email" id='email' value="" />
+      <button id='sendOrderSyncRequestBtn'>寄出驗證碼</button>
+    </form>
+  </div>
 
-<div id='syncToken' style="display: none;">
-  <form id='orderStatusRequestForm' action='/order/status' method="post">
-    請輸入您收到的驗證碼
-    <input type="text" name="token" id='token' value="" />
-    <button id='orderStatusRequestBtn'>確認驗證碼</button>
-  </form>
+  <div id='syncToken' style="display: none;">
+    <form id='orderStatusRequestForm' action='/order/status' method="post">
+      請輸入您收到的驗證碼
+      <input type="text" name="token" id='token' value="" />
+      <button id='orderStatusRequestBtn'>確認驗證碼</button>
+    </form>
+
+  </div>
 
 </div>
