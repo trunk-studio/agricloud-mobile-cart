@@ -14,13 +14,18 @@ $( document ).delegate("#order", "pageshow", function() {
 
   var showPurchaseList = function(list){
     $('#orderStatusList').empty();
+    var status = {
+      new: '尚未付款',
+      paymentConfirm: '確認已付款，尚未出貨',
+      deliveryConfirm: '已出貨完成'
+    }
     $.each(list, function (i) {
         try{
             $('#orderStatusList').append(
             '<li class=\"ui-li-has-thumb ui-last-child\" id='+ i +'>'+
                 '<a href=\"#orderStatus\" rel=\"external\" class=\"ui-btn ui-btn-icon-right ui-icon-carat-r\">'+
                 '<img src=\"img/blackcat.jpg\" />'+
-                '<h3>雲端文旦禮盒</h3>'+
+                '<h3>雲端文旦禮盒 狀態：'+status[list[i].status]+'</h3>'+
                 '<p>訂單日期：'+ list[i].createdAt.split("T")[0] +'</p>'+
                 '<p>金額：$'+ list[i].paymentTotalAmount +
                 '元、配送地址：'+ list[i].Shipment.address +'</p>'+
@@ -75,19 +80,50 @@ $( document ).delegate("#order", "pageshow", function() {
     }
   });
 
-  $("#orderStatusRequestForm").on('submit',function(e){
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    console.log('=== getOrderStatusRequestBtn ===');
-    var postData = $(this).serializeArray();
-    var formURL = $(this).attr("action");
+  // $("#orderStatusRequestForm").on('submit',function(e){
+  //   e.preventDefault();
+  //   e.stopImmediatePropagation();
+  //   console.log('=== getOrderStatusRequestBtn ===');
+  //   var postData = $(this).serializeArray();
+  //   var formURL = $(this).attr("action");
+  //
+  //   console.log(formURL);
+  //   console.log(postData);
+  //   $.ajax({
+  //     url : formURL,
+  //     type: "POST",
+  //     data : postData,
+  //     success:function(data, textStatus, jqXHR){
+  //       var data = JSON.parse(data)
+  //       localStorage['purchaseHistory'] = JSON.stringify(data.purchaseHistory);
+  //       showPurchaseList(data.purchaseHistory);
+  //       $('#syncToken').hide();
+  //       $('#syncOrderHistory').show();
+  //     },
+  //     error: function (data, textStatus, jqXHR) {
+  //       alert('再確認一下喔，驗證碼錯誤哟 :)')
+  //     }
+  //   });
+  // });
 
-    console.log(formURL);
-    console.log(postData);
+
+
+  if(localStorage.shipmentInfo){
+    var shipmentInfo = JSON.parse(localStorage.shipmentInfo);
+    var email = "";
+
+    console.log('shipmentInfo', shipmentInfo);
+
+    shipmentInfo.forEach(function(single){
+      if(single.name === 'order[user][email]') email = single.value;
+    });
+
+    console.log('=== email ===', email);
+
     $.ajax({
-      url : formURL,
+      url : '/order/status',
       type: "POST",
-      data : postData,
+      data : {email: email},
       success:function(data, textStatus, jqXHR){
         var data = JSON.parse(data)
         localStorage['purchaseHistory'] = JSON.stringify(data.purchaseHistory);
@@ -96,10 +132,10 @@ $( document ).delegate("#order", "pageshow", function() {
         $('#syncOrderHistory').show();
       },
       error: function (data, textStatus, jqXHR) {
-        alert('再確認一下喔，驗證碼錯誤哟 :)')
+        alert('再確認一下喔，email 錯誤哟 :)')
       }
     });
-  });
+  }
 
 
   console.log('~~~~~~~~~~~~~~~~~~');
@@ -114,10 +150,9 @@ $( document ).delegate("#order", "pageshow", function() {
     $('#token').val(token);
     $('#syncOrderHistory').hide();
   }
-
-  $('#orderStatusList li').click(function() {
+  $( document ).delegate('#orderStatusList li', 'click', function() {
     var orderStatus = JSON.parse(localStorage["purchaseHistory"])[this.id];
-    console.log(orderStatus);
+    console.log('=== orderStatus ===', orderStatus);
 
     $('#orderStatus_id').text(orderStatus.serialNumber);
     $('#orderStatus_createdDate').text(orderStatus.createdAt.split("T")[0]);
