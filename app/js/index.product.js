@@ -37,6 +37,28 @@ $( document ).delegate("#product", "pageshow", function() {
       alert("不好意思啦！需要至少選擇一樣產品才能結帳哟 :) ");
     }
   });
+
+  $("#rebateButton").click(function(){
+    $('#rebateEmail').slideDown(300);
+    $('#rebateButton').hide();
+  });
+
+  $("#rebateEmailBtn").click(function(){
+    if($("#inputRebateEmail").val()==''){
+      alert("要記得輸入Email哦～");
+    }else{
+      var quantity = $("input[name='quantity[0]']").map(function(){
+        return $(this).val();
+      }).get();
+      var unOrder = [ "0","0","0","0","0" ];
+      if( JSON.stringify(quantity) != JSON.stringify(unOrder) ){
+        window.location.replace("/index.html#purchase")
+      }else{
+        alert("不好意思啦！需要至少選擇一樣產品才能結帳哟 :) ");
+      }
+    }
+  });
+
 });
 
 $( document ).delegate("#product", "pagebeforecreate", function() {
