@@ -232,6 +232,12 @@ $( document ).delegate("#purchase", "pageshow", function() {
     return $(this).data();
   }).get();
 
+  var rebateEmail = $("#inputRebateEmail").val()
+  if(rebateEmail!=""){
+    $("input[name='order[user][email]']").val(rebateEmail);
+    $("input[name='order[shipment][email]']").val(rebateEmail);
+  }
+
   var priceSum = 0;
   var allProductQuantity = 0
   $('#purchaseTable tbody').empty();
