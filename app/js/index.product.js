@@ -4,6 +4,7 @@ $( document ).delegate('#product', 'pagebeforecreate', function() {
   $('div[data-role=footer]', '#product').installGlobalFooter();
 });
 
+var bonusData;
 $( document ).delegate("#product", "pageshow", function() {
 /*
 	$('.owl-carousel.product-slides').owlCarousel({
@@ -62,7 +63,7 @@ $( document ).delegate("#product", "pageshow", function() {
           },
           success:function(data, textStatus, jqXHR){
             console.log(data);
-            alert('success');
+            bonusData = JSON.parse(data);
           }
         });
         window.location.replace("/index.html#purchase")
