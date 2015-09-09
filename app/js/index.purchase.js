@@ -270,6 +270,13 @@ $( document ).delegate("#purchase", "pageshow", function() {
   else
     shippingRate = allProductQuantity * 60;
 
+  if(bonus !== null ){
+    $("input[name='order[usedDiscountPoint]']").val(true);
+  }else{
+    $("input[name='order[usedDiscountPoint]']").val(false);
+    bonus = 0;
+  }
+
   $('#purchaseTable').find('tbody:last').append(
     // '<tr>'+
     //   '<td colspan=\"4\" align=\"right\"><font color=\"red\">訂購優惠九折 - <b>$'+ Math.round(priceSum*0.1) +'</b> 元</font></td>'+
@@ -278,13 +285,14 @@ $( document ).delegate("#purchase", "pageshow", function() {
       '<td colspan=\"4\" align=\"right\"><font color=\"green\">運費 <b>$'+ shippingRate +'</b> 元</font></td>'+
     '</tr>'+
     '<tr>'+
-      '<td colspan=\"4\" align=\"right\"><font color=\"green\">預購金折扣 <b>$'+ bonusData.bonusPoint.remain +'</b> 元</font></td>'+
+      '<td colspan=\"4\" align=\"right\"><font color=\"green\">預購金折扣 <b>$'+ bonus +'</b> 元</font></td>'+
     '</tr>'+
     '<tr>'+
-      '<td colspan=\"4\" align=\"right\"><font color=\"blue\">訂單金額總計（含運費）  <b>$'+ (priceSum + shippingRate - bonusData.bonusPoint.remain)+'</b> 元</font></td>'+
-      '<input type=\"hidden\" name=\"order[paymentTotalAmount]\" value='+(priceSum + shippingRate - bonusData.bonusPoint.remain) +'>'+
+      '<td colspan=\"4\" align=\"right\"><font color=\"blue\">訂單金額總計（含運費）  <b>$'+ (priceSum + shippingRate - bonus)+'</b> 元</font></td>'+
+      '<input type=\"hidden\" name=\"order[paymentTotalAmount]\" value='+(priceSum + shippingRate - bonus) +'>'+
     '</tr>'
   );
+
 
   // transform window if postData(cart) is empty.
   var checkLock = false;

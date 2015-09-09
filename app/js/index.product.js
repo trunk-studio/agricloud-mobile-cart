@@ -4,7 +4,7 @@ $( document ).delegate('#product', 'pagebeforecreate', function() {
   $('div[data-role=footer]', '#product').installGlobalFooter();
 });
 
-var bonusData;
+var bonus = null;
 $( document ).delegate("#product", "pageshow", function() {
 /*
 	$('.owl-carousel.product-slides').owlCarousel({
@@ -20,6 +20,7 @@ $( document ).delegate("#product", "pageshow", function() {
 	});
 */
   $("input[name='quantity[0]']").val(0);
+  $("input[name='order[usedDiscountPoint]']").val(false);
 
   $("#purchaseButton").unbind('click').click( function() {
     console.log('=== purchaseButton clicked ===');
@@ -63,7 +64,7 @@ $( document ).delegate("#product", "pageshow", function() {
           },
           success:function(data, textStatus, jqXHR){
             console.log(data);
-            bonusData = JSON.parse(data);
+            bonus = JSON.parse(data).bonusPoint.remain;
           }
         });
         window.location.replace("/index.html#purchase")
