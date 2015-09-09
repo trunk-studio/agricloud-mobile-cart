@@ -84,6 +84,18 @@ router.post('/order/status', function *(next) {
     this.body = result.body;
 });
 
+router.get('/order/bonus', function *(next) {
+  console.log(this.request);
+  var result = yield request.get(restServerUrl+this.request.url);
+  console.log('result', result.body);
+  if(result.statusCode == 500){
+    this.body = result.body;
+    this.status = 500;
+  }
+  else
+    this.body = result.body;
+});
+
 
 app
   .use(router.routes())

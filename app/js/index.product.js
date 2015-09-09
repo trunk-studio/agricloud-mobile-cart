@@ -52,6 +52,19 @@ $( document ).delegate("#product", "pageshow", function() {
       }).get();
       var unOrder = [ "0","0","0","0","0" ];
       if( JSON.stringify(quantity) != JSON.stringify(unOrder) ){
+        $.ajax({
+          url : '/order/bonus',
+          type: "GET",
+          data : {email: $("#inputRebateEmail").val()},
+          error: function (jqXHR, textStatus, errorThrown) {
+            alert(JSON.parse(jqXHR.responseText).message);
+            window.location.replace("/index.html#product")
+          },
+          success:function(data, textStatus, jqXHR){
+            console.log(data);
+            alert('success');
+          }
+        });
         window.location.replace("/index.html#purchase")
       }else{
         alert("不好意思啦！需要至少選擇一樣產品才能結帳哟 :) ");
