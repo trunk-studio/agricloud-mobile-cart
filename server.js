@@ -48,6 +48,7 @@ router.get('/', function *(next) {
 router.post('/order', function *(next) {
   var purchaseForm = this.request.body;
   var result = yield request.post(restServerUrl+'/api/order', {form: purchaseForm});
+  console.log("result",result);
   if(result.statusCode == 500){
     this.body = result.body;
     this.status = 500;
@@ -76,6 +77,18 @@ router.post('/order/status', function *(next) {
   console.log('=== email ===', email);
   var result = yield request.get(restServerUrl+'/api/order/status?email='+email);
   console.log('result', result);
+  if(result.statusCode == 500){
+    this.body = result.body;
+    this.status = 500;
+  }
+  else
+    this.body = result.body;
+});
+
+router.get('/order/bonus', function *(next) {
+  console.log(this.request);
+  var result = yield request.get(restServerUrl+this.request.url);
+  console.log('result', result.body);
   if(result.statusCode == 500){
     this.body = result.body;
     this.status = 500;

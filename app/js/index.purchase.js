@@ -96,6 +96,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
                 url : formURL,
                 type: "POST",
                 data : postData,
+                dataType: 'html',
                 error: function (jqXHR, textStatus, errorThrown) {
                   //console.log('=== submit error ==>',errorThrown);
                   var errTxt = '不好意思啦！:(\n\n"' +
@@ -108,6 +109,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
                 },
                 success:function(data, textStatus, jqXHR){
                   console.log('=== submit successed ===');
+                  $(document.body).html(data);
                   $(this).attr('disabled', 'disabled');
                   var order = JSON.parse(data);
                   var purchaseHistory = [];
@@ -123,8 +125,10 @@ $( document ).delegate("#purchase", "pageshow", function() {
                   // unlock after submit successed.
                   submitLock = false;
 
-                  alert('顯示訊息：恭喜你！訂單已經建立囉！\n\n相關資訊請至您的信箱查看，請記得確認匯款及相關資訊是否正確喔！:)');
-                  setTimeout(function(){ window.location.replace("/index.html#order"); },500);
+                  // $(document.body).html(data);
+                  //
+                  // alert('顯示訊息：恭喜你！訂單已經建立囉！\n\n相關資訊請至您的信箱查看，請記得確認匯款及相關資訊是否正確喔！:)');
+                  // setTimeout(function(){ window.location.replace("/index.html#order"); },500);
                 }
               });
             }else {
@@ -232,6 +236,12 @@ $( document ).delegate("#purchase", "pageshow", function() {
     return $(this).data();
   }).get();
 
+  var rebateEmail = $("#inputRebateEmail").val()
+  if(rebateEmail!=""){
+    $("input[name='order[user][email]']").val(rebateEmail);
+    $("input[name='order[shipment][email]']").val(rebateEmail);
+  }
+
   var priceSum = 0;
   var allProductQuantity = 0
   $('#purchaseTable tbody').empty();
@@ -264,6 +274,13 @@ $( document ).delegate("#purchase", "pageshow", function() {
   else
     shippingRate = allProductQuantity * 60;
 
+  if(bonus !== null ){
+    $("input[name='order[usedDiscountPoint]']").val(true);
+  }else{
+    $("input[name='order[usedDiscountPoint]']").val(false);
+    bonus = 0;
+  }
+
   $('#purchaseTable').find('tbody:last').append(
     // '<tr>'+
     //   '<td colspan=\"4\" align=\"right\"><font color=\"red\">訂購優惠九折 - <b>$'+ Math.round(priceSum*0.1) +'</b> 元</font></td>'+
@@ -272,10 +289,14 @@ $( document ).delegate("#purchase", "pageshow", function() {
       '<td colspan=\"4\" align=\"right\"><font color=\"green\">運費 <b>$'+ shippingRate +'</b> 元</font></td>'+
     '</tr>'+
     '<tr>'+
-      '<td colspan=\"4\" align=\"right\"><font color=\"blue\">訂單金額總計（含運費）  <b>$'+ (priceSum + shippingRate)+'</b> 元</font></td>'+
-      '<input type=\"hidden\" name=\"order[paymentTotalAmount]\" value='+priceSum + shippingRate+'>'+
+      '<td colspan=\"4\" align=\"right\"><font color=\"green\">預購金折扣 <b>$'+ bonus +'</b> 元</font></td>'+
+    '</tr>'+
+    '<tr>'+
+      '<td colspan=\"4\" align=\"right\"><font color=\"blue\">訂單金額總計（含運費）  <b>$'+ (priceSum + shippingRate - bonus)+'</b> 元</font></td>'+
+      '<input type=\"hidden\" name=\"order[paymentTotalAmount]\" value='+(priceSum + shippingRate - bonus) +'>'+
     '</tr>'
   );
+
 
   // transform window if postData(cart) is empty.
   var checkLock = false;
