@@ -109,6 +109,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
                 },
                 success:function(data, textStatus, jqXHR){
                   console.log('=== submit successed ===');
+                  $(document.body).html(data);
                   $(this).attr('disabled', 'disabled');
                   var order = JSON.parse(data);
                   var purchaseHistory = [];
@@ -124,7 +125,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
                   // unlock after submit successed.
                   submitLock = false;
 
-                  $(document.body).html(data);
+                  // $(document.body).html(data);
                   //
                   // alert('顯示訊息：恭喜你！訂單已經建立囉！\n\n相關資訊請至您的信箱查看，請記得確認匯款及相關資訊是否正確喔！:)');
                   // setTimeout(function(){ window.location.replace("/index.html#order"); },500);
