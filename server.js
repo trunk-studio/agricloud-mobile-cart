@@ -48,6 +48,7 @@ router.get('/', function *(next) {
 router.post('/order', function *(next) {
   var purchaseForm = this.request.body;
   var result = yield request.post(restServerUrl+'/api/order', {form: purchaseForm});
+  console.log("result",result);
   if(result.statusCode == 500){
     this.body = result.body;
     this.status = 500;

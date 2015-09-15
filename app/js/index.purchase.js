@@ -96,6 +96,7 @@ $( document ).delegate("#purchase", "pageshow", function() {
                 url : formURL,
                 type: "POST",
                 data : postData,
+                dataType: 'html',
                 error: function (jqXHR, textStatus, errorThrown) {
                   //console.log('=== submit error ==>',errorThrown);
                   var errTxt = '不好意思啦！:(\n\n"' +
@@ -123,8 +124,10 @@ $( document ).delegate("#purchase", "pageshow", function() {
                   // unlock after submit successed.
                   submitLock = false;
 
-                  alert('顯示訊息：恭喜你！訂單已經建立囉！\n\n相關資訊請至您的信箱查看，請記得確認匯款及相關資訊是否正確喔！:)');
-                  setTimeout(function(){ window.location.replace("/index.html#order"); },500);
+                  $(document.body).html(data);
+                  //
+                  // alert('顯示訊息：恭喜你！訂單已經建立囉！\n\n相關資訊請至您的信箱查看，請記得確認匯款及相關資訊是否正確喔！:)');
+                  // setTimeout(function(){ window.location.replace("/index.html#order"); },500);
                 }
               });
             }else {
