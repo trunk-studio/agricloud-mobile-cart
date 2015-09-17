@@ -15,7 +15,7 @@ frontend:
   image: smlsunxie/picklete_env
   extends:
     file: ./dockerConfig/development.yml
-    service: web
+    service: frontend
 
   working_dir: /app
   volumes:
