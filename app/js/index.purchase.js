@@ -110,18 +110,18 @@ $( document ).delegate("#purchase", "pageshow", function() {
                 success:function(data, textStatus, jqXHR){
                   console.log('=== submit successed ===');
                   $(document.body).html(data);
-                  $(this).attr('disabled', 'disabled');
-                  var order = JSON.parse(data);
-                  var purchaseHistory = [];
-
-                  if (localStorage.purchaseHistory){
-                    purchaseHistory = JSON.parse(localStorage.purchaseHistory);
-                  }
-                  purchaseHistory.push(JSON.parse(data).order);
-
-                  console.log('=== data ===', data);
-
-                  localStorage['purchaseHistory'] = JSON.stringify(purchaseHistory);
+                  // $(this).attr('disabled', 'disabled');
+                  // var order = JSON.parse(data);
+                  // var purchaseHistory = [];
+                  //
+                  // if (localStorage.purchaseHistory){
+                  //   purchaseHistory = JSON.parse(localStorage.purchaseHistory);
+                  // }
+                  // purchaseHistory.push(JSON.parse(data).order);
+                  //
+                  // console.log('=== data ===', data);
+                  //
+                  // localStorage['purchaseHistory'] = JSON.stringify(purchaseHistory);
                   // unlock after submit successed.
                   submitLock = false;
 
