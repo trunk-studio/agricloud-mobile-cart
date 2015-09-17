@@ -1,5 +1,5 @@
 build:
-  command: "/bin/bash -l -c 'npm i && node_modules/.bin/gulp prod'"
+  command: "/bin/bash -l -c 'npm i && bower i --allow-root && node_modules/.bin/gulp prod'"
 
 frontend:
   command: "/bin/bash -l -c 'npm start'"
