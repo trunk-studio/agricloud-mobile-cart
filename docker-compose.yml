@@ -8,8 +8,6 @@ build:
   volumes:
     - ./:/app
 
-  restart: always
-
 
 frontend:
   image: smlsunxie/picklete_env
