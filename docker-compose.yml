@@ -1,0 +1,25 @@
+build:
+  image: smlsunxie/picklete_env
+  extends:
+    file: ./dockerConfig/development.yml
+    service: build
+
+  working_dir: /app
+  volumes:
+    - ./:/app
+
+
+frontend:
+  image: smlsunxie/picklete_env
+  extends:
+    file: ./dockerConfig/development.yml
+    service: frontend
+
+  working_dir: /app
+  volumes:
+    - ./:/app
+  restart: always
+
+
+  external_links:
+    - picklete
