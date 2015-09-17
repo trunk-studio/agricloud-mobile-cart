@@ -1,7 +1,7 @@
 build:
   command: "/bin/bash -l -c 'npm i && node_modules/.bin/gulp build'"
 
-web:
+frontend:
   command: "/bin/bash -l -c 'npm start'"
   environment:
     NODE_ENV: "development"

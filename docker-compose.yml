@@ -11,7 +11,7 @@ build:
   restart: always
 
 
-web:
+frontend:
   image: smlsunxie/picklete_env
   extends:
     file: ./dockerConfig/development.yml
