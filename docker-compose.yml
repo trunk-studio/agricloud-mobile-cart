@@ -10,6 +10,7 @@ build:
 
 
 frontend:
+  container_name: frontend
   image: smlsunxie/picklete_env
   extends:
     file: ./dockerConfig/development.yml
