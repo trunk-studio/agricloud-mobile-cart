@@ -1,6 +1,6 @@
 build:
   container_name: frontend_build
-  image: smlsunxie/picklete_env
+  image: miiixr/picklete_env
   extends:
     file: ./dockerConfig/development.yml
     service: build
@@ -12,7 +12,7 @@ build:
 
 frontend:
   container_name: frontend
-  image: smlsunxie/picklete_env
+  image: miiixr/picklete_env
   extends:
     file: ./dockerConfig/development.yml
     service: frontend
